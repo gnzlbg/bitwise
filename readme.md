@@ -1,6 +1,6 @@
 # Bitwise manipulation algorithms
 
-[![Clippy Linting Result](https://clippy.bashy.io/github/gnzlbh/bitwise/master/badge.svg)]
+[![Build Status](https://travis-ci.org/gnzlbg/bitwise.svg?branch=master)](https://travis-ci.org/gnzlbg/bitwise)[![Clippy Linting Result](https://clippy.bashy.io/github/gnzlbh/bitwise/master/badge.svg)]
 
 The algorithms are implemented for single words and slices of words in the
 `Word` and `Words` traits, respectively.

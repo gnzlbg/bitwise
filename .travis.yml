@@ -4,6 +4,9 @@ language: rust
 addons:
   apt:
     packages:
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
       - binutils-dev # optional: only required for the --verify flag of coveralls
 
 # run builds for all the trains (and more)
@@ -14,7 +17,7 @@ rust:
   - stable
   # and the first stable one (this should be bumped as the minimum
   # Rust version required changes)
-  - 1.9.0
+  - 1.4.0
 
 # load travis-cargo
 before_script:
