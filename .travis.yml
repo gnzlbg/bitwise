@@ -17,7 +17,7 @@ rust:
   - stable
   # and the first stable one (this should be bumped as the minimum
   # Rust version required changes)
-  - 1.4.0
+  - 1.1.0
 
 # load travis-cargo
 before_script:
@@ -27,7 +27,8 @@ before_script:
 
 # the main build
 script:
-  - |
+  - export GH_TOKEN=${GITHUB_TOKEN}
+  - | 
       travis-cargo build &&
       travis-cargo test &&
       travis-cargo bench &&
