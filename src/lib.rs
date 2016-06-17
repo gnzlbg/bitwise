@@ -1,6 +1,6 @@
 use std::ops::{Add, Sub, Mul, Div};
 use std::ops::{Not, BitAnd, BitOr, BitXor, Shl, Shr};
-use std::mem::{self, size_of};
+use std::mem::{self};
 
 /// Bitwise word algorithms
 pub trait Word
@@ -1225,7 +1225,7 @@ macro_rules! bitwise_int_impl {
                     t = (x ^ (x >> 16)) & (0x00000000FFFF0000u64 as Self);
                     x = x ^ t ^ (t << 16);
                 }
-                return x;
+                x
             }
 
             fn parallel_bits_deposit(self, mask_: Self) -> Self
@@ -1238,10 +1238,10 @@ macro_rules! bitwise_int_impl {
                         break;
                     }
                     if (self & bb) != Self::zero() {
-                        res = res | (mask & mask.wrapping_neg());
+                        res |= mask & mask.wrapping_neg();
                     }
-                    mask = mask & (mask - Self::one());
-                    bb = bb + bb;
+                    mask &= mask - Self::one();
+                    bb += bb;
                 }
                 res
             }
@@ -1255,10 +1255,10 @@ macro_rules! bitwise_int_impl {
                         break;
                     }
                     if self & mask & (mask.wrapping_neg()) != Self::zero() {
-                        res = res | bb;
+                        res |= bb;
                     }
-                    mask = mask & (mask - Self::one());
-                    bb = bb + bb;
+                    mask &= mask - Self::one();
+                    bb += bb;
                 }
                 res
             }
