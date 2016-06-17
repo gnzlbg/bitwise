@@ -1,3 +1,18 @@
+#![deny(missing_docs,
+        missing_debug_implementations, missing_copy_implementations,
+        trivial_casts, 
+        unsafe_code,
+        unstable_features,
+        unused_import_braces, unused_qualifications)]
+
+//! Bitwise algorithms
+//!
+//! TODO
+
+#![cfg_attr(feature = "dev", allow(unstable_features))]
+#![cfg_attr(feature = "dev", feature(plugin))]
+#![cfg_attr(feature = "dev", plugin(clippy))]
+
 use std::ops::{Add, Sub, Mul, Div};
 use std::ops::{Not, BitAnd, BitOr, BitXor, Shl, Shr};
 use std::mem::{self};
@@ -19,7 +34,9 @@ pub trait Word
     + Eq + PartialOrd
 
 {
+    /// Signed Word Type of the same size as Self.
     type Signed : Word;
+    /// Unsigned Word Type of the same size as Self.
     type Unsigned : Word;
 
 /// Size of the word in bytes.
@@ -1316,7 +1333,8 @@ pub trait Words {
     /// ```
     fn count_zeros(&self) -> usize;
 
-    /// of `self`.
+    /// Returns the number of leading zeros in the binary representation of
+    /// `self`.
     ///
     /// # Examples
     ///
@@ -1333,6 +1351,7 @@ pub trait Words {
     /// ```
     fn leading_zeros(&self) -> usize;
 
+    /// Size of the word sequence.
     fn size(&self) -> usize;
 }
 

@@ -4,3 +4,8 @@ version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 
 [dependencies]
+clippy = {version = "0.0.76", optional = true}
+
+[features]
+default = []
+dev = ["clippy"]
