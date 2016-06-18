@@ -2,10 +2,28 @@
 name = "bitwise"
 version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
+description = "Bitwise manipulation algorithms for Words and Word sequences."
+documentation = "https://gnzlbg.github.io/bitwise"
+homepage = "https://gnzlbg.github.io/bitwise"
+repository = "https://github.com/gnzlbg/bitwise"
+readme = "readme.md"
+keywords = ["bit", "byte", "algorithm", "bitwise", "word"]
+license = "MIT"
 
 [dependencies]
 clippy = {version = "0.0.76", optional = true}
+llvmint = {version = "0.0.2", optional = true}
 
 [features]
 default = []
 dev = ["clippy"]
+bmi2 = ["llvmint"]
+
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = 'unwind'

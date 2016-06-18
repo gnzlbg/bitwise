@@ -1,23 +1,25 @@
 #![deny(missing_docs,
         missing_debug_implementations, missing_copy_implementations,
-        trivial_casts, 
-        unsafe_code,
+        trivial_casts,
         unstable_features,
         unused_import_braces, unused_qualifications)]
 
-//! Bitwise algorithms
+//! Bitwise manipulation algorithms for Words and WordSlices.
 //!
-//! TODO
+//! See the list of available algorithms in the `Word` and `Words` traits.
 
 #![cfg_attr(feature = "dev", allow(unstable_features))]
 #![cfg_attr(feature = "dev", feature(plugin))]
 #![cfg_attr(feature = "dev", plugin(clippy))]
 
+#![cfg(feature = "llvmint")]
+extern crate llvmint;
+
 use std::ops::{Add, Sub, Mul, Div};
 use std::ops::{Not, BitAnd, BitOr, BitXor, Shl, Shr};
-use std::mem::{self};
+use std::mem;
 
-/// Bitwise word algorithms
+/// Bitwise manipulation algorithms for Words
 pub trait Word
     : Sized
     + Copy
@@ -34,9 +36,9 @@ pub trait Word
     + Eq + PartialOrd
 
 {
-    /// Signed Word Type of the same size as Self.
+/// Signed Word Type of the same size as Self.
     type Signed : Word;
-    /// Unsigned Word Type of the same size as Self.
+/// Unsigned Word Type of the same size as Self.
     type Unsigned : Word;
 
 /// Size of the word in bytes.
@@ -73,9 +75,6 @@ pub trait Word
 /// Returns an integer of value zero
     fn zero() -> Self;
 
-/// Returns an integer from an u32
-    fn from_u32(u32) -> Self;
-
 /// Returns the number of ones in the binary representation of `self`.
 ///
 /// # Examples
@@ -87,7 +86,7 @@ pub trait Word
 ///
 /// assert_eq!(n.count_ones(), 3);
 /// ```
-    fn count_ones(self) -> u32;
+    fn count_ones(self) -> usize;
 
 /// Returns the number of zeros in the binary representation of `self`.
 ///
@@ -100,7 +99,7 @@ pub trait Word
 ///
 /// assert_eq!(n.count_zeros(), 5);
 /// ```
-    fn count_zeros(self) -> u32;
+    fn count_zeros(self) -> usize;
 
 /// Returns the number of leading zeros in the binary representation
 /// of `self`.
@@ -114,7 +113,7 @@ pub trait Word
 ///
 /// assert_eq!(n.leading_zeros(), 10);
 /// ```
-    fn leading_zeros(self) -> u32;
+    fn leading_zeros(self) -> usize;
 
 /// Returns the number of trailing zeros in the binary representation
 /// of `self`.
@@ -128,7 +127,7 @@ pub trait Word
 ///
 /// assert_eq!(n.trailing_zeros(), 3);
 /// ```
-    fn trailing_zeros(self) -> u32;
+    fn trailing_zeros(self) -> usize;
 
 /// Shifts the bits to the left by a specified amount amount, `n`, wrapping
 /// the truncated bits to the end of the resulting integer.
@@ -273,7 +272,7 @@ pub trait Word
 ///
 /// assert_eq!(n.leading_ones(), 10);
 /// ```
-    fn leading_ones(self) -> u32 {
+    fn leading_ones(self) -> usize {
        Self::leading_zeros(!self)
     }
 
@@ -289,7 +288,7 @@ pub trait Word
 ///
 /// assert_eq!(n.trailing_ones(), 3);
 /// ```
-    fn trailing_ones(self) -> u32 {
+    fn trailing_ones(self) -> usize {
        Self::trailing_zeros(!self)
     }
 
@@ -312,7 +311,7 @@ pub trait Word
 /// assert_eq!(n2.parity(), 1);
 /// assert_eq!(n3.parity(), 0);
 /// ```
-    fn parity(self) -> u32 {
+    fn parity(self) -> usize {
 // TODO: use intrinsics depending on size:
 //   - __builtin_parity, __builtin_parityl, __builtin_parityll
         self.count_ones() & 1
@@ -364,8 +363,7 @@ pub trait Word
 /// assert_eq!(n.isolate_least_significant_one(), s);
 /// ```
     fn isolate_least_significant_one(self) -> Self {
-// note: self & -self is intended, which is rewritten as
-//  self & (0 - self), so:
+        // note: self & -self is intended, which is rewritten as:
         self & (Self::zero() - self)
     }
 
@@ -899,10 +897,7 @@ pub trait Word
 /// assert!(4.is_aligned(4));
 /// assert!(!4.is_aligned(8));
 /// ```
-    fn is_aligned(self, alignment: u32) -> bool {
-        assert!(alignment as i32 - 1 >= 0);
-        (self & Self::from_u32(alignment - 1)) == Self::zero()
-    }
+    fn is_aligned(self, alignment: u32) -> bool;
 
 /// Align `self` up to `alignment`
 ///
@@ -1019,7 +1014,8 @@ pub trait Word
 /// assert_eq!(n.inner_perfect_shuffle(), s);
 /// ```
     fn inner_perfect_shuffle(self) -> Self {
-        self.reverse_bit_groups((Self::size() * 8 / 2) as u32, 1).outer_perfect_shuffle()
+        let hwb = Self::size() * 8 / 2;
+        self.reverse_bit_groups(hwb as u32, 1).outer_perfect_shuffle()
    }
 
 /// Inner Perfect Unshuffle of `self`
@@ -1039,7 +1035,8 @@ pub trait Word
 /// assert_eq!(n.inner_perfect_unshuffle(), s);
 /// ```
     fn inner_perfect_unshuffle(self) -> Self {
-        self.outer_perfect_unshuffle().reverse_bit_groups((Self::size() * 8 / 2) as u32, 1)
+        let hwb = Self::size() * 8 / 2;
+        self.outer_perfect_unshuffle().reverse_bit_groups(hwb as u32, 1)
     }
 
 /// Parallel bits deposit of `mask` into `self`
@@ -1084,7 +1081,7 @@ pub trait Word
 
 }
 
-macro_rules! bitwise_int_impl {
+macro_rules! bitwise_word_impl {
     ($T:ty, $AS:ty, $AU:ty) => (
         impl Word for $T {
             type Signed = $AS;
@@ -1102,23 +1099,19 @@ macro_rules! bitwise_int_impl {
                 self as $AS
             }
 
-            fn from_u32(n: u32) -> $T {
-                n as $T
-            }
-
             fn zero() -> $T { 0 as $T }
-            fn leading_zeros(self) -> u32 {
-                <$T>::leading_zeros(self)
+            fn leading_zeros(self) -> usize {
+                <$T>::leading_zeros(self) as usize
             }
 
-            fn trailing_zeros(self) -> u32 {
-                <$T>::trailing_zeros(self)
+            fn trailing_zeros(self) -> usize {
+                <$T>::trailing_zeros(self) as usize
             }
-            fn count_ones(self) -> u32 {
-              <$T>::count_ones(self)
+            fn count_ones(self) -> usize {
+              <$T>::count_ones(self) as usize
             }
-            fn count_zeros(self) -> u32 {
-              <$T>::count_zeros(self)
+            fn count_zeros(self) -> usize {
+              <$T>::count_zeros(self) as usize
             }
             fn one() -> $T { 1 as $T }
             fn rotate_left(self, n: u32) -> Self {
@@ -1245,6 +1238,12 @@ macro_rules! bitwise_int_impl {
                 x
             }
 
+            fn is_aligned(self, alignment: u32) -> bool {
+                debug_assert!(alignment as i32 - 1 >= 0);
+                (self & ((alignment - 1) as Self)) == Self::zero()
+            }
+
+            #[cfg(not(feature = "bmi2"))]
             fn parallel_bits_deposit(self, mask_: Self) -> Self
             {
                 let mut res = Self::zero();
@@ -1263,6 +1262,8 @@ macro_rules! bitwise_int_impl {
                 res
             }
 
+
+            #[cfg(not(feature = "bmi2"))]
             fn parallel_bits_extract(self, mask_: Self) -> Self {
                 let mut res = Self::zero();
                 let mut mask = mask_;
@@ -1279,23 +1280,39 @@ macro_rules! bitwise_int_impl {
                 }
                 res
             }
-            
+
+            #[cfg(feature = "bmi2")]
+            fn parallel_bits_deposit(self, mask_: Self) -> Self {
+                match <Self as Word>::size() {
+                    0...32 => unsafe { llvmint::x86::bmi_pdep_32(self as i32, mask_ as i32) as Self },
+                    64 => unsafe { llvmint::x86::bmi_pdep_64(self as i64, mask_ as i64) as Self },
+                     _ => unreachable!()
+                }
+            }
+            #[cfg(feature = "bmi2")]
+            fn parallel_bits_extract(self, mask_: Self) -> Self {
+                match <Self as Word>::size() {
+                    0...32 => unsafe { llvmint::x86::bmi_pext_32(self as i32, mask_ as i32) as Self }, 
+                    64 => unsafe { llvmint::x86::bmi_pext_64(self as i64, mask_ as i64) as Self },
+                     _ => unreachable!()
+                }
+            }
         }
     )
 }
 
-bitwise_int_impl!(u8, i8, u8);
-bitwise_int_impl!(u16, i16, u16);
-bitwise_int_impl!(u32, i32, u32);
-bitwise_int_impl!(u64, i64, u64);
-bitwise_int_impl!(usize, isize, usize);
-bitwise_int_impl!(i8, i8, u8);
-bitwise_int_impl!(i16, i16, u16);
-bitwise_int_impl!(i32, i32, u32);
-bitwise_int_impl!(i64, i64, u64);
-bitwise_int_impl!(isize, isize, usize);
+bitwise_word_impl!(u8, i8, u8);
+bitwise_word_impl!(u16, i16, u16);
+bitwise_word_impl!(u32, i32, u32);
+bitwise_word_impl!(u64, i64, u64);
+bitwise_word_impl!(usize, isize, usize);
+bitwise_word_impl!(i8, i8, u8);
+bitwise_word_impl!(i16, i16, u16);
+bitwise_word_impl!(i32, i32, u32);
+bitwise_word_impl!(i64, i64, u64);
+bitwise_word_impl!(isize, isize, usize);
 
-/// Bitwise algorithms
+/// Bitwise manimpulation algorithms for Word sequences.
 pub trait Words {
     /// Returns the number of ones in the binary representation of `self`.
     ///
