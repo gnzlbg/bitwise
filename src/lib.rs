@@ -13,6 +13,7 @@
 //! any, to make them easier to find.
 //!
 //! The following architectures are supported using feature flags:
+//!
 //! - SSE 4.2: sse42,
 //! - BMI 1.0: bmi1,
 //! - BMI 2.0: bmi2,
@@ -66,6 +67,9 @@ pub trait Word
 /// Size of the word in bytes.
     fn size() -> usize;
 
+/// Size of the word in bits.
+    fn bit_size() -> usize { 8 * Self::size() }
+
 /// Transmutes the integer into an unsigned integer of the
 /// same size (bitwise loss-less).
 ///
@@ -113,9 +117,11 @@ pub trait Word
 
 /// Returns the number of ones in the binary representation of `self`.
 ///
-/// Keywords: population count, popcount, hamming weight, sideways sum.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Population count, popcount, hamming weight, sideways sum.
+///
+/// # Intrinsics:
 /// - ABM: popcnt.
 /// - SSE4.2: popcnt.
 /// - NEON: vcnt.
@@ -136,14 +142,16 @@ pub trait Word
 /// Returns the number of leading zeros in the binary representation
 /// of `self`.
 ///
-/// Keywords: count leading zeros.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Count leading zeros.
+///
+/// # Intrinsics:
 /// - ABM: lzcnt.
 /// - BMI 1.0: lzcnt.
 /// - ARMv5: clz.
 /// - PowerPC: cntlzd.
-/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_clz(x)`
+/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_clz(x)`.
 ///
 /// # Examples
 ///
@@ -159,11 +167,13 @@ pub trait Word
 /// Returns the number of trailing zeros in the binary representation
 /// of `self`.
 ///
-/// Keywords: count trailing zeros.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Count trailing zeros.
+///
+/// # Intrinsics:
 /// - BMI 1.0: tzcnt.
-/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_ctz(x)`
+/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_ctz(x)`.
 ///
 /// # Examples
 ///
@@ -179,9 +189,11 @@ pub trait Word
 /// Returns the number of leading ones in the binary representation
 /// of `self`.
 ///
-/// Keywords: count leading ones.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Count leading ones.
+///
+/// # Intrinsics:
 /// - ARMv8: cls.
 ///
 /// # Examples
@@ -200,7 +212,9 @@ pub trait Word
 /// Returns the number of trailing ones in the binary representation
 /// of `self`.
 ///
-/// Keywords: count trailing ones.
+/// # Keywords:
+///
+/// Count trailing ones.
 ///
 /// # Examples
 ///
@@ -217,6 +231,10 @@ pub trait Word
 
 /// Shift the bits to the left by a specified amount, `n`.
 ///
+/// # Panics
+///
+/// If `n > bit_size()`.
+///
 /// # Examples
 ///
 /// ```
@@ -227,14 +245,20 @@ pub trait Word
 ///
 /// assert_eq!(a.shift_logical_left(4), 0b1010_0000u8);
 /// assert_eq!(b.shift_logical_left(4), 0b1001_0000u8);
+/// b.shift_logical_right((<u8 as Word>::bit_size() - 1) as u32);
 ///
 /// ```
-    fn shift_logical_left(self, n: u32) -> Self;
+fn shift_logical_left(self, n: u32) -> Self;
 
 /// Shift the bits to the right by a specified amount, `n`, with the
 /// high-order bits of the result resetted.
 ///
+/// # Panics
+///
+/// If `n > bit_size()`.
+///
 /// # Examples
+///
 ///
 /// ```
 /// use bitwise::Word;
@@ -244,6 +268,7 @@ pub trait Word
 ///
 /// assert_eq!(a.shift_logical_right(4), 0b0000_0111u8);
 /// assert_eq!(b.shift_logical_right(4), 0b0000_1001u8);
+/// b.shift_logical_right((<u8 as Word>::bit_size() - 1) as u32);
 ///
 /// ```
     fn shift_logical_right(self, n: u32) -> Self;
@@ -251,6 +276,10 @@ pub trait Word
 /// Shift the bits to the left by a specified amount, `n` (same as
 /// [`shift_logical_left`](tymethod.shift_logical_left), provided for
 /// symmetry).
+///
+/// # Panics
+///
+/// If `n > bit_size()`.
 ///
 /// # Examples
 ///
@@ -262,6 +291,7 @@ pub trait Word
 ///
 /// assert_eq!(a.shift_arithmetic_left(4), 0b1010_0000u8);
 /// assert_eq!(b.shift_arithmetic_left(4), 0b1001_0000u8);
+/// b.shift_arithmetic_left((<u8 as Word>::bit_size() - 1) as u32);
 ///
 /// ```
     fn shift_arithmetic_left(self, n: u32) -> Self;
@@ -269,6 +299,10 @@ pub trait Word
 /// Shift the bits to the right by a specified amount, `n`, setting the
 /// high-order bits of the result to the value of the most significant bit
 /// of `self`.
+///
+/// # Panics
+///
+/// If `n > bit_size()`.
 ///
 /// # Examples
 ///
@@ -280,12 +314,17 @@ pub trait Word
 ///
 /// assert_eq!(a.shift_arithmetic_right(4), 0b0000_0111u8);
 /// assert_eq!(b.shift_arithmetic_right(4), 0b1111_1001u8);
+/// b.shift_arithmetic_right((<u8 as Word>::bit_size() - 1) as u32);
 ///
 /// ```
     fn shift_arithmetic_right(self, n: u32) -> Self;
 
 /// Shifts the bits to the left by a specified amount, `n`, wrapping
 /// the truncated bits to the end of the resulting integer.
+///
+/// # Panics
+///
+/// If `n > bit_size()`.
 ///
 /// # Examples
 ///
@@ -296,13 +335,18 @@ pub trait Word
 /// let m = 0x3456789ABCDEF012u64;
 ///
 /// assert_eq!(n.rotate_left(12), m);
+/// n.rotate_left(<u64 as Word>::bit_size() as u32);
 /// ```
     fn rotate_left(self, n: u32) -> Self;
 
 /// Shifts the bits to the right by a specified amount, `n`, wrapping
 /// the truncated bits to the beginning of the resulting integer.
 ///
-/// Intrinsics:
+/// # Panics
+///
+/// If `n > bit_size()`.
+///
+/// # Intrinsics:
 /// - BMI 2.0: rorx.
 ///
 /// # Examples
@@ -314,6 +358,7 @@ pub trait Word
 /// let m = 0xDEF0123456789ABCu64;
 ///
 /// assert_eq!(n.rotate_right(12), m);
+/// n.rotate_right(<u64 as Word>::bit_size() as u32);
 /// ```
     fn rotate_right(self, n: u32) -> Self;
 
@@ -421,7 +466,7 @@ pub trait Word
 /// Returns the number of 1 bits in `self` mod 2, that is, returns 1 if the
 /// number of 1 bits in `self` is odd, and zero otherwise
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// -gcc/llvm: `__builtin_parity(x)`.
 ///
 /// # Examples
@@ -447,7 +492,7 @@ pub trait Word
 
 /// Reset least significant 1 bit of `self`; returns 0 if `self` is 0.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - BMI1.0: blsr.
 ///
 /// # Examples
@@ -466,7 +511,7 @@ pub trait Word
 
 /// Set least significant 0 bit of `self`.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blcs.
 ///
 /// # Examples
@@ -486,7 +531,7 @@ pub trait Word
 /// Isolate least significant 1 bit of `self` and returns it; returns 0
 /// if `self` is 0.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - BMI 1.0: blsi.
 /// - TBM: blsic, not.
 ///
@@ -508,7 +553,7 @@ pub trait Word
 /// Set the least significant zero bit of `self` to 1 and all of the
 /// rest to 0.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blcic (or: blci, not).
 ///
 /// # Examples
@@ -527,7 +572,7 @@ pub trait Word
 
 /// Reset the trailing 1's in `self`.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blcfill.
 ///
 /// # Examples
@@ -546,7 +591,7 @@ pub trait Word
 
 /// Set all of the trailing 0's in `self`.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blsfill.
 ///
 /// # Examples
@@ -565,7 +610,7 @@ pub trait Word
 
 /// Returns a mask with all of the trailing 0's of `self` set.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: tzmsk.
 ///
 /// # Examples
@@ -584,7 +629,7 @@ pub trait Word
 
 /// Returns a mask with all of the trailing 1's of `self` set.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: tlmskc, not.
 ///
 /// # Examples
@@ -604,7 +649,7 @@ pub trait Word
 /// Returns a mask with all of the trailing 0's of `self` set and the least
 /// significant 1 bit set.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blsmsk.
 ///
 /// # Examples
@@ -624,7 +669,7 @@ pub trait Word
 /// Returns a mask with all of the trailing 1's of `self` set and the least
 /// significant 0 bit set.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - TBM: blcmsk.
 ///
 /// # Examples
@@ -683,7 +728,7 @@ pub trait Word
 
 /// Reverses the bits of `self`.
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - ARM: rbit (u32 ARMv7, u64 ARMv8).
 ///
 /// # Examples
@@ -767,7 +812,7 @@ pub trait Word
 
 /// Reverses the bytes of `self` (equivalent to swap bytes).
 ///
-/// Intrinsics:
+/// # Intrinsics:
 /// - x86_64: bswap.
 /// - ARM: rev (v5), revsh (v5), rev16 (v6,v8), rev32(v8).
 /// - gcc/llvm: `__builtin_bswap16/32/64`.
@@ -793,6 +838,10 @@ pub trait Word
 
 /// Sets the `bit` of `self`.
 ///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
+///
 /// # Examples
 ///
 /// ```
@@ -806,11 +855,16 @@ pub trait Word
 /// assert_eq!(n.set_bit(0), s1);
 /// assert_eq!(n.set_bit(3), s2);
 /// ```
-     fn set_bit(self, bit: u32) -> Self {
-         self | (Self::one() << bit)
+    fn set_bit(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
+        self | (Self::one() << bit)
     }
 
 /// Resets the `bit` of `self`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -826,10 +880,15 @@ pub trait Word
 /// assert_eq!(n.reset_bit(5), s2);
 /// ```
     fn reset_bit(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
          self & !(Self::one() << bit)
     }
 
 /// Flip the `bit` of `self`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -845,10 +904,15 @@ pub trait Word
 /// assert_eq!(n.flip_bit(5), s2);
 /// ```
     fn flip_bit(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
          self ^ (Self::one() << bit)
     }
 
 /// Test the `bit` of `self`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -861,12 +925,17 @@ pub trait Word
 /// assert_eq!(n.test_bit(5), true);
 /// ```
     fn test_bit(self, bit: u32) -> bool {
+        debug_assert!((bit as usize) < Self::bit_size());
         self & (Self::one() << bit) != Self::zero()
     }
 
 /// Resets all bits of `self` at position >= `bit`.
 ///
-/// Intrinsics:
+/// # Panics
+///
+/// If `bit >= bit_size()`.
+///
+/// # Intrinsics:
 /// - BMI 2.0: bzhi.
 ///
 /// # Examples
@@ -879,10 +948,15 @@ pub trait Word
 /// assert_eq!(n.reset_bits_geq(5), s);
 /// ```
     fn reset_bits_geq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self & ((Self::one() << bit) - Self::one())
     }
 
 /// Resets all bits of `self` at position <= `bit`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -894,10 +968,15 @@ pub trait Word
 /// assert_eq!(n.reset_bits_leq(5), s);
 /// ```
     fn reset_bits_leq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self & !((Self::one() << (bit + 1)) - Self::one())
     }
 
 /// Sets all bits of `self` at position >= `bit`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -909,10 +988,15 @@ pub trait Word
 /// assert_eq!(n.set_bits_geq(5), s);
 /// ```
     fn set_bits_geq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self | !((Self::one() << bit) - Self::one())
     }
 
 /// Sets all bits of `self` at position <= `bit`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -924,10 +1008,15 @@ pub trait Word
 /// assert_eq!(n.set_bits_leq(5), s);
 /// ```
     fn set_bits_leq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self | ((Self::one() << (bit + 1)) - Self::one())
     }
 
 /// Flip all bits of `self` at position >= `bit`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -939,10 +1028,15 @@ pub trait Word
 /// assert_eq!(n.flip_bits_geq(5), s);
 /// ```
     fn flip_bits_geq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self ^ !((Self::one() << bit) - Self::one())
     }
 
 /// Flip all bits of `self` at position <= `bit`.
+///
+/// # Panics
+///
+/// If `bit >= bit_size()`.
 ///
 /// # Examples
 ///
@@ -954,6 +1048,7 @@ pub trait Word
 /// assert_eq!(n.flip_bits_leq(5), s);
 /// ```
     fn flip_bits_leq(self, bit: u32) -> Self {
+        debug_assert!((bit as usize) < Self::bit_size());
        self ^ ((Self::one() << (bit + 1)) - Self::one() )
     }
 
@@ -979,6 +1074,10 @@ pub trait Word
 
 /// Round `self` to the next power of 2.
 ///
+/// # Panics
+///
+/// If the next power of 2 cannot be represented by Self.
+///
 /// # Examples
 ///
 /// ```
@@ -991,6 +1090,11 @@ pub trait Word
 /// assert_eq!(6.ceil_pow2(), 8);
 /// assert_eq!(7.ceil_pow2(), 8);
 /// assert_eq!(8.ceil_pow2(), 8);
+/// assert_eq!(2u32.pow(30).ceil_pow2(), 2u32.pow(30));
+/// assert_eq!((2u32.pow(30) + 1).ceil_pow2(), 2u32.pow(31));
+/// assert_eq!(2u32.pow(31).ceil_pow2(), 2u32.pow(31));
+/// // panics:
+/// // assert_eq!((2u32.pow(31) + 1).ceil_pow2(), 2u32.pow(32));
 /// ```
     fn ceil_pow2(self)-> Self {
         let mut x = self - Self::one();
@@ -1012,6 +1116,10 @@ pub trait Word
 
 /// Round `self` to the previous power of 2.
 ///
+/// # Panics
+///
+/// If `self <= 0`.
+///
 /// # Examples
 ///
 /// ```
@@ -1025,23 +1133,24 @@ pub trait Word
 /// assert_eq!(7.floor_pow2(), 4);
 /// assert_eq!(8.floor_pow2(), 8);
 /// ```
-    fn floor_pow2(self) -> Self {
-        let mut x = self;
-        let s = Self::size();
-        x = x | (x >> 1);
-        x = x | (x >> 2);
-        x = x | (x >> 4);
-        if s > 1 {
-            x = x | (x >> 8);
+fn floor_pow2(self) -> Self {
+    debug_assert!(self > Self::zero());
+    let mut x = self;
+    let s = Self::size();
+    x = x | (x >> 1);
+    x = x | (x >> 2);
+    x = x | (x >> 4);
+    if s > 1 {
+        x = x | (x >> 8);
             if s > 2 {
                 x = x | (x >> 16);
                 if s > 4 {
                     x = x | (x >> 32);
                 }
             }
-        }
-        x - (x >> 1)
     }
+    x - (x >> 1)
+}
 
 /// Is `self` aligned to `alignment` bytes.
 ///
@@ -1215,9 +1324,11 @@ pub trait Word
 
 /// Parallel bits deposit of `mask` into `self`.
 ///
-/// Keywords: scatter.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Scatter.
+///
+/// # Intrinsics:
 /// - BMI 2.0: pdep.
 ///
 /// # Examples
@@ -1240,9 +1351,11 @@ pub trait Word
 
 /// Parallel bits extract of `mask` from `self`.
 ///
-/// Keywords: gather.
+/// # Keywords:
 ///
-/// Intrinsics:
+/// Gather.
+///
+/// # Intrinsics:
 /// - BMI 2.0: pext.
 ///
 /// # Examples
@@ -1352,21 +1465,27 @@ macro_rules! bitwise_word_impl {
             }
             fn one() -> $T { 1 as $T }
             fn shift_logical_left(self, n: u32) -> Self {
+                debug_assert!(n as usize <= <Self as Word>::bit_size());
                 (self.to_unsigned() << n) as Self
             }
             fn shift_logical_right(self, n: u32) -> Self {
+                debug_assert!(n  as usize <= <Self as Word>::bit_size());
                 (self.to_unsigned() >> n) as Self
             }
             fn shift_arithmetic_left(self, n: u32) -> Self {
+                debug_assert!(n  as usize <= <Self as Word>::bit_size());
                 self.shift_logical_left(n)
             }
             fn shift_arithmetic_right(self, n: u32) -> Self {
+                debug_assert!(n as usize <= <Self as Word>::bit_size());
                 (self.to_signed() >> n) as Self
             }
             fn rotate_left(self, n: u32) -> Self {
+                debug_assert!(n as usize <= <Self as Word>::bit_size());
                 <$T>::rotate_left(self, n)
             }
             fn rotate_right(self, n: u32) -> Self {
+                debug_assert!(n as usize <= <Self as Word>::bit_size());
                 <$T>::rotate_right(self, n)
             }
             fn swap_bytes(self) -> Self {
