@@ -13,7 +13,7 @@
 #![cfg_attr(feature = "dev", feature(plugin))]
 #![cfg_attr(feature = "dev", plugin(clippy))]
 
-#![cfg(feature = "llvmint")]
+#[cfg(feature = "llvmint")]
 extern crate llvmint;
 
 use std::ops::{Add, Sub, Mul, Div};
