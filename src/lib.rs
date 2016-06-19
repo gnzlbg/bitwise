@@ -5,7 +5,7 @@
         unused_import_braces,
         unused_qualifications)]
 
-//! Bitwise manipulation algorithms for Words and WordSlices.
+//! Bitwise manipulation algorithms for `Word`s and sequences of `Words`.
 //!
 //! See the list of available algorithms in the `Word` and `Words` traits.
 
@@ -20,7 +20,7 @@ use std::ops::{Add, Sub, Mul, Div};
 use std::ops::{Not, BitAnd, BitOr, BitXor, Shl, Shr};
 use std::mem;
 
-/// Bitwise manipulation algorithms for Words
+/// Bitwise manipulation algorithms for `Word`s
 pub trait Word
     : Sized
     + Copy
@@ -486,7 +486,7 @@ pub trait Word
 /// Reverses the bits of `self` by `subword_bits` and `group_subwords`:
 ///
 /// - `subword_bits`: the bits will be reversed in grous:
-///   1 (single bits), 2 (pair-wise), 4 (nibbles), 
+///   1 (single bits), 2 (pair-wise), 4 (nibbles),
 /// - `group_subwords`: the subword size is 8 bits: `mem::size_of::<u8>()`,
 ///   the bits will be reversed within each subword.
 ///
@@ -1084,6 +1084,63 @@ pub trait Word
 /// ```
     fn parallel_bits_extract(self, mask_: Self) -> Self;
 
+/// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
+///
+/// Layout: xy|xy|xy|xy|...
+///
+/// # Example
+/// ```
+/// use bitwise::Word;
+///
+/// let idx : u64 = 30;
+/// assert_eq!(idx, 0b01_11_10);
+///
+/// let x = idx.morton_decode_2d();
+///
+/// assert!(Word::morton_encode_2d(x) == idx);
+///
+/// assert_eq!(x[0], 0b_110);
+/// assert_eq!(x[1], 0b_011);
+///
+/// ```
+    fn morton_encode_2d(x: [Self; 2]) -> Self;
+
+/// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
+///
+/// Layout: xyz|xyz|xyz|xyz|...
+///
+/// # Example
+/// ```
+/// use bitwise::Word;
+///
+/// let idx : u64 = 30;
+/// assert_eq!(idx, 0b011_110);
+///
+/// let x = idx.morton_decode_3d();
+///
+/// assert!(Word::morton_encode_3d(x) == idx);
+///
+/// assert_eq!(x[0], 0b10);
+/// assert_eq!(x[1], 0b11);
+/// assert_eq!(x[2], 0b01);
+///
+/// ```
+    fn morton_encode_3d(x: [Self; 3]) -> Self;
+
+/// Decode interleaved Morton index for a Z-Curve.
+///
+/// # Example
+///
+/// See `Word::morton_encode_2d`.
+    fn morton_decode_2d(self) -> [Self; 2];
+
+/// Decode interleaved Morton index for a Z-Curve.
+///
+/// # Example
+///
+/// See `Word::morton_encode_3d`.
+    fn morton_decode_3d(self) -> [Self; 3];
+
 }
 
 macro_rules! bitwise_word_impl {
@@ -1309,6 +1366,29 @@ macro_rules! bitwise_word_impl {
                      _ => unreachable!()
                 }
             }
+
+            fn morton_encode_2d(x: [Self; 2]) -> Self {
+                Self::parallel_bits_deposit(x[1], 0xAAAAAAAAAAAAAAAAu64 as Self)
+                    | Self::parallel_bits_deposit(x[0], 0x5555555555555555u64 as Self)
+            }
+            fn morton_encode_3d(x: [Self; 3]) -> Self {
+                Self::parallel_bits_deposit(x[2], 0x4924924924924924u64 as Self)
+                    | Self::parallel_bits_deposit(x[1], 0x2492492492492492u64 as Self)
+                    | Self::parallel_bits_deposit(x[0], 0x9249249249249249u64 as Self)
+            }
+            fn morton_decode_2d(self) -> [Self; 2] {
+                 [
+                    self.parallel_bits_extract(0x5555555555555555u64 as Self),
+                    self.parallel_bits_extract(0xAAAAAAAAAAAAAAAAu64 as Self)
+                ]
+            }
+            fn morton_decode_3d(self) -> [Self; 3] {
+                 [
+                    self.parallel_bits_extract(0x9249249249249249u64 as Self),
+                    self.parallel_bits_extract(0x2492492492492492u64 as Self),
+                    self.parallel_bits_extract(0x4924924924924924u64 as Self)
+                ]
+            }
         }
     )
 }
@@ -1324,7 +1404,7 @@ bitwise_word_impl!(i32, i32, u32);
 bitwise_word_impl!(i64, i64, u64);
 bitwise_word_impl!(isize, isize, usize);
 
-/// Bitwise manimpulation algorithms for Word sequences.
+/// Bitwise manimpulation algorithms for sequences of `Words`.
 pub trait Words {
     /// Returns the number of ones in the binary representation of `self`.
     ///
