@@ -1185,7 +1185,7 @@ fn floor_pow2(self) -> Self {
 ///
 /// # Panics
 ///
-/// `alignment` must be a power of two which is asserted in debug builds.
+/// `alignment` must be a power of two.  which is asserted in debug
 ///
 /// # Examples
 ///
@@ -1216,7 +1216,7 @@ fn floor_pow2(self) -> Self {
 ///
 /// # Panics
 ///
-/// `alignment` must be a power of two which is asserted in debug builds.
+/// `alignment` must be a power of two.
 ///
 /// # Examples
 ///
@@ -1550,14 +1550,14 @@ macro_rules! bitwise_word_impl {
             }
 
             fn align_up(self, alignment: u32) -> Self {
-                assert!(alignment.is_pow2());
+                debug_assert!(alignment.is_pow2());
                 let x = self.to_unsigned();
                 let a = alignment as Self::Unsigned;
                 ((x + (a - 1)) & !(a - 1)) as Self
             }
 
             fn align_down(self, alignment: u32) -> Self {
-                assert!(alignment.is_pow2());
+                debug_assert!(alignment.is_pow2());
                 self & (!(alignment - 1) as Self)
             }
 
