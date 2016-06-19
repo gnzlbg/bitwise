@@ -7,10 +7,10 @@
 
 //! Bitwise manipulation algorithms for `Word`s and sequences of `Words`.
 //!
-//! Every algorithm has been given a readable name that explicitly states what
-//! the algorithm does. Each algorithms documentation contains other popular
-//! names of each algorithm as well as the hardware intrinsics they map to, if
-//! any, to make them easier to find.
+//! The algorithms have long and boring readable names that explicitly state
+//! what the algorithm does, but their documentation also contain other popular
+//! names of each algorithm as well as the hardware intrinsics they map to (if
+//! any) to make them easier to find.
 //!
 //! The following architectures are supported using feature flags:
 //!
@@ -493,7 +493,7 @@ fn shift_logical_left(self, n: u32) -> Self;
 /// Reset least significant 1 bit of `self`; returns 0 if `self` is 0.
 ///
 /// # Intrinsics:
-/// - BMI1.0: blsr.
+/// - BMI 1.0: blsr.
 ///
 /// # Examples
 ///
@@ -1376,7 +1376,7 @@ fn floor_pow2(self) -> Self {
 /// ```
     fn parallel_bits_extract(self, mask_: Self) -> Self;
 
-/// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
+/// Encode coordinates `x` into an interleaved Morton index for a Z-Curve.
 ///
 /// Layout: `xy|xy|xy|xy|...` .
 ///
@@ -1397,7 +1397,7 @@ fn floor_pow2(self) -> Self {
 /// ```
     fn morton_encode_2d(x: [Self; 2]) -> Self;
 
-/// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
+/// Encode coordinates `x` into an interleaved Morton index for a Z-Curve.
 ///
 /// Layout: `xyz|xyz|xyz|xyz|...` .
 ///
@@ -1419,16 +1419,15 @@ fn floor_pow2(self) -> Self {
 /// ```
     fn morton_encode_3d(x: [Self; 3]) -> Self;
 
-/// Decode interleaved Morton index for a Z-Curve.
+/// Decode interleaved Morton index for a Z-Curve into coordinates.
 ///
 /// See [`morton_encode_2d`](#tymethod.morton_encode_2d).
     fn morton_decode_2d(self) -> [Self; 2];
 
-/// Decode interleaved Morton index for a Z-Curve.
+/// Decode interleaved Morton index for a Z-Curve into coordinates.
 ///
 /// See [`morton_encode_3d`](#tymethod.morton_encode_3d).
     fn morton_decode_3d(self) -> [Self; 3];
-
 }
 
 macro_rules! bitwise_word_impl {
