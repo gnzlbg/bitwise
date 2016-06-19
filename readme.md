@@ -7,8 +7,16 @@ clippy linting doesn't seem to work
 [![Clippy Linting Result](https://clippy.bashy.io/github/gnzlbh/bitwise/master/badge.svg)]
 -->
 
-The algorithms are implemented for single words and slices of words in the
-`Word` and `Words` traits, respectively.
+The algorithms are implemented for single `Word`s and sequences of `Words`. For
+the following hardware architectures specific versions of some algorithms that
+use hardware intrinsics are available (using feature flags): SSE4.2 (sse42), BMI
+1.0 (bmi1), BMI 2.0 (bmi2), ABM (abm), and TBM (tbm).
+
+**Note**: right now the crate `llvmint` is used whenever possible. While inline
+assembly can be used to implement these algorithms, inline assembly prevents
+compiler optimizations. Ideally, rustc would offer these builtins directly.
+
+## Acknowledgements
 
 The algorithms are heavily inspired and/or directly taken from Matthew
 Fioravante's

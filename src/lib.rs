@@ -7,7 +7,22 @@
 
 //! Bitwise manipulation algorithms for `Word`s and sequences of `Words`.
 //!
-//! See the list of available algorithms in the `Word` and `Words` traits.
+//! Every algorithm has been given a readable name that explicitly states what
+//! the algorithm does. Each algorithms documentation contains other popular
+//! names of each algorithm as well as the hardware intrinsics they map to, if
+//! any, to make them easier to find.
+//!
+//! The following architectures are supported using feature flags:
+//! - SSE 4.2: sse42
+//! - BMI 1.0: bmi1
+//! - BMI 2.0: bmi2
+//! - ABM: abm
+//! - TBM: tbm
+//!
+//! The crate `llvmint` is used to implement the intrinsics whenever possible.
+//! Inline assembly prevents compiler optimizations and is deliberately not
+//! used. Ideally, these intrinsics should be somehow exposed by rustc (or a
+//! similar crate to this should be part of the standard library).
 
 #![cfg_attr(feature = "dev", allow(unstable_features))]
 #![cfg_attr(feature = "dev", feature(plugin))]
@@ -20,7 +35,13 @@ use std::ops::{Add, Sub, Mul, Div};
 use std::ops::{Not, BitAnd, BitOr, BitXor, Shl, Shr};
 use std::mem;
 
-/// Bitwise manipulation algorithms for `Word`s
+/// Bitwise manipulation algorithms for `Word`s.
+///
+/// Note: this trait is not supposed to be implemented by library users.
+/// The distinction between functionality required and inherited has been
+/// arbitrarily placed at the "what is easier to implement within the trait
+/// and what is easier to implement with a macro" for the primitive integer
+/// types.
 pub trait Word
     : Sized
     + Copy
@@ -71,23 +92,11 @@ pub trait Word
 /// ```
     fn to_signed(self) -> Self::Signed;
 
-/// Returns an integer of value one.
-    fn one() -> Self;
 /// Returns an integer of value zero.
     fn zero() -> Self;
 
-/// Returns the number of ones in the binary representation of `self`.
-///
-/// # Examples
-///
-/// ```
-/// use bitwise::Word;
-///
-/// let n = 0b0100_1100u8;
-///
-/// assert_eq!(n.count_ones(), 3);
-/// ```
-    fn count_ones(self) -> usize;
+/// Returns an integer of value one.
+    fn one() -> Self;
 
 /// Returns the number of zeros in the binary representation of `self`.
 ///
@@ -102,8 +111,39 @@ pub trait Word
 /// ```
     fn count_zeros(self) -> usize;
 
+/// Returns the number of ones in the binary representation of `self`.
+///
+/// Keywords: population count, popcount, hamming weight, sideways sum.
+///
+/// Intrinsics:
+/// - ABM: popcnt.
+/// - SSE4.2: popcnt.
+/// - NEON: vcnt.
+/// - PowerPC: popcntb.
+/// - gcc/llvm builtin: `__builtin_popcount(x)`.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let n = 0b0100_1100u8;
+///
+/// assert_eq!(n.count_ones(), 3);
+/// ```
+    fn count_ones(self) -> usize;
+
 /// Returns the number of leading zeros in the binary representation
 /// of `self`.
+///
+/// Keywords: count leading zeros.
+///
+/// Intrinsics:
+/// - ABM: lzcnt.
+/// - BMI 1.0: lzcnt.
+/// - ARMv5: clz.
+/// - PowerPC: cntlzd.
+/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_clz(x)`
 ///
 /// # Examples
 ///
@@ -119,6 +159,12 @@ pub trait Word
 /// Returns the number of trailing zeros in the binary representation
 /// of `self`.
 ///
+/// Keywords: count trailing zeros.
+///
+/// Intrinsics:
+/// - BMI 1.0: tzcnt.
+/// - gcc/llvm builtin: `x == 0 ? mem::size_of(x) * 8 : __builtin_ctz(x)`
+///
 /// # Examples
 ///
 /// ```
@@ -129,6 +175,46 @@ pub trait Word
 /// assert_eq!(n.trailing_zeros(), 3);
 /// ```
     fn trailing_zeros(self) -> usize;
+
+/// Returns the number of leading ones in the binary representation
+/// of `self`.
+///
+/// Keywords: count leading ones.
+///
+/// Intrinsics:
+/// - ARMv8: cls.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let n = 0b1111_1111_1100_1000u16;
+///
+/// assert_eq!(n.leading_ones(), 10);
+/// ```
+    fn leading_ones(self) -> usize {
+       Self::leading_zeros(!self)
+    }
+
+/// Returns the number of trailing ones in the binary representation
+/// of `self`.
+///
+/// Keywords: count trailing ones.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let n = 0b0010_0111u16;
+///
+/// assert_eq!(n.trailing_ones(), 3);
+/// ```
+    fn trailing_ones(self) -> usize {
+       Self::trailing_zeros(!self)
+    }
+
 
 /// Shifts the bits to the left by a specified amount amount, `n`, wrapping
 /// the truncated bits to the end of the resulting integer.
@@ -147,6 +233,9 @@ pub trait Word
 
 /// Shifts the bits to the right by a specified amount amount, `n`, wrapping
 /// the truncated bits to the beginning of the resulting integer.
+///
+/// Intrinsics:
+/// - BMI 2.0: rorx.
 ///
 /// # Examples
 ///
@@ -261,41 +350,11 @@ pub trait Word
 /// ```
     fn pow(self, mut exp: u32) -> Self;
 
-/// Returns the number of leading ones in the binary representation
-/// of `self`.
-///
-/// # Examples
-///
-/// ```
-/// use bitwise::Word;
-///
-/// let n = 0b1111_1111_1100_1000u16;
-///
-/// assert_eq!(n.leading_ones(), 10);
-/// ```
-    fn leading_ones(self) -> usize {
-       Self::leading_zeros(!self)
-    }
-
-/// Returns the number of trailing ones in the binary representation
-/// of `self`.
-///
-/// # Examples
-///
-/// ```
-/// use bitwise::Word;
-///
-/// let n = 0b0010_0111u16;
-///
-/// assert_eq!(n.trailing_ones(), 3);
-/// ```
-    fn trailing_ones(self) -> usize {
-       Self::trailing_zeros(!self)
-    }
-
 /// Returns the number of 1 bits in `self` mod 2, that is, returns 1 if the
 /// number of 1 bits in `self` is odd, and zero otherwise
 ///
+/// Intrinsics:
+/// -gcc/llvm: `__builtin_parity(x)`.
 ///
 /// # Examples
 ///
@@ -320,6 +379,9 @@ pub trait Word
 
 /// Reset least significant 1 bit of `self`; returns 0 if `self` is 0.
 ///
+/// Intrinsics:
+/// - BMI1.0: blsr.
+///
 /// # Examples
 ///
 /// ```
@@ -335,6 +397,9 @@ pub trait Word
     }
 
 /// Set least significant 0 bit of `self`.
+///
+/// Intrinsics:
+/// - TBM: blcs.
 ///
 /// # Examples
 ///
@@ -352,6 +417,10 @@ pub trait Word
 
 /// Isolate least significant 1 bit of `self` and returns it; returns 0
 /// if `self` is 0.
+///
+/// Intrinsics:
+/// - BMI 1.0: blsi.
+/// - TBM: blsic, not.
 ///
 /// # Examples
 ///
@@ -371,6 +440,9 @@ pub trait Word
 /// Set the least significant zero bit of `self` to 1 and all of the
 /// rest to 0.
 ///
+/// Intrinsics:
+/// - TBM: blcic (or: blci, not).
+///
 /// # Examples
 ///
 /// ```
@@ -386,6 +458,9 @@ pub trait Word
     }
 
 /// Reset the trailing 1's in `self`.
+///
+/// Intrinsics:
+/// - TBM: blcfill.
 ///
 /// # Examples
 ///
@@ -403,6 +478,9 @@ pub trait Word
 
 /// Set all of the trailing 0's in `self`.
 ///
+/// Intrinsics:
+/// - TBM: blsfill.
+///
 /// # Examples
 ///
 /// ```
@@ -419,6 +497,9 @@ pub trait Word
 
 /// Returns a mask with all of the trailing 0's of `self` set.
 ///
+/// Intrinsics:
+/// - TBM: tzmsk.
+///
 /// # Examples
 ///
 /// ```
@@ -434,6 +515,9 @@ pub trait Word
     }
 
 /// Returns a mask with all of the trailing 1's of `self` set.
+///
+/// Intrinsics:
+/// - TBM: tlmskc, not.
 ///
 /// # Examples
 ///
@@ -452,6 +536,9 @@ pub trait Word
 /// Returns a mask with all of the trailing 0's of `self` set and the least
 /// significant 1 bit set.
 ///
+/// Intrinsics:
+/// - TBM: blsmsk.
+///
 /// # Examples
 ///
 /// ```
@@ -468,6 +555,9 @@ pub trait Word
 
 /// Returns a mask with all of the trailing 1's of `self` set and the least
 /// significant 0 bit set.
+///
+/// Intrinsics:
+/// - TBM: blcmsk.
 ///
 /// # Examples
 ///
@@ -524,6 +614,9 @@ pub trait Word
     fn reverse_bit_groups(self, subword_bits: u32, group_subwords: u32) -> Self;
 
 /// Reverses the bits of `self`.
+///
+/// Intrinsics:
+/// - ARM: rbit (u32 ARMv7, u64 ARMv8).
 ///
 /// # Examples
 ///
@@ -605,6 +698,11 @@ pub trait Word
     }
 
 /// Reverses the bytes of `self` (equivalent to swap bytes).
+///
+/// Intrinsics:
+/// - x86_64: bswap.
+/// - ARM: rev (v5), revsh (v5), rev16 (v6,v8), rev32(v8).
+/// - gcc/llvm: `__builtin_bswap16/32/64`.
 ///
 /// # Examples
 ///
@@ -699,6 +797,9 @@ pub trait Word
     }
 
 /// Resets all bits of `self` at position >= `bit`.
+///
+/// Intrinsics:
+/// - BMI 2.0: bzhi.
 ///
 /// # Examples
 ///
@@ -1046,6 +1147,11 @@ pub trait Word
 
 /// Parallel bits deposit of `mask` into `self`.
 ///
+/// Keywords: scatter.
+///
+/// Intrinsics:
+/// - BMI 2.0: pdep.
+///
 /// # Examples
 ///
 /// ```
@@ -1065,6 +1171,11 @@ pub trait Word
     fn parallel_bits_deposit(self, mask_: Self) -> Self;
 
 /// Parallel bits extract of `mask` from `self`.
+///
+/// Keywords: gather.
+///
+/// Intrinsics:
+/// - BMI 2.0: pext.
 ///
 /// # Examples
 ///
@@ -1086,7 +1197,7 @@ pub trait Word
 
 /// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
 ///
-/// Layout: xy|xy|xy|xy|...
+/// Layout: `xy|xy|xy|xy|...` .
 ///
 /// # Example
 /// ```
@@ -1107,7 +1218,7 @@ pub trait Word
 
 /// Encode coordinate `x` into an interleaved Morton index for a Z-Curve.
 ///
-/// Layout: xyz|xyz|xyz|xyz|...
+/// Layout: `xyz|xyz|xyz|xyz|...` .
 ///
 /// # Example
 /// ```
@@ -1129,16 +1240,12 @@ pub trait Word
 
 /// Decode interleaved Morton index for a Z-Curve.
 ///
-/// # Example
-///
-/// See `Word::morton_encode_2d`.
+/// See [`morton_encode_2d`](#tymethod.morton_encode_2d).
     fn morton_decode_2d(self) -> [Self; 2];
 
 /// Decode interleaved Morton index for a Z-Curve.
 ///
-/// # Example
-///
-/// See `Word::morton_encode_3d`.
+/// See [`morton_encode_3d`](#tymethod.morton_encode_3d).
     fn morton_decode_3d(self) -> [Self; 3];
 
 }
@@ -1405,6 +1512,12 @@ bitwise_word_impl!(i64, i64, u64);
 bitwise_word_impl!(isize, isize, usize);
 
 /// Bitwise manimpulation algorithms for sequences of `Words`.
+///
+/// Note: this trait is not supposed to be implemented by library users.
+/// The distinction between functionality required and inherited has been
+/// arbitrarily placed at the "what is easier to implement within the trait
+/// and what is easier to implement with a macro" for the primitive integer
+/// types.
 pub trait Words {
     /// Returns the number of ones in the binary representation of `self`.
     ///

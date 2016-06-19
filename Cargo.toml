@@ -17,7 +17,11 @@ llvmint = {version = "0.0.2", optional = true}
 [features]
 default = []
 dev = ["clippy"]
+sse42 = ["llvmint"]
+bmi1 = ["llvmint"]
 bmi2 = ["llvmint"]
+abm = ["llvmint"]
+tbm = ["llvmint"]
 
 [profile.bench]
 opt-level = 3
