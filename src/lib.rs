@@ -2,7 +2,8 @@
         missing_debug_implementations, missing_copy_implementations,
         trivial_casts,
         unstable_features,
-        unused_import_braces, unused_qualifications)]
+        unused_import_braces,
+        unused_qualifications)]
 
 //! Bitwise manipulation algorithms for Words and WordSlices.
 //!
@@ -49,12 +50,12 @@ pub trait Word
 ///
 /// # Examples
 ///
-/// ~~~
+/// ```
 /// use bitwise::Word;
 ///
 /// assert_eq!((8i32).to_unsigned().to_signed(), 8i32);
 /// assert_eq!((-1i32).to_unsigned().to_signed(), -1i32);
-/// ~~~
+/// ```
     fn to_unsigned(self) -> Self::Unsigned;
 
 /// Transmutes an integer into a signed integer of the
@@ -62,12 +63,12 @@ pub trait Word
 ///
 /// # Examples
 ///
-/// ~~~
+/// ```
 /// use bitwise::Word;
 ///
 /// assert_eq!((8i32).to_unsigned().to_signed(), 8i32);
 /// assert_eq!((-1i32).to_unsigned().to_signed(), -1i32);
-/// ~~~
+/// ```
     fn to_signed(self) -> Self::Signed;
 
 /// Returns an integer of value one
@@ -292,8 +293,8 @@ pub trait Word
        Self::trailing_zeros(!self)
     }
 
-/// Returns the number of 1 bits in `self` mod 2, that is, returns 1 if the number
-/// of 1 bits in `self` is odd, and zero otherwise
+/// Returns the number of 1 bits in `self` mod 2, that is, returns 1 if the
+/// number of 1 bits in `self` is odd, and zero otherwise
 ///
 ///
 /// # Examples
@@ -363,7 +364,7 @@ pub trait Word
 /// assert_eq!(n.isolate_least_significant_one(), s);
 /// ```
     fn isolate_least_significant_one(self) -> Self {
-        // note: self & -self is intended, which is rewritten as:
+// note: self & -self is intended, which is rewritten as:
         self & (Self::zero() - self)
     }
 
@@ -522,7 +523,7 @@ pub trait Word
 /// ```
     fn reverse_bit_groups(self, subword_bits: u32, group_subwords: u32) -> Self;
 
-/// Reverses the bits of `self`
+/// Reverses the bits of `self`.
 ///
 /// # Examples
 ///
@@ -541,7 +542,7 @@ pub trait Word
         self.reverse_bit_groups(1, 1)
     }
 
-/// Reverses the pairs of bits of `self`
+/// Reverses the pairs of bits of `self`.
 ///
 /// # Examples
 ///
@@ -560,7 +561,7 @@ pub trait Word
         self.reverse_bit_groups(2, 1)
     }
 
-/// Reverses the nibbles of `self`
+/// Reverses the nibbles of `self`.
 ///
 /// # Examples
 ///
@@ -579,7 +580,7 @@ pub trait Word
         self.reverse_bit_groups(4, 1)
     }
 
-/// Reverses the bytes of `self`
+/// Reverses the bytes of `self`.
 ///
 /// - `bytes_per_block`: number of bytes per block to reverse.
 /// - `blocks_per_group`: number of blocks per group of blocks.
@@ -603,7 +604,7 @@ pub trait Word
         self.reverse_bit_groups(8 * bytes_per_block, blocks_per_group)
     }
 
-/// Reverses the bytes of `self` (equivalent to swap bytes)
+/// Reverses the bytes of `self` (equivalent to swap bytes).
 ///
 /// # Examples
 ///
@@ -624,7 +625,7 @@ pub trait Word
         self.swap_bytes()
     }
 
-/// Sets the `bit` of `self`
+/// Sets the `bit` of `self`.
 ///
 /// # Examples
 ///
@@ -643,7 +644,7 @@ pub trait Word
          self | (Self::one() << bit)
     }
 
-/// Resets the `bit` of `self`
+/// Resets the `bit` of `self`.
 ///
 /// # Examples
 ///
@@ -662,7 +663,7 @@ pub trait Word
          self & !(Self::one() << bit)
     }
 
-/// Flip the `bit` of `self`
+/// Flip the `bit` of `self`.
 ///
 /// # Examples
 ///
@@ -681,7 +682,7 @@ pub trait Word
          self ^ (Self::one() << bit)
     }
 
-/// Test the `bit` of `self`
+/// Test the `bit` of `self`.
 ///
 /// # Examples
 ///
@@ -697,7 +698,7 @@ pub trait Word
         self & (Self::one() << bit) != Self::zero()
     }
 
-/// Resets all bits of `self` at position >= `bit`
+/// Resets all bits of `self` at position >= `bit`.
 ///
 /// # Examples
 ///
@@ -712,7 +713,7 @@ pub trait Word
        self & ((Self::one() << bit) - Self::one())
     }
 
-/// Resets all bits of `self` at position <= `bit`
+/// Resets all bits of `self` at position <= `bit`.
 ///
 /// # Examples
 ///
@@ -727,7 +728,7 @@ pub trait Word
        self & !((Self::one() << (bit + 1)) - Self::one())
     }
 
-/// Sets all bits of `self` at position >= `bit`
+/// Sets all bits of `self` at position >= `bit`.
 ///
 /// # Examples
 ///
@@ -742,7 +743,7 @@ pub trait Word
        self | !((Self::one() << bit) - Self::one())
     }
 
-/// Sets all bits of `self` at position <= `bit`
+/// Sets all bits of `self` at position <= `bit`.
 ///
 /// # Examples
 ///
@@ -757,7 +758,7 @@ pub trait Word
        self | ((Self::one() << (bit + 1)) - Self::one())
     }
 
-/// Flip all bits of `self` at position >= `bit`
+/// Flip all bits of `self` at position >= `bit`.
 ///
 /// # Examples
 ///
@@ -772,7 +773,7 @@ pub trait Word
        self ^ !((Self::one() << bit) - Self::one())
     }
 
-/// Flip all bits of `self` at position <= `bit`
+/// Flip all bits of `self` at position <= `bit`.
 ///
 /// # Examples
 ///
@@ -787,7 +788,7 @@ pub trait Word
        self ^ ((Self::one() << (bit + 1)) - Self::one() )
     }
 
-/// Is `self` a power of 2
+/// Is `self` a power of 2.
 ///
 /// # Examples
 ///
@@ -807,7 +808,7 @@ pub trait Word
        && ((self & (self - Self::one())) == Self::zero())
     }
 
-/// Round `self` to the next power of 2
+/// Round `self` to the next power of 2.
 ///
 /// # Examples
 ///
@@ -840,7 +841,7 @@ pub trait Word
         x + Self::one()
     }
 
-/// Round `self` to the previous power of 2
+/// Round `self` to the previous power of 2.
 ///
 /// # Examples
 ///
@@ -873,7 +874,7 @@ pub trait Word
         x - (x >> 1)
     }
 
-/// Is `self` aligned to `alignment` bytes
+/// Is `self` aligned to `alignment` bytes.
 ///
 /// Returns true if `self == 0` or `self` is a multiple of `alignment`.
 ///
@@ -899,7 +900,7 @@ pub trait Word
 /// ```
     fn is_aligned(self, alignment: u32) -> bool;
 
-/// Align `self` up to `alignment`
+/// Align `self` up to `alignment`.
 ///
 /// Returns `n`, where `n` is the least number >= `self`
 /// and `is_aligned(n, alignment)`.
@@ -930,7 +931,7 @@ pub trait Word
 /// ```
     fn align_up(self, alignment: u32) -> Self;
 
-/// Align `self` down to `alignment`
+/// Align `self` down to `alignment`.
 ///
 /// Returns `n`, where `n` is the greatest number <= `self`
 /// and `is_aligned(n, alignment)`.
@@ -961,9 +962,10 @@ pub trait Word
 /// ```
     fn align_down(self, alignment: u32) -> Self;
 
-/// Outer Perfect Shuffle of `self`
+/// Outer Perfect Shuffle of `self`.
 ///
-/// See also [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
+/// See also:
+/// [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
 ///
 /// # Examples
 ///
@@ -979,9 +981,10 @@ pub trait Word
 /// ```
     fn outer_perfect_shuffle(self) -> Self;
 
-/// Outer Perfect Unshuffle of `self`
+/// Outer Perfect Unshuffle of `self`.
 ///
-/// See also [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
+/// See also:
+/// [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
 ///
 /// # Examples
 ///
@@ -997,9 +1000,10 @@ pub trait Word
 /// ```
     fn outer_perfect_unshuffle(self) -> Self;
 
-/// Inner Perfect Shuffle of `self`
+/// Inner Perfect Shuffle of `self`.
 ///
-/// See also [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
+/// See also:
+/// [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
 ///
 /// # Examples
 ///
@@ -1018,9 +1022,10 @@ pub trait Word
         self.reverse_bit_groups(hwb as u32, 1).outer_perfect_shuffle()
    }
 
-/// Inner Perfect Unshuffle of `self`
+/// Inner Perfect Unshuffle of `self`.
 ///
-/// See also [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
+/// See also:
+/// [Hacker's Delight: shuffling bits](http://icodeguru.com/Embedded/Hacker's-Delight/047.htm).
 ///
 /// # Examples
 ///
@@ -1039,7 +1044,7 @@ pub trait Word
         self.outer_perfect_unshuffle().reverse_bit_groups(hwb as u32, 1)
     }
 
-/// Parallel bits deposit of `mask` into `self`
+/// Parallel bits deposit of `mask` into `self`.
 ///
 /// # Examples
 ///
@@ -1059,7 +1064,7 @@ pub trait Word
 /// ```
     fn parallel_bits_deposit(self, mask_: Self) -> Self;
 
-/// Parallel bits extract of `mask` from `self`
+/// Parallel bits extract of `mask` from `self`.
 ///
 /// # Examples
 ///
@@ -1145,10 +1150,10 @@ macro_rules! bitwise_word_impl {
             }
 
             fn reverse_bit_groups(self, subword_bits: u32, group_subwords: u32) -> Self {
-              // Adapted from Matthew Fioravante's stdcxx-bitops, which
-              // is released under the MIT's License here:
-              // https://github.com/fmatthew5876/stdcxx-bitops
-           
+// Adapted from Matthew Fioravante's stdcxx-bitops, which
+// is released under the MIT's License here:
+// https://github.com/fmatthew5876/stdcxx-bitops
+
               let mut x: Self::Unsigned = self.to_unsigned();
               let width: u32  = <Self as Word>::size() as u32;
               let group_sz: u32 = width * 8 / group_subwords;
@@ -1262,7 +1267,6 @@ macro_rules! bitwise_word_impl {
                 res
             }
 
-
             #[cfg(not(feature = "bmi2"))]
             fn parallel_bits_extract(self, mask_: Self) -> Self {
                 let mut res = Self::zero();
@@ -1284,16 +1288,24 @@ macro_rules! bitwise_word_impl {
             #[cfg(feature = "bmi2")]
             fn parallel_bits_deposit(self, mask_: Self) -> Self {
                 match <Self as Word>::size() {
-                    0...32 => unsafe { llvmint::x86::bmi_pdep_32(self as i32, mask_ as i32) as Self },
-                    64 => unsafe { llvmint::x86::bmi_pdep_64(self as i64, mask_ as i64) as Self },
+                    0...32 => unsafe {
+                        llvmint::x86::bmi_pdep_32(self as i32, mask_ as i32) as Self
+                    },
+                    64 => unsafe {
+                        llvmint::x86::bmi_pdep_64(self as i64, mask_ as i64) as Self
+                    },
                      _ => unreachable!()
                 }
             }
             #[cfg(feature = "bmi2")]
             fn parallel_bits_extract(self, mask_: Self) -> Self {
                 match <Self as Word>::size() {
-                    0...32 => unsafe { llvmint::x86::bmi_pext_32(self as i32, mask_ as i32) as Self }, 
-                    64 => unsafe { llvmint::x86::bmi_pext_64(self as i64, mask_ as i64) as Self },
+                    0...32 => unsafe {
+                        llvmint::x86::bmi_pext_32(self as i32, mask_ as i32) as Self
+                    },
+                    64 => unsafe {
+                        llvmint::x86::bmi_pext_64(self as i64, mask_ as i64) as Self
+                    },
                      _ => unreachable!()
                 }
             }
