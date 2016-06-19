@@ -46,7 +46,7 @@ pub trait Word
     fn size() -> usize;
 
 /// Transmutes the integer into an unsigned integer of the
-/// same size (loss less).
+/// same size (bitwise loss-less).
 ///
 /// # Examples
 ///
@@ -59,7 +59,7 @@ pub trait Word
     fn to_unsigned(self) -> Self::Unsigned;
 
 /// Transmutes an integer into a signed integer of the
-/// same size (loss less).
+/// same size (bitwise loss-less).
 ///
 /// # Examples
 ///
@@ -71,9 +71,9 @@ pub trait Word
 /// ```
     fn to_signed(self) -> Self::Signed;
 
-/// Returns an integer of value one
+/// Returns an integer of value one.
     fn one() -> Self;
-/// Returns an integer of value zero
+/// Returns an integer of value zero.
     fn zero() -> Self;
 
 /// Returns the number of ones in the binary representation of `self`.
@@ -486,7 +486,7 @@ pub trait Word
 /// Reverses the bits of `self` by `subword_bits` and `group_subwords`:
 ///
 /// - `subword_bits`: the bits will be reversed in grous:
-///   1 (single bits), 2 (pair-wise), 4 (nibbles)
+///   1 (single bits), 2 (pair-wise), 4 (nibbles), 
 /// - `group_subwords`: the subword size is 8 bits: `mem::size_of::<u8>()`,
 ///   the bits will be reversed within each subword.
 ///
