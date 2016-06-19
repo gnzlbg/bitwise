@@ -27,7 +27,6 @@ before_script:
 
 # the main build
 script:
-  - export GH_TOKEN=${GITHUB_TOKEN}
   - | 
       travis-cargo build &&
       travis-cargo test &&
@@ -47,4 +46,4 @@ env:
     # override the default `--features unstable` used for the nightly branch (optional)
      - TRAVIS_CARGO_NIGHTLY_FEATURE=""
     # encrypted github token for doc upload (see `GH_TOKEN` link above)
-     - secure: "QKmAzwG8jeQV1GMEqNIZlKy5yB4+L/ecFxDAHa0XYPnD5d+IP3PT+DLyD36THVA9DmGqWLJWlMc27mZghjH/W/dvNtNoQjEr6GOhUTqUjK2dAvjEKd23VNg/qUr7I8i0MNPK4dgOuKXzGDKK/tj7i294T8pAS1BlKmF7dHtZjmvaMg9VoSaXtWwO8JxgfrvMf0ruDV7iRgkhhuCUa/qzwSzShL1wbXbdtNqvmYodc7aBh/wX5COznldGBDCK0TZbjnvL9Bbr+bvrclmrTcuDL55tl0Bdyags1V6tw0NzwUXJACDXnQ9MknqNCbkMlBys+/6tBbqFi5nJJgvRIrkxGm1gFHePrhesEB7yScTj6HjtOOWF8UnV9Y8098o/Q4TaPAJoVaVuNkfpG/rxng5VWCD+W97w6bUr0QJyVjHQcdIe924GguLx28lrJTfDcg4Ej7osu5wmd9iCWdL/hsgTyT6gm4Im05k0o60I8uyJ1zQ1YIZg8xl/tveuTs4/Q4ZVhHdOMPjawXT+cQIdq1BfPzaRq6Uce7BvjRQpBolxyz/GzMG0pRunfk0uHiV6sIPGp66dhlq8Ff/7Vdrg1kpXTJKR6KMFA+IVQiX50XjFoqMdTXxx/NjLGQ4JMsKz6sg4tyS6atCH3niOuZffZewxikR/CJpdU2i+2ksfmF6rr8E="
+     - secure: "JNWcsT/AyHX72KTqJgZpqwOAN2FI1bAiTLkvCC2j/9O50EhCz/q7M+YDKawYMbqJNccCGbS0y+V/YPXPeuMFlp0B/7+hSca3/skXZ75uIk/yWRmYYm6Dj7BvrUx1M0LrG+dTMYQn/jtFBdOxOEzOHznO16SZPO0cfS8k2NAqhfdsAvWtzYELJ25zwWGzrU/A7aq1WkC0M3QMBbUoxSRwjXihRqwfbXS2Z4gLnzWJAMxdI24gSqFrvY8dHb/PKx9PyHR1W2SskH5cPEfNDHLGZ7ZgwLfqTD2OuHbcPOfqZ5ImPT1oJHtor9KNqhwxkSMVoMZDTQu0974/5+48t3U7CYzRnjgrAesH4z9QS6MgnL1rTvAvu+lEspoJmN4MB5VCGcrsP+H576XLlB2i5BzWDC+zdUfi8fZdQBVEnr7N9h7xuh89z3/anUfuWrlKV4a15BI7qivKZlenvrIq4L/QZQlWGfWgWOdb3UP8HeocEZFFOBb7Z3NYGkSWzlu5FQjWjd5qtoyKK0l0aiAUp6nW1Vc8flJJc0XH0aRIDn2I9Nd/OaLkUSI/tmh75/CGl04ReWe3bRuzEsi3K2wPqsQ2OAB9liE9n190CVNb1ZGE3JGu/Smt/JlLnJ/lYNFdIvVBmfPGE9BTU2XdyQ6YO1Yhy8/ZxYlJJCvhTPWeyPpEU+Q="
