@@ -13,11 +13,11 @@
 //! any, to make them easier to find.
 //!
 //! The following architectures are supported using feature flags:
-//! - SSE 4.2: sse42
-//! - BMI 1.0: bmi1
-//! - BMI 2.0: bmi2
-//! - ABM: abm
-//! - TBM: tbm
+//! - SSE 4.2: sse42,
+//! - BMI 1.0: bmi1,
+//! - BMI 2.0: bmi2,
+//! - ABM: abm,
+//! - TBM: tbm.
 //!
 //! The crate `llvmint` is used to implement the intrinsics whenever possible.
 //! Inline assembly prevents compiler optimizations and is deliberately not
@@ -215,8 +215,76 @@ pub trait Word
        Self::trailing_zeros(!self)
     }
 
+/// Shift the bits to the left by a specified amount, `n`.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let a = 0b0000_1010u8;
+/// let b = 0b0000_1001u8;
+///
+/// assert_eq!(a.shift_logical_left(4), 0b1010_0000u8);
+/// assert_eq!(b.shift_logical_left(4), 0b1001_0000u8);
+///
+/// ```
+    fn shift_logical_left(self, n: u32) -> Self;
 
-/// Shifts the bits to the left by a specified amount amount, `n`, wrapping
+/// Shift the bits to the right by a specified amount, `n`, with the
+/// high-order bits of the result resetted.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let a = 0b0111_0000u8;
+/// let b = 0b1001_0000u8;
+///
+/// assert_eq!(a.shift_logical_right(4), 0b0000_0111u8);
+/// assert_eq!(b.shift_logical_right(4), 0b0000_1001u8);
+///
+/// ```
+    fn shift_logical_right(self, n: u32) -> Self;
+
+/// Shift the bits to the left by a specified amount, `n` (same as
+/// [`shift_logical_left`](tymethod.shift_logical_left), provided for
+/// symmetry).
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let a = 0b0000_1010u8;
+/// let b = 0b0000_1001u8;
+///
+/// assert_eq!(a.shift_arithmetic_left(4), 0b1010_0000u8);
+/// assert_eq!(b.shift_arithmetic_left(4), 0b1001_0000u8);
+///
+/// ```
+    fn shift_arithmetic_left(self, n: u32) -> Self;
+
+/// Shift the bits to the right by a specified amount, `n`, setting the
+/// high-order bits of the result to the value of the most significant bit
+/// of `self`.
+///
+/// # Examples
+///
+/// ```
+/// use bitwise::Word;
+///
+/// let a = 0b0111_0000u8;
+/// let b = 0b1001_0000u8;
+///
+/// assert_eq!(a.shift_arithmetic_right(4), 0b0000_0111u8);
+/// assert_eq!(b.shift_arithmetic_right(4), 0b1111_1001u8);
+///
+/// ```
+    fn shift_arithmetic_right(self, n: u32) -> Self;
+
+/// Shifts the bits to the left by a specified amount, `n`, wrapping
 /// the truncated bits to the end of the resulting integer.
 ///
 /// # Examples
@@ -231,7 +299,7 @@ pub trait Word
 /// ```
     fn rotate_left(self, n: u32) -> Self;
 
-/// Shifts the bits to the right by a specified amount amount, `n`, wrapping
+/// Shifts the bits to the right by a specified amount, `n`, wrapping
 /// the truncated bits to the beginning of the resulting integer.
 ///
 /// Intrinsics:
@@ -1283,6 +1351,18 @@ macro_rules! bitwise_word_impl {
               <$T>::count_zeros(self) as usize
             }
             fn one() -> $T { 1 as $T }
+            fn shift_logical_left(self, n: u32) -> Self {
+                (self.to_unsigned() << n) as Self
+            }
+            fn shift_logical_right(self, n: u32) -> Self {
+                (self.to_unsigned() >> n) as Self
+            }
+            fn shift_arithmetic_left(self, n: u32) -> Self {
+                self.shift_logical_left(n)
+            }
+            fn shift_arithmetic_right(self, n: u32) -> Self {
+                (self.to_signed() >> n) as Self
+            }
             fn rotate_left(self, n: u32) -> Self {
                 <$T>::rotate_left(self, n)
             }
