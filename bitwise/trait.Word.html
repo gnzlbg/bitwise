@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Word` trait in crate `bitwise`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Word">
+
+    <title>bitwise::Word - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>bitwise</a></p><script>window.sidebarCurrent = {name: 'Word', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>bitwise</a>::<wbr><a class='trait' href=''>Word</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-7' class='srclink' href='../src/bitwise/src/lib.rs.html#47-1876' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Word: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Not.html' title='core::ops::Not'>Not</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.BitOr.html' title='core::ops::BitOr'>BitOr</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.BitXor.html' title='core::ops::BitXor'>BitXor</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Add.html' title='core::ops::Add'>Add</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Sub.html' title='core::ops::Sub'>Sub</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Mul.html' title='core::ops::Mul'>Mul</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Div.html' title='core::ops::Div'>Div</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Shr.html' title='core::ops::Shr'>Shr</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Shl.html' title='core::ops::Shl'>Shl</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.BitAnd.html' title='core::ops::BitAnd'>BitAnd</a>&lt;Output=Self&gt; + <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a> {
+    type <a href='#associatedtype.Signed' class='type'>Signed</a>: <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a>;
+    type <a href='#associatedtype.Unsigned' class='type'>Unsigned</a>: <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a>;
+    fn <a href='#tymethod.size' class='fnname'>size</a>() -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.to_unsigned' class='fnname'>to_unsigned</a>(self) -&gt; Self::<a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Unsigned</a>;
+    fn <a href='#tymethod.to_signed' class='fnname'>to_signed</a>(self) -&gt; Self::<a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Signed</a>;
+    fn <a href='#tymethod.zero' class='fnname'>zero</a>() -&gt; Self;
+    fn <a href='#tymethod.one' class='fnname'>one</a>() -&gt; Self;
+    fn <a href='#tymethod.two' class='fnname'>two</a>() -&gt; Self;
+    fn <a href='#tymethod.count_zeros' class='fnname'>count_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.count_ones' class='fnname'>count_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.leading_zeros' class='fnname'>leading_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.trailing_zeros' class='fnname'>trailing_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.shift_logical_left' class='fnname'>shift_logical_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.shift_logical_right' class='fnname'>shift_logical_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.shift_arithmetic_left' class='fnname'>shift_arithmetic_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.shift_arithmetic_right' class='fnname'>shift_arithmetic_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.rotate_left' class='fnname'>rotate_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.rotate_right' class='fnname'>rotate_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.swap_bytes' class='fnname'>swap_bytes</a>(self) -&gt; Self;
+    fn <a href='#tymethod.from_be' class='fnname'>from_be</a>(x: Self) -&gt; Self;
+    fn <a href='#tymethod.from_le' class='fnname'>from_le</a>(x: Self) -&gt; Self;
+    fn <a href='#tymethod.to_be' class='fnname'>to_be</a>(self) -&gt; Self;
+    fn <a href='#tymethod.to_le' class='fnname'>to_le</a>(self) -&gt; Self;
+    fn <a href='#tymethod.pow' class='fnname'>pow</a>(self, exp: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.reverse_bit_groups' class='fnname'>reverse_bit_groups</a>(self, subword_bits: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, group_subwords: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.set_bit_to' class='fnname'>set_bit_to</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, value: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; Self;
+    fn <a href='#tymethod.clear_bits_geq' class='fnname'>clear_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.is_aligned' class='fnname'>is_aligned</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>;
+    fn <a href='#tymethod.align_up' class='fnname'>align_up</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.align_down' class='fnname'>align_down</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.outer_perfect_shuffle' class='fnname'>outer_perfect_shuffle</a>(self) -&gt; Self;
+    fn <a href='#tymethod.outer_perfect_unshuffle' class='fnname'>outer_perfect_unshuffle</a>(self) -&gt; Self;
+    fn <a href='#tymethod.scatter_bits' class='fnname'>scatter_bits</a>(self, mask_: Self) -&gt; Self;
+    fn <a href='#tymethod.gather_bits' class='fnname'>gather_bits</a>(self, mask_: Self) -&gt; Self;
+    fn <a href='#tymethod.gather_bit_range' class='fnname'>gather_bit_range</a>(self, first: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self;
+    fn <a href='#tymethod.morton_encode_2d' class='fnname'>morton_encode_2d</a>(x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a>) -&gt; Self;
+    fn <a href='#tymethod.morton_encode_3d' class='fnname'>morton_encode_3d</a>(x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a>) -&gt; Self;
+    fn <a href='#tymethod.morton_decode_2d' class='fnname'>morton_decode_2d</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a>;
+    fn <a href='#tymethod.morton_decode_3d' class='fnname'>morton_decode_3d</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a>;
+
+    fn <a href='#method.bit_size' class='fnname'>bit_size</a>() -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.leading_ones' class='fnname'>leading_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.trailing_ones' class='fnname'>trailing_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.and_not' class='fnname'>and_not</a>(self, y: Self) -&gt; Self { ... }
+    fn <a href='#method.parity' class='fnname'>parity</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.next_abs_greater_even' class='fnname'>next_abs_greater_even</a>(self) -&gt; Self { ... }
+    fn <a href='#method.prev_abs_smaller_even' class='fnname'>prev_abs_smaller_even</a>(self) -&gt; Self { ... }
+    fn <a href='#method.next_abs_greater_equal_even' class='fnname'>next_abs_greater_equal_even</a>(self) -&gt; Self { ... }
+    fn <a href='#method.prev_abs_smaller_equal_even' class='fnname'>prev_abs_smaller_equal_even</a>(self) -&gt; Self { ... }
+    fn <a href='#method.next_abs_greater_odd' class='fnname'>next_abs_greater_odd</a>(self) -&gt; Self { ... }
+    fn <a href='#method.prev_abs_smaller_odd' class='fnname'>prev_abs_smaller_odd</a>(self) -&gt; Self { ... }
+    fn <a href='#method.next_abs_greater_equal_odd' class='fnname'>next_abs_greater_equal_odd</a>(self) -&gt; Self { ... }
+    fn <a href='#method.prev_abs_smaller_equal_odd' class='fnname'>prev_abs_smaller_equal_odd</a>(self) -&gt; Self { ... }
+    fn <a href='#method.clear' class='fnname'>clear</a>(self) -&gt; Self { ... }
+    fn <a href='#method.clear_least_significant_one' class='fnname'>clear_least_significant_one</a>(self) -&gt; Self { ... }
+    fn <a href='#method.set_least_significant_zero' class='fnname'>set_least_significant_zero</a>(self) -&gt; Self { ... }
+    fn <a href='#method.isolate_least_significant_one' class='fnname'>isolate_least_significant_one</a>(self) -&gt; Self { ... }
+    fn <a href='#method.isolate_least_significant_zero' class='fnname'>isolate_least_significant_zero</a>(self) -&gt; Self { ... }
+    fn <a href='#method.clear_trailing_ones' class='fnname'>clear_trailing_ones</a>(self) -&gt; Self { ... }
+    fn <a href='#method.set_trailing_zeros' class='fnname'>set_trailing_zeros</a>(self) -&gt; Self { ... }
+    fn <a href='#method.mask_trailing_zeros' class='fnname'>mask_trailing_zeros</a>(self) -&gt; Self { ... }
+    fn <a href='#method.mask_trailing_ones' class='fnname'>mask_trailing_ones</a>(self) -&gt; Self { ... }
+    fn <a href='#method.mask_trailing_zeros_and_least_significant_one' class='fnname'>mask_trailing_zeros_and_least_significant_one</a>(self) -&gt; Self { ... }
+    fn <a href='#method.mask_trailing_ones_and_least_significant_zero' class='fnname'>mask_trailing_ones_and_least_significant_zero</a>(self) -&gt; Self { ... }
+    fn <a href='#method.first_bit_set' class='fnname'>first_bit_set</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.first_bit_clear' class='fnname'>first_bit_clear</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> { ... }
+    fn <a href='#method.reverse_bits' class='fnname'>reverse_bits</a>(self) -&gt; Self { ... }
+    fn <a href='#method.reverse_bit_pairs' class='fnname'>reverse_bit_pairs</a>(self) -&gt; Self { ... }
+    fn <a href='#method.reverse_bit_nibbles' class='fnname'>reverse_bit_nibbles</a>(self) -&gt; Self { ... }
+    fn <a href='#method.reverse_byte_groups' class='fnname'>reverse_byte_groups</a>(self, bytes_per_block: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, blocks_per_group: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.reverse_bytes' class='fnname'>reverse_bytes</a>(self) -&gt; Self { ... }
+    fn <a href='#method.set_bit' class='fnname'>set_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.clear_bit' class='fnname'>clear_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.flip_bit' class='fnname'>flip_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.test_bit' class='fnname'>test_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> { ... }
+    fn <a href='#method.clear_bits_leq' class='fnname'>clear_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.set_bits_geq' class='fnname'>set_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.set_bits_leq' class='fnname'>set_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.flip_bits_geq' class='fnname'>flip_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.flip_bits_leq' class='fnname'>flip_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self { ... }
+    fn <a href='#method.is_pow2' class='fnname'>is_pow2</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> { ... }
+    fn <a href='#method.ceil_pow2' class='fnname'>ceil_pow2</a>(self) -&gt; Self { ... }
+    fn <a href='#method.floor_pow2' class='fnname'>floor_pow2</a>(self) -&gt; Self { ... }
+    fn <a href='#method.average_floor' class='fnname'>average_floor</a>(x: Self, y: Self) -&gt; Self { ... }
+    fn <a href='#method.average_ceil' class='fnname'>average_ceil</a>(x: Self, y: Self) -&gt; Self { ... }
+    fn <a href='#method.inner_perfect_shuffle' class='fnname'>inner_perfect_shuffle</a>(self) -&gt; Self { ... }
+    fn <a href='#method.inner_perfect_unshuffle' class='fnname'>inner_perfect_unshuffle</a>(self) -&gt; Self { ... }
+}</pre><div class='docblock'><p>Bitwise manipulation algorithms for <code>Word</code>s.</p>
+
+<p>Note: this trat is not supposed to be implemented by library users. The
+distinction between functionality required and inherited has been
+arbitrarily placed at the boundary between &quot;what is easier to implement
+within the trait&quot; and &quot;what is easier to implement with a macro&quot; for the
+primitive integer types.</p>
+</div>
+            <h2 id='associated-types'>Associated Types</h2>
+            <div class='methods'>
+        <h3 id='associatedtype.Signed' class='method stab '><code>type <a href='#associatedtype.Signed' class='type'>Signed</a>: <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a></code></h3><div class='docblock'><p>Signed Word Type of the same size as Self.</p>
+</div><h3 id='associatedtype.Unsigned' class='method stab '><code>type <a href='#associatedtype.Unsigned' class='type'>Unsigned</a>: <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a></code></h3><div class='docblock'><p>Unsigned Word Type of the same size as Self.</p>
+</div></div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.size' class='method stab '><code>fn <a href='#tymethod.size' class='fnname'>size</a>() -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Size of the word in bytes.</p>
+</div><h3 id='tymethod.to_unsigned' class='method stab '><code>fn <a href='#tymethod.to_unsigned' class='fnname'>to_unsigned</a>(self) -&gt; Self::<a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Unsigned</a></code></h3><div class='docblock'><p>Transmutes the integer into an unsigned integer of the
+same size (bitwise loss-less).</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='number'>8i32</span>).<span class='ident'>to_unsigned</span>().<span class='ident'>to_signed</span>(), <span class='number'>8i32</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='op'>-</span><span class='number'>1i32</span>).<span class='ident'>to_unsigned</span>().<span class='ident'>to_signed</span>(), <span class='op'>-</span><span class='number'>1i32</span>);</pre>
+</div><h3 id='tymethod.to_signed' class='method stab '><code>fn <a href='#tymethod.to_signed' class='fnname'>to_signed</a>(self) -&gt; Self::<a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Signed</a></code></h3><div class='docblock'><p>Transmutes an integer into a signed integer of the
+same size (bitwise loss-less).</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='number'>8i32</span>).<span class='ident'>to_unsigned</span>().<span class='ident'>to_signed</span>(), <span class='number'>8i32</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='op'>-</span><span class='number'>1i32</span>).<span class='ident'>to_unsigned</span>().<span class='ident'>to_signed</span>(), <span class='op'>-</span><span class='number'>1i32</span>);</pre>
+</div><h3 id='tymethod.zero' class='method stab '><code>fn <a href='#tymethod.zero' class='fnname'>zero</a>() -&gt; Self</code></h3><div class='docblock'><p>Returns a word with no bits set (an integer of value zero).</p>
+</div><h3 id='tymethod.one' class='method stab '><code>fn <a href='#tymethod.one' class='fnname'>one</a>() -&gt; Self</code></h3><div class='docblock'><p>Returns a word with the least significant bit set (an integer of value one).</p>
+</div><h3 id='tymethod.two' class='method stab '><code>fn <a href='#tymethod.two' class='fnname'>two</a>() -&gt; Self</code></h3><div class='docblock'><p>Returns a word with the second least significant bit set (an integer of value two).</p>
+</div><h3 id='tymethod.count_zeros' class='method stab '><code>fn <a href='#tymethod.count_zeros' class='fnname'>count_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of zeros in the binary representation of <code>self</code>.</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0100_1100u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>count_zeros</span>(), <span class='number'>5</span>);</pre>
+</div><h3 id='tymethod.count_ones' class='method stab '><code>fn <a href='#tymethod.count_ones' class='fnname'>count_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of ones in the binary representation of <code>self</code>.</p>
+
+<h1 id='keywords' class='section-header'><a href='#keywords'>Keywords:</a></h1>
+<p>Population count, popcount, hamming weight, sideways sum.</p>
+
+<h1 id='intrinsics' class='section-header'><a href='#intrinsics'>Intrinsics:</a></h1>
+<ul>
+<li>ABM: popcnt.</li>
+<li>SSE4.2: popcnt.</li>
+<li>NEON: vcnt.</li>
+<li>PowerPC: popcntb.</li>
+<li>gcc/llvm builtin: <code>__builtin_popcount(x)</code>.</li>
+</ul>
+
+<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0100_1100u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>count_ones</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='tymethod.leading_zeros' class='method stab '><code>fn <a href='#tymethod.leading_zeros' class='fnname'>leading_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of leading zeros in the binary representation
+of <code>self</code>.</p>
+
+<h1 id='keywords-1' class='section-header'><a href='#keywords-1'>Keywords:</a></h1>
+<p>Count leading zeros.</p>
+
+<h1 id='intrinsics-1' class='section-header'><a href='#intrinsics-1'>Intrinsics:</a></h1>
+<ul>
+<li>ABM: lzcnt.</li>
+<li>BMI 1.0: lzcnt.</li>
+<li>ARMv5: clz.</li>
+<li>PowerPC: cntlzd.</li>
+<li>gcc/llvm builtin: <code>x == 0 ? mem::size_of(x) * 8 : __builtin_clz(x)</code>.</li>
+</ul>
+
+<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0010_1000u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>leading_zeros</span>(), <span class='number'>10</span>);</pre>
+</div><h3 id='tymethod.trailing_zeros' class='method stab '><code>fn <a href='#tymethod.trailing_zeros' class='fnname'>trailing_zeros</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of trailing zeros in the binary representation
+of <code>self</code>.</p>
+
+<h1 id='keywords-2' class='section-header'><a href='#keywords-2'>Keywords:</a></h1>
+<p>Count trailing zeros.</p>
+
+<h1 id='intrinsics-2' class='section-header'><a href='#intrinsics-2'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 1.0: tzcnt.</li>
+<li>gcc/llvm builtin: <code>x == 0 ? mem::size_of(x) * 8 : __builtin_ctz(x)</code>.</li>
+</ul>
+
+<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0010_1000u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>trailing_zeros</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='tymethod.shift_logical_left' class='method stab '><code>fn <a href='#tymethod.shift_logical_left' class='fnname'>shift_logical_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shift the bits to the left by a specified amount, <code>n</code>.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='number'>0b0000_1010u8</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0b0000_1001u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>shift_logical_left</span>(<span class='number'>4</span>), <span class='number'>0b1010_0000u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>b</span>.<span class='ident'>shift_logical_left</span>(<span class='number'>4</span>), <span class='number'>0b1001_0000u8</span>);
+<span class='ident'>b</span>.<span class='ident'>shift_logical_right</span>((<span class='op'>&lt;</span><span class='ident'>u8</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
+</pre>
+</div><h3 id='tymethod.shift_logical_right' class='method stab '><code>fn <a href='#tymethod.shift_logical_right' class='fnname'>shift_logical_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shift the bits to the right by a specified amount, <code>n</code>, with the
+high-order bits of the result cleared.</p>
+
+<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='number'>0b0111_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0b1001_0000u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>shift_logical_right</span>(<span class='number'>4</span>), <span class='number'>0b0000_0111u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>b</span>.<span class='ident'>shift_logical_right</span>(<span class='number'>4</span>), <span class='number'>0b0000_1001u8</span>);
+<span class='ident'>b</span>.<span class='ident'>shift_logical_right</span>((<span class='op'>&lt;</span><span class='ident'>u8</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
+</pre>
+</div><h3 id='tymethod.shift_arithmetic_left' class='method stab '><code>fn <a href='#tymethod.shift_arithmetic_left' class='fnname'>shift_arithmetic_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shift the bits to the left by a specified amount, <code>n</code> (same as
+<a href="tymethod.shift_logical_left"><code>shift_logical_left</code></a>, provided for
+symmetry).</p>
+
+<h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='number'>0b0000_1010u8</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0b0000_1001u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>shift_arithmetic_left</span>(<span class='number'>4</span>), <span class='number'>0b1010_0000u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>b</span>.<span class='ident'>shift_arithmetic_left</span>(<span class='number'>4</span>), <span class='number'>0b1001_0000u8</span>);
+<span class='ident'>b</span>.<span class='ident'>shift_arithmetic_left</span>((<span class='op'>&lt;</span><span class='ident'>u8</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
+</pre>
+</div><h3 id='tymethod.shift_arithmetic_right' class='method stab '><code>fn <a href='#tymethod.shift_arithmetic_right' class='fnname'>shift_arithmetic_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shift the bits to the right by a specified amount, <code>n</code>, setting the
+high-order bits of the result to the value of the most significant bit
+of <code>self</code>.</p>
+
+<h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='number'>0b0111_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='number'>0b1001_0000u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>shift_arithmetic_right</span>(<span class='number'>4</span>), <span class='number'>0b0000_0111u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>b</span>.<span class='ident'>shift_arithmetic_right</span>(<span class='number'>4</span>), <span class='number'>0b1111_1001u8</span>);
+<span class='ident'>b</span>.<span class='ident'>shift_arithmetic_right</span>((<span class='op'>&lt;</span><span class='ident'>u8</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
+</pre>
+</div><h3 id='tymethod.rotate_left' class='method stab '><code>fn <a href='#tymethod.rotate_left' class='fnname'>rotate_left</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shifts the bits to the left by a specified amount, <code>n</code>, wrapping
+the truncated bits to the end of the resulting integer.</p>
+
+<h1 id='panics-4' class='section-header'><a href='#panics-4'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+<span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='number'>0x3456789ABCDEF012u64</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>rotate_left</span>(<span class='number'>12</span>), <span class='ident'>m</span>);
+<span class='ident'>n</span>.<span class='ident'>rotate_left</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='kw'>as</span> <span class='ident'>u32</span>);</pre>
+</div><h3 id='tymethod.rotate_right' class='method stab '><code>fn <a href='#tymethod.rotate_right' class='fnname'>rotate_right</a>(self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Shifts the bits to the right by a specified amount, <code>n</code>, wrapping
+the truncated bits to the beginning of the resulting integer.</p>
+
+<h1 id='panics-5' class='section-header'><a href='#panics-5'>Panics</a></h1>
+<p>If <code>n &gt; bit_size()</code>.</p>
+
+<h1 id='intrinsics-3' class='section-header'><a href='#intrinsics-3'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: rorx.</li>
+</ul>
+
+<h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+<span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='number'>0xDEF0123456789ABCu64</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>rotate_right</span>(<span class='number'>12</span>), <span class='ident'>m</span>);
+<span class='ident'>n</span>.<span class='ident'>rotate_right</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>bit_size</span>() <span class='kw'>as</span> <span class='ident'>u32</span>);</pre>
+</div><h3 id='tymethod.swap_bytes' class='method stab '><code>fn <a href='#tymethod.swap_bytes' class='fnname'>swap_bytes</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Reverses the byte order of the integer.</p>
+
+<h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+<span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='number'>0xEFCDAB8967452301u64</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>swap_bytes</span>(), <span class='ident'>m</span>);</pre>
+</div><h3 id='tymethod.from_be' class='method stab '><code>fn <a href='#tymethod.from_be' class='fnname'>from_be</a>(x: Self) -&gt; Self</code></h3><div class='docblock'><p>Convert an integer from big endian to the target&#39;s endianness.</p>
+
+<p>On big endian this is a no-op. On little endian the bytes are swapped.</p>
+
+<h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+
+<span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>target_endian</span> <span class='op'>=</span> <span class='string'>&quot;big&quot;</span>) {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>u64</span>::<span class='ident'>from_be</span>(<span class='ident'>n</span>), <span class='ident'>n</span>)
+} <span class='kw'>else</span> {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>u64</span>::<span class='ident'>from_be</span>(<span class='ident'>n</span>), <span class='ident'>n</span>.<span class='ident'>swap_bytes</span>())
+}</pre>
+</div><h3 id='tymethod.from_le' class='method stab '><code>fn <a href='#tymethod.from_le' class='fnname'>from_le</a>(x: Self) -&gt; Self</code></h3><div class='docblock'><p>Convert an integer from little endian to the target&#39;s endianness.</p>
+
+<p>On little endian this is a no-op. On big endian the bytes are swapped.</p>
+
+<h1 id='examples-14' class='section-header'><a href='#examples-14'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+
+<span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>target_endian</span> <span class='op'>=</span> <span class='string'>&quot;little&quot;</span>) {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>u64</span>::<span class='ident'>from_le</span>(<span class='ident'>n</span>), <span class='ident'>n</span>)
+} <span class='kw'>else</span> {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>u64</span>::<span class='ident'>from_le</span>(<span class='ident'>n</span>), <span class='ident'>n</span>.<span class='ident'>swap_bytes</span>())
+}</pre>
+</div><h3 id='tymethod.to_be' class='method stab '><code>fn <a href='#tymethod.to_be' class='fnname'>to_be</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Convert <code>self</code> to big endian from the target&#39;s endianness.</p>
+
+<p>On big endian this is a no-op. On little endian the bytes are swapped.</p>
+
+<h1 id='examples-15' class='section-header'><a href='#examples-15'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+
+<span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>target_endian</span> <span class='op'>=</span> <span class='string'>&quot;big&quot;</span>) {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>to_be</span>(), <span class='ident'>n</span>)
+} <span class='kw'>else</span> {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>to_be</span>(), <span class='ident'>n</span>.<span class='ident'>swap_bytes</span>())
+}</pre>
+</div><h3 id='tymethod.to_le' class='method stab '><code>fn <a href='#tymethod.to_le' class='fnname'>to_le</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Convert <code>self</code> to little endian from the target&#39;s endianness.</p>
+
+<p>On little endian this is a no-op. On big endian the bytes are swapped.</p>
+
+<h1 id='examples-16' class='section-header'><a href='#examples-16'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0x0123456789ABCDEFu64</span>;
+
+<span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>target_endian</span> <span class='op'>=</span> <span class='string'>&quot;little&quot;</span>) {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>to_le</span>(), <span class='ident'>n</span>)
+} <span class='kw'>else</span> {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>to_le</span>(), <span class='ident'>n</span>.<span class='ident'>swap_bytes</span>())
+}</pre>
+</div><h3 id='tymethod.pow' class='method stab '><code>fn <a href='#tymethod.pow' class='fnname'>pow</a>(self, exp: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Raises self to the power of <code>exp</code>, using exponentiation by squaring.</p>
+
+<h1 id='panics-6' class='section-header'><a href='#panics-6'>Panics</a></h1>
+<p>If the result does not fit in <code>Self</code>.</p>
+
+<h1 id='examples-17' class='section-header'><a href='#examples-17'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2i32</span>.<span class='ident'>pow</span>(<span class='number'>4</span>), <span class='number'>16</span>);</pre>
+</div><h3 id='tymethod.reverse_bit_groups' class='method stab '><code>fn <a href='#tymethod.reverse_bit_groups' class='fnname'>reverse_bit_groups</a>(self, subword_bits: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, group_subwords: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Reverses the bits of <code>self</code> by <code>subword_bits</code> and <code>group_subwords</code>:</p>
+
+<ul>
+<li><code>subword_bits</code>: the bits will be reversed in grous:
+1 (single bits), 2 (pair-wise), 4 (nibbles),</li>
+<li><code>group_subwords</code>: the subword size is 8 bits: <code>mem::size_of::&lt;u8&gt;()</code>,
+the bits will be reversed within each subword.</li>
+</ul>
+
+<h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101_1101_1010_0101_u16</span>;
+
+<span class='comment'>// Single bits:</span>
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b1010_0101_1011_1010u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>1</span>, <span class='number'>1</span>), <span class='ident'>s0</span>);
+
+<span class='comment'>// Bit pairs:</span>
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b0101_1010_0111_0101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>2</span>, <span class='number'>1</span>), <span class='ident'>s1</span>);
+
+<span class='comment'>// Bit nibbles:</span>
+<span class='kw'>let</span> <span class='ident'>s2</span> <span class='op'>=</span> <span class='number'>0b0101_1010_1101_0101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>4</span>, <span class='number'>1</span>), <span class='ident'>s2</span>);
+
+<span class='comment'>// Single bits: group_subwords = 2</span>
+<span class='kw'>let</span> <span class='ident'>s3</span> <span class='op'>=</span> <span class='number'>0b1011_1010_1010_0101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>1</span>, <span class='number'>2</span>), <span class='ident'>s3</span>);
+
+<span class='comment'>// Bit pairs: group_subwords = 2</span>
+<span class='kw'>let</span> <span class='ident'>s4</span> <span class='op'>=</span> <span class='number'>0b0111_0101_0101_1010u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>2</span>, <span class='number'>2</span>), <span class='ident'>s4</span>);
+
+<span class='comment'>// Bit nibbles: group_subwords = 2</span>
+<span class='kw'>let</span> <span class='ident'>s5</span> <span class='op'>=</span> <span class='number'>0b1101_0101_0101_1010u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_groups</span>(<span class='number'>4</span>, <span class='number'>2</span>), <span class='ident'>s5</span>);</pre>
+</div><h3 id='tymethod.set_bit_to' class='method stab '><code>fn <a href='#tymethod.set_bit_to' class='fnname'>set_bit_to</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, value: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; Self</code></h3><div class='docblock'><p>Sets the <code>bit</code> of <code>self</code> to <code>value</code>.</p>
+
+<h1 id='panics-7' class='section-header'><a href='#panics-7'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-19' class='section-header'><a href='#examples-19'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span>  <span class='op'>=</span> <span class='number'>0b1001_0011u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit_to</span>(<span class='number'>6</span>, <span class='boolval'>true</span>), <span class='number'>0b1101_0011u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit_to</span>(<span class='number'>0</span>, <span class='boolval'>false</span>), <span class='number'>0b1001_0010u8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit_to</span>(<span class='number'>3</span>, <span class='boolval'>true</span>), <span class='number'>0b1001_1011u8</span>);</pre>
+</div><h3 id='tymethod.clear_bits_geq' class='method stab '><code>fn <a href='#tymethod.clear_bits_geq' class='fnname'>clear_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Clears all bits of <code>self</code> at position &gt;= <code>bit</code>.</p>
+
+<h1 id='panics-8' class='section-header'><a href='#panics-8'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='intrinsics-4' class='section-header'><a href='#intrinsics-4'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: bzhi.</li>
+</ul>
+
+<h1 id='examples-20' class='section-header'><a href='#examples-20'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1111_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0001_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_bits_geq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='tymethod.is_aligned' class='method stab '><code>fn <a href='#tymethod.is_aligned' class='fnname'>is_aligned</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h3><div class='docblock'><p>Is <code>self</code> aligned to <code>alignment</code> bytes.</p>
+
+<p>Returns true if <code>self == 0</code> or <code>self</code> is a multiple of <code>alignment</code>.</p>
+
+<h1 id='examples-21' class='section-header'><a href='#examples-21'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>is_aligned</span>(<span class='number'>1</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>is_aligned</span>(<span class='number'>2</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>2</span>.<span class='ident'>is_aligned</span>(<span class='number'>4</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>2</span>.<span class='ident'>is_aligned</span>(<span class='number'>8</span>));
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>is_aligned</span>(<span class='number'>1</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>3</span>.<span class='ident'>is_aligned</span>(<span class='number'>2</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>3</span>.<span class='ident'>is_aligned</span>(<span class='number'>4</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>3</span>.<span class='ident'>is_aligned</span>(<span class='number'>8</span>));
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>is_aligned</span>(<span class='number'>1</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>is_aligned</span>(<span class='number'>2</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>is_aligned</span>(<span class='number'>4</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>4</span>.<span class='ident'>is_aligned</span>(<span class='number'>8</span>));</pre>
+</div><h3 id='tymethod.align_up' class='method stab '><code>fn <a href='#tymethod.align_up' class='fnname'>align_up</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Align <code>self</code> up to <code>alignment</code>.</p>
+
+<p>Returns <code>n</code>, where <code>n</code> is the least number &gt;= <code>self</code>
+and <code>is_aligned(n, alignment)</code>.</p>
+
+<h1 id='panics-9' class='section-header'><a href='#panics-9'>Panics</a></h1>
+<p><code>alignment</code> must be a power of two.  which is asserted in debug</p>
+
+<h1 id='examples-22' class='section-header'><a href='#examples-22'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_up</span>(<span class='number'>1</span>), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_up</span>(<span class='number'>2</span>), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_up</span>(<span class='number'>4</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_up</span>(<span class='number'>8</span>), <span class='number'>8</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_up</span>(<span class='number'>1</span>), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_up</span>(<span class='number'>2</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_up</span>(<span class='number'>4</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_up</span>(<span class='number'>8</span>), <span class='number'>8</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_up</span>(<span class='number'>1</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_up</span>(<span class='number'>2</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_up</span>(<span class='number'>4</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_up</span>(<span class='number'>8</span>), <span class='number'>8</span>);</pre>
+</div><h3 id='tymethod.align_down' class='method stab '><code>fn <a href='#tymethod.align_down' class='fnname'>align_down</a>(self, alignment: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Align <code>self</code> down to <code>alignment</code>.</p>
+
+<p>Returns <code>n</code>, where <code>n</code> is the greatest number &lt;= <code>self</code>
+and <code>is_aligned(n, alignment)</code>.</p>
+
+<h1 id='panics-10' class='section-header'><a href='#panics-10'>Panics</a></h1>
+<p><code>alignment</code> must be a power of two.</p>
+
+<h1 id='examples-23' class='section-header'><a href='#examples-23'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_down</span>(<span class='number'>1</span>), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_down</span>(<span class='number'>2</span>), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_down</span>(<span class='number'>4</span>), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>align_down</span>(<span class='number'>8</span>), <span class='number'>0</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_down</span>(<span class='number'>1</span>), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_down</span>(<span class='number'>2</span>), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_down</span>(<span class='number'>4</span>), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>align_down</span>(<span class='number'>8</span>), <span class='number'>0</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_down</span>(<span class='number'>1</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_down</span>(<span class='number'>2</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_down</span>(<span class='number'>4</span>), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>align_down</span>(<span class='number'>8</span>), <span class='number'>0</span>);</pre>
+</div><h3 id='tymethod.outer_perfect_shuffle' class='method stab '><code>fn <a href='#tymethod.outer_perfect_shuffle' class='fnname'>outer_perfect_shuffle</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Outer Perfect Shuffle of <code>self</code>.</p>
+
+<p>See also:
+<a href="http://icodeguru.com/Embedded/Hacker&#x27;s-Delight/047.htm">Hacker&#39;s Delight: shuffling bits</a>.</p>
+
+<h1 id='examples-24' class='section-header'><a href='#examples-24'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110_0101_1101_1011_1111_1001_0110_0011u32</span>;
+<span class='comment'>//        abcd efgh ijkl mnop ABCD EFGH IJKL MNOP,</span>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0111_1101_0110_0011_1011_0110_1000_1111u32</span>;
+<span class='comment'>//        aAbB cCdD eEfF gGhH iIjJ kKlL mMnN oOpP,</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>outer_perfect_shuffle</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='tymethod.outer_perfect_unshuffle' class='method stab '><code>fn <a href='#tymethod.outer_perfect_unshuffle' class='fnname'>outer_perfect_unshuffle</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Outer Perfect Unshuffle of <code>self</code>.</p>
+
+<p>See also:
+<a href="http://icodeguru.com/Embedded/Hacker&#x27;s-Delight/047.htm">Hacker&#39;s Delight: shuffling bits</a>.</p>
+
+<h1 id='examples-25' class='section-header'><a href='#examples-25'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0111_1101_0110_0011_1011_0110_1000_1111u32</span>;
+<span class='comment'>//        aAbB cCdD eEfF gGhH iIjJ kKlL mMnN oOpP,</span>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0110_0101_1101_1011_1111_1001_0110_0011u32</span>;
+<span class='comment'>//        abcd efgh ijkl mnop ABCD EFGH IJKL MNOP,</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>outer_perfect_unshuffle</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='tymethod.scatter_bits' class='method stab '><code>fn <a href='#tymethod.scatter_bits' class='fnname'>scatter_bits</a>(self, mask_: Self) -&gt; Self</code></h3><div class='docblock'><p>Scatter the low-ordr bits of self into the positions of the result selected
+by the <code>mask</code>.</p>
+
+<p>The contiguous low-order bits of <code>self</code> are to be copied to the bits of the
+destination selected by the <code>mask</code>. in the destination. The bits nothing was
+copied to are cleared.</p>
+
+<h1 id='keywords-3' class='section-header'><a href='#keywords-3'>Keywords:</a></h1>
+<p>Parallel bits deposit, scatter.</p>
+
+<p>Scatter.</p>
+
+<h1 id='intrinsics-5' class='section-header'><a href='#intrinsics-5'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: pdep.</li>
+</ul>
+
+<h1 id='examples-26' class='section-header'><a href='#examples-26'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span>  <span class='op'>=</span> <span class='number'>0b1011_1110_1001_0011u16</span>;
+
+<span class='kw'>let</span> <span class='ident'>m0</span> <span class='op'>=</span> <span class='number'>0b0110_0011_1000_0101u16</span>;
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b0000_0010_0000_0101u16</span>;
+
+<span class='kw'>let</span> <span class='ident'>m1</span> <span class='op'>=</span> <span class='number'>0b1110_1011_1110_1111u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1110_1001_0010_0011u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>scatter_bits</span>(<span class='ident'>m0</span>), <span class='ident'>s0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>scatter_bits</span>(<span class='ident'>m1</span>), <span class='ident'>s1</span>);
+
+<span class='comment'>// The following examples are from Wikipedia:</span>
+<span class='kw'>let</span> <span class='ident'>w</span> <span class='op'>=</span> <span class='number'>0b1101_0101u8</span>;
+<span class='comment'>//        abcd efgh</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>scatter_bits</span>(<span class='number'>0b1111_0000u8</span>), <span class='number'>0b0101_0000u8</span>);
+<span class='comment'>//                                   efgh ____       efgh ____</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>scatter_bits</span>(<span class='number'>0b1111_1100u8</span>), <span class='number'>0b0101_0100u8</span>);
+<span class='comment'>//                                   cdef gh__       cdef gh__</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>scatter_bits</span>(<span class='number'>0b0101_0101u8</span>), <span class='number'>0b0001_0001u8</span>);
+<span class='comment'>//                                   _e_f _g_h       _e_f _g_h</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>scatter_bits</span>(<span class='number'>0b1101_1101u8</span>), <span class='number'>0b0100_1001u8</span>);
+<span class='comment'>//                                   cd_e fg_h       cd_e fg_h</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>scatter_bits</span>(<span class='number'>0b0001_1111u8</span>), <span class='number'>0b0001_0101u8</span>);
+<span class='comment'>//                                   ___d efgh       ___d efgh</span></pre>
+</div><h3 id='tymethod.gather_bits' class='method stab '><code>fn <a href='#tymethod.gather_bits' class='fnname'>gather_bits</a>(self, mask_: Self) -&gt; Self</code></h3><div class='docblock'><p>Gather the bits of <code>self</code> selected by the <code>mask</code> into the low-order bits of
+the result.</p>
+
+<p>The bits from <code>self</code> selected by the <code>mask</code> are copied into the contiguous
+low order bits of the destination. High-order bits of the destination are
+cleared.</p>
+
+<h1 id='keywords-4' class='section-header'><a href='#keywords-4'>Keywords:</a></h1>
+<p>Gather bits, parallel bits extract.</p>
+
+<h1 id='intrinsics-6' class='section-header'><a href='#intrinsics-6'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: pext.</li>
+</ul>
+
+<h1 id='examples-27' class='section-header'><a href='#examples-27'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span>  <span class='op'>=</span> <span class='number'>0b1011_1110_1001_0011u16</span>;
+
+<span class='kw'>let</span> <span class='ident'>m0</span> <span class='op'>=</span> <span class='number'>0b0110_0011_1000_0101u16</span>;
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b0000_0000_0011_0101u16</span>;
+
+<span class='kw'>let</span> <span class='ident'>m1</span> <span class='op'>=</span> <span class='number'>0b1110_1011_1110_1111u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b0001_0111_0100_0011u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>gather_bits</span>(<span class='ident'>m0</span>), <span class='ident'>s0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>gather_bits</span>(<span class='ident'>m1</span>), <span class='ident'>s1</span>);
+
+<span class='comment'>// The following examples are from Wikipedia:</span>
+<span class='kw'>let</span> <span class='ident'>w</span> <span class='op'>=</span> <span class='number'>0b1101_0101u8</span>;
+<span class='comment'>//        abcd efgh</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>gather_bits</span>(<span class='number'>0b1111_0000u8</span>), <span class='number'>0b0000_1101u8</span>);
+<span class='comment'>//                                   abcd ____       ____ abcd</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>gather_bits</span>(<span class='number'>0b1111_1100u8</span>), <span class='number'>0b0011_0101u8</span>);
+<span class='comment'>//                                   abcd ef__       __ab cdef</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>gather_bits</span>(<span class='number'>0b0101_0101u8</span>), <span class='number'>0b0000_1111u8</span>);
+<span class='comment'>//                                   _b_d _f_h       ____ bdfh</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>gather_bits</span>(<span class='number'>0b1101_1101u8</span>), <span class='number'>0b0011_1011u8</span>);
+<span class='comment'>//                                   ab_d ef_h       __ab defh</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>w</span>.<span class='ident'>gather_bits</span>(<span class='number'>0b0001_1111u8</span>), <span class='number'>0b0001_0101u8</span>);
+<span class='comment'>//                                   ___d efgh       ___d efgh</span></pre>
+</div><h3 id='tymethod.gather_bit_range' class='method stab '><code>fn <a href='#tymethod.gather_bit_range' class='fnname'>gather_bit_range</a>(self, first: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Gathers the contiguous low-order bits of <code>self</code> in range <code>[first, first+length]</code> into the low-order bits of the result.</p>
+
+<p>The range increases from low-order to high-order bits, is zero-indexed,
+and closed.</p>
+
+<h1 id='keywords-5' class='section-header'><a href='#keywords-5'>Keywords:</a></h1>
+<p>Extract bit range.</p>
+
+<h1 id='panics-11' class='section-header'><a href='#panics-11'>Panics</a></h1>
+<p>If <code>first + length &gt;= bit_size()</code>.</p>
+
+<h1 id='intrinsics-7' class='section-header'><a href='#intrinsics-7'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: bextr.</li>
+</ul>
+
+<h1 id='examples-28' class='section-header'><a href='#examples-28'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span>  <span class='op'>=</span> <span class='number'>0b1011_1110_1001_0011u16</span>;
+<span class='comment'>//         abcd efgh ijkl mnop</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>gather_bit_range</span>(<span class='number'>2</span>, <span class='number'>6</span>), <span class='number'>0b0000_0000_0010_0100u16</span>);
+<span class='comment'>//                 [2, 8] =&gt; [n, i]    ____ ____ __ij klmn</span>
+</pre>
+</div><h3 id='tymethod.morton_encode_2d' class='method stab '><code>fn <a href='#tymethod.morton_encode_2d' class='fnname'>morton_encode_2d</a>(x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a>) -&gt; Self</code></h3><div class='docblock'><p>Encode coordinates <code>x</code> into an interleaved Morton index for a Z-Curve.</p>
+
+<p>Layout: <code>xy|xy|xy|xy|...</code> .</p>
+
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>idx</span> : <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>30</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>idx</span>, <span class='number'>0b01_11_10</span>);
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>idx</span>.<span class='ident'>morton_decode_2d</span>();
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Word</span>::<span class='ident'>morton_encode_2d</span>(<span class='ident'>x</span>) <span class='op'>==</span> <span class='ident'>idx</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>[<span class='number'>0</span>], <span class='number'>0b_110</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>[<span class='number'>1</span>], <span class='number'>0b_011</span>);
+</pre>
+</div><h3 id='tymethod.morton_encode_3d' class='method stab '><code>fn <a href='#tymethod.morton_encode_3d' class='fnname'>morton_encode_3d</a>(x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a>) -&gt; Self</code></h3><div class='docblock'><p>Encode coordinates <code>x</code> into an interleaved Morton index for a Z-Curve.</p>
+
+<p>Layout: <code>xyz|xyz|xyz|xyz|...</code> .</p>
+
+<h1 id='example-1' class='section-header'><a href='#example-1'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>idx</span> : <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>30</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>idx</span>, <span class='number'>0b011_110</span>);
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>idx</span>.<span class='ident'>morton_decode_3d</span>();
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Word</span>::<span class='ident'>morton_encode_3d</span>(<span class='ident'>x</span>) <span class='op'>==</span> <span class='ident'>idx</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>[<span class='number'>0</span>], <span class='number'>0b10</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>[<span class='number'>1</span>], <span class='number'>0b11</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>[<span class='number'>2</span>], <span class='number'>0b01</span>);
+</pre>
+</div><h3 id='tymethod.morton_decode_2d' class='method stab '><code>fn <a href='#tymethod.morton_decode_2d' class='fnname'>morton_decode_2d</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a></code></h3><div class='docblock'><p>Decode interleaved Morton index for a Z-Curve into coordinates.</p>
+
+<p>See <a href="#tymethod.morton_encode_2d"><code>morton_encode_2d</code></a>.</p>
+</div><h3 id='tymethod.morton_decode_3d' class='method stab '><code>fn <a href='#tymethod.morton_decode_3d' class='fnname'>morton_decode_3d</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a>Self<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a></code></h3><div class='docblock'><p>Decode interleaved Morton index for a Z-Curve into coordinates.</p>
+
+<p>See <a href="#tymethod.morton_encode_3d"><code>morton_encode_3d</code></a>.</p>
+</div></div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.bit_size' class='method stab '><code>fn <a href='#method.bit_size' class='fnname'>bit_size</a>() -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Size of the word in bits.</p>
+</div><h3 id='method.leading_ones' class='method stab '><code>fn <a href='#method.leading_ones' class='fnname'>leading_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of leading ones in the binary representation
+of <code>self</code>.</p>
+
+<h1 id='keywords-6' class='section-header'><a href='#keywords-6'>Keywords:</a></h1>
+<p>Count leading ones.</p>
+
+<h1 id='intrinsics-8' class='section-header'><a href='#intrinsics-8'>Intrinsics:</a></h1>
+<ul>
+<li>ARMv8: cls.</li>
+</ul>
+
+<h1 id='examples-29' class='section-header'><a href='#examples-29'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1111_1111_1100_1000u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>leading_ones</span>(), <span class='number'>10</span>);</pre>
+</div><h3 id='method.trailing_ones' class='method stab '><code>fn <a href='#method.trailing_ones' class='fnname'>trailing_ones</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of trailing ones in the binary representation
+of <code>self</code>.</p>
+
+<h1 id='keywords-7' class='section-header'><a href='#keywords-7'>Keywords:</a></h1>
+<p>Count trailing ones.</p>
+
+<h1 id='examples-30' class='section-header'><a href='#examples-30'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0010_0111u16</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>trailing_ones</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='method.and_not' class='method stab '><code>fn <a href='#method.and_not' class='fnname'>and_not</a>(self, y: Self) -&gt; Self</code></h3><div class='docblock'><p>Logical and not of <code>self</code> with <code>y</code>.</p>
+
+<h1 id='intrinsics-9' class='section-header'><a href='#intrinsics-9'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 2.0: andn.</li>
+</ul>
+
+<h1 id='examples-31' class='section-header'><a href='#examples-31'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0100_1101u8</span>;
+<span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='number'>0b1110_1010u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>and_not</span>(<span class='ident'>m</span>), <span class='number'>0b1010_0010u8</span>);</pre>
+</div><h3 id='method.parity' class='method stab '><code>fn <a href='#method.parity' class='fnname'>parity</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of 1 bits in <code>self</code> mod 2, that is, returns 1 if the
+number of 1 bits in <code>self</code> is odd, and zero otherwise</p>
+
+<h1 id='intrinsics-10' class='section-header'><a href='#intrinsics-10'>Intrinsics:</a></h1>
+<p>-gcc/llvm: <code>__builtin_parity(x)</code>.</p>
+
+<h1 id='examples-32' class='section-header'><a href='#examples-32'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n0</span> <span class='op'>=</span> <span class='number'>0b0000</span>;  <span class='comment'>// 0 -&gt; even =&gt; parity = 0</span>
+<span class='kw'>let</span> <span class='ident'>n1</span> <span class='op'>=</span> <span class='number'>0b0001</span>;  <span class='comment'>// 1 -&gt; odd  =&gt; partiy = 1</span>
+<span class='kw'>let</span> <span class='ident'>n2</span> <span class='op'>=</span> <span class='number'>0b0010</span>;  <span class='comment'>// 1 -&gt; odd  =&gt; parity = 1</span>
+<span class='kw'>let</span> <span class='ident'>n3</span> <span class='op'>=</span> <span class='number'>0b0011</span>;  <span class='comment'>// 2 -&gt; even =&gt; parity = 0</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n0</span>.<span class='ident'>parity</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>parity</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n2</span>.<span class='ident'>parity</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n3</span>.<span class='ident'>parity</span>(), <span class='number'>0</span>);</pre>
+</div><h3 id='method.next_abs_greater_even' class='method stab '><code>fn <a href='#method.next_abs_greater_even' class='fnname'>next_abs_greater_even</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the next &quot;absolute&quot; even even number x such that <code>|self| &lt; |x| and sign(self) == sign(x)</code>.</p>
+
+<p>That is, for positive numbers the next even is greater than <code>self</code> and for
+negative numbers it is smaller than <code>self</code> (see examples).</p>
+
+<h1 id='panics-12' class='section-header'><a href='#panics-12'>Panics</a></h1>
+<p>If <code>self</code> overflows.</p>
+
+<h1 id='examples-33' class='section-header'><a href='#examples-33'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='op'>-</span><span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='op'>-</span><span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>next_abs_greater_even</span>(), <span class='number'>4</span>);</pre>
+</div><h3 id='method.prev_abs_smaller_even' class='method stab '><code>fn <a href='#method.prev_abs_smaller_even' class='fnname'>prev_abs_smaller_even</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the previous &quot;absolute&quot; even number x such that <code>|x| &lt; |self| and sign(x) == sign(self)</code>.</p>
+
+<p>That is, for positive numbers the previous even is smaller than <code>self</code> and
+for negative numbers it is greater than <code>self</code> (see examples).</p>
+
+<h1 id='panics-13' class='section-header'><a href='#panics-13'>Panics</a></h1>
+<p>If <code>self</code> overflows. Note that zero is handled as -0 and that the previous
+even of zero for Unsigned numbers overflows (because its negative).</p>
+
+<h1 id='examples-34' class='section-header'><a href='#examples-34'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>0</span>);
+<span class='comment'>// assert_eq!(0u32.prev_abs_smaller_even(), 2); // overflows</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>prev_abs_smaller_even</span>(), <span class='number'>2</span>);</pre>
+</div><h3 id='method.next_abs_greater_equal_even' class='method stab '><code>fn <a href='#method.next_abs_greater_equal_even' class='fnname'>next_abs_greater_equal_even</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the next &quot;absolute&quot; even number x such that <code>|self| &lt;= |x| and sign(self) == sign(x)</code>.</p>
+
+<p>That is, for positive numbers the next even is greater or equal than <code>self</code>
+and for negative numbers it is smaller or equal than <code>self</code> (see examples).</p>
+
+<h1 id='panics-14' class='section-header'><a href='#panics-14'>Panics</a></h1>
+<p>If <code>self</code> overflows.</p>
+
+<h1 id='examples-35' class='section-header'><a href='#examples-35'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='op'>-</span><span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>next_abs_greater_equal_even</span>(), <span class='number'>4</span>);</pre>
+</div><h3 id='method.prev_abs_smaller_equal_even' class='method stab '><code>fn <a href='#method.prev_abs_smaller_equal_even' class='fnname'>prev_abs_smaller_equal_even</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the previous &quot;absolute&quot; even number x such that <code>|x| &lt;= |self| and sign(x) == sign(self)</code>.</p>
+
+<p>That is, for positive numbers the previous even is smaller or equalt than
+<code>self</code> and for negative numbers it is greater or equalt than <code>self</code> (see
+examples).</p>
+
+<h1 id='panics-15' class='section-header'><a href='#panics-15'>Panics</a></h1>
+<p>If <code>self</code> overflows.</p>
+
+<h1 id='examples-36' class='section-header'><a href='#examples-36'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='op'>-</span><span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0u32</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>prev_abs_smaller_equal_even</span>(), <span class='number'>4</span>);</pre>
+</div><h3 id='method.next_abs_greater_odd' class='method stab '><code>fn <a href='#method.next_abs_greater_odd' class='fnname'>next_abs_greater_odd</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the next &quot;absolute&quot; odd number x such that <code>|self| &lt; |x| and sign(self) == sign(x)</code>.</p>
+
+<p>That is, for positive numbers the next odd is greater than <code>self</code> and for
+negative numbers it is smaller than <code>self</code> (see examples).</p>
+
+<h1 id='panics-16' class='section-header'><a href='#panics-16'>Panics</a></h1>
+<p>If <code>self</code> overflows.</p>
+
+<h1 id='examples-37' class='section-header'><a href='#examples-37'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='op'>-</span><span class='number'>5</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>next_abs_greater_odd</span>(), <span class='number'>5</span>);</pre>
+</div><h3 id='method.prev_abs_smaller_odd' class='method stab '><code>fn <a href='#method.prev_abs_smaller_odd' class='fnname'>prev_abs_smaller_odd</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the previous &quot;absolute&quot; odd number x such that <code>|x| &lt; |self| and sign(x) == sign(self)</code>.</p>
+
+<p>That is, for positive numbers the previous odd is smaller than <code>self</code> and
+for negative numbers it is greater than <code>self</code> (see examples).</p>
+
+<h1 id='panics-17' class='section-header'><a href='#panics-17'>Panics</a></h1>
+<p>If <code>self</code> overflows. Note that zero is handled as -0 and that the previous
+odd of zero and one for Unsigned numbers overflows (because its negative).</p>
+
+<h1 id='examples-38' class='section-header'><a href='#examples-38'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>4</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='number'>1</span>);
+<span class='comment'>// assert_eq!(0u32.prev_abs_smaller_odd(), 2); // overflows</span>
+<span class='comment'>//assert_eq!(1u32.prev_abs_smaller_odd(), 2); // overflows</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>prev_abs_smaller_odd</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='method.next_abs_greater_equal_odd' class='method stab '><code>fn <a href='#method.next_abs_greater_equal_odd' class='fnname'>next_abs_greater_equal_odd</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the next &quot;absolute&quot; odd odd number x such that <code>|self| &lt;= |x| and sign(self) == sign(x)</code>.</p>
+
+<p>That is, for positive numbers the next odd is greater or equal than <code>self</code>
+and for negative numbers it is smaller or equal than <code>self</code> (see examples).</p>
+
+<h1 id='panics-18' class='section-header'><a href='#panics-18'>Panics</a></h1>
+<p>If <code>self</code> overflows.</p>
+
+<h1 id='examples-39' class='section-header'><a href='#examples-39'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>next_abs_greater_equal_odd</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='method.prev_abs_smaller_equal_odd' class='method stab '><code>fn <a href='#method.prev_abs_smaller_equal_odd' class='fnname'>prev_abs_smaller_equal_odd</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns the previous &quot;absolute&quot; odd number x such that <code>|x| &lt;= |self| and sign(x) == sign(self)</code>.</p>
+
+<p>That is, for positive numbers the previous odd is smaller or equalt than
+<code>self</code> and for negative numbers it is greater or equalt than <code>self</code> (see
+examples).</p>
+
+<h1 id='panics-19' class='section-header'><a href='#panics-19'>Panics</a></h1>
+<p>If <code>self</code> overflows. Note that the previous of zero is negative and will
+overflow for Unsigned Integers.</p>
+
+<h1 id='examples-40' class='section-header'><a href='#examples-40'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>3</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='op'>-</span><span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>2</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>-</span><span class='number'>1</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='comment'>// assert_eq!(0u32.prev_abs_smaller_equal_odd(), -1); // overflows</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='op'>-</span><span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>prev_abs_smaller_equal_odd</span>(), <span class='number'>3</span>);</pre>
+</div><h3 id='method.clear' class='method stab '><code>fn <a href='#method.clear' class='fnname'>clear</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Clear all bits of <code>self</code>.</p>
+
+<p>Equivalent to <a href="#tymethod.zero"><code>zero()</code></a>.</p>
+
+<h1 id='example-2' class='section-header'><a href='#example-2'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b1010_1010u8</span>.<span class='ident'>clear</span>(), <span class='number'>0u8</span>);</pre>
+</div><h3 id='method.clear_least_significant_one' class='method stab '><code>fn <a href='#method.clear_least_significant_one' class='fnname'>clear_least_significant_one</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Clear least significant 1 bit of <code>self</code>; returns 0 if <code>self</code> is 0.</p>
+
+<h1 id='intrinsics-11' class='section-header'><a href='#intrinsics-11'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 1.0: blsr.</li>
+</ul>
+
+<h1 id='examples-41' class='section-header'><a href='#examples-41'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0100</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_least_significant_one</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.set_least_significant_zero' class='method stab '><code>fn <a href='#method.set_least_significant_zero' class='fnname'>set_least_significant_zero</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Set least significant 0 bit of <code>self</code>.</p>
+
+<h1 id='intrinsics-12' class='section-header'><a href='#intrinsics-12'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blcs.</li>
+</ul>
+
+<h1 id='examples-42' class='section-header'><a href='#examples-42'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0111</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_least_significant_zero</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.isolate_least_significant_one' class='method stab '><code>fn <a href='#method.isolate_least_significant_one' class='fnname'>isolate_least_significant_one</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Isolate least significant 1 bit of <code>self</code> and returns it; returns 0
+if <code>self</code> is 0.</p>
+
+<h1 id='intrinsics-13' class='section-header'><a href='#intrinsics-13'>Intrinsics:</a></h1>
+<ul>
+<li>BMI 1.0: blsi.</li>
+<li>TBM: blsic, not.</li>
+</ul>
+
+<h1 id='examples-43' class='section-header'><a href='#examples-43'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0010</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>isolate_least_significant_one</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.isolate_least_significant_zero' class='method stab '><code>fn <a href='#method.isolate_least_significant_zero' class='fnname'>isolate_least_significant_zero</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Set the least significant zero bit of <code>self</code> to 1 and all of the
+rest to 0.</p>
+
+<h1 id='intrinsics-14' class='section-header'><a href='#intrinsics-14'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blcic (or: blci, not).</li>
+</ul>
+
+<h1 id='examples-44' class='section-header'><a href='#examples-44'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0010</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>isolate_least_significant_zero</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.clear_trailing_ones' class='method stab '><code>fn <a href='#method.clear_trailing_ones' class='fnname'>clear_trailing_ones</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Clear the trailing 1&#39;s in <code>self</code>.</p>
+
+<h1 id='intrinsics-15' class='section-header'><a href='#intrinsics-15'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blcfill.</li>
+</ul>
+
+<h1 id='examples-45' class='section-header'><a href='#examples-45'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110_1111</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0110_0000</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_trailing_ones</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.set_trailing_zeros' class='method stab '><code>fn <a href='#method.set_trailing_zeros' class='fnname'>set_trailing_zeros</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Set all of the trailing 0&#39;s in <code>self</code>.</p>
+
+<h1 id='intrinsics-16' class='section-header'><a href='#intrinsics-16'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blsfill.</li>
+</ul>
+
+<h1 id='examples-46' class='section-header'><a href='#examples-46'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0111_1111u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_trailing_zeros</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.mask_trailing_zeros' class='method stab '><code>fn <a href='#method.mask_trailing_zeros' class='fnname'>mask_trailing_zeros</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns a mask with all of the trailing 0&#39;s of <code>self</code> set.</p>
+
+<h1 id='intrinsics-17' class='section-header'><a href='#intrinsics-17'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: tzmsk.</li>
+</ul>
+
+<h1 id='examples-47' class='section-header'><a href='#examples-47'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0001_1111u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>mask_trailing_zeros</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.mask_trailing_ones' class='method stab '><code>fn <a href='#method.mask_trailing_ones' class='fnname'>mask_trailing_ones</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns a mask with all of the trailing 1&#39;s of <code>self</code> set.</p>
+
+<h1 id='intrinsics-18' class='section-header'><a href='#intrinsics-18'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: tlmskc, not.</li>
+</ul>
+
+<h1 id='examples-48' class='section-header'><a href='#examples-48'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101_1111u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0001_1111u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>mask_trailing_ones</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.mask_trailing_zeros_and_least_significant_one' class='method stab '><code>fn <a href='#method.mask_trailing_zeros_and_least_significant_one' class='fnname'>mask_trailing_zeros_and_least_significant_one</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns a mask with all of the trailing 0&#39;s of <code>self</code> set and the least
+significant 1 bit set.</p>
+
+<h1 id='intrinsics-19' class='section-header'><a href='#intrinsics-19'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blsmsk.</li>
+</ul>
+
+<h1 id='examples-49' class='section-header'><a href='#examples-49'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0001_1111u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>mask_trailing_zeros_and_least_significant_one</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.mask_trailing_ones_and_least_significant_zero' class='method stab '><code>fn <a href='#method.mask_trailing_ones_and_least_significant_zero' class='fnname'>mask_trailing_ones_and_least_significant_zero</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Returns a mask with all of the trailing 1&#39;s of <code>self</code> set and the least
+significant 0 bit set.</p>
+
+<h1 id='intrinsics-20' class='section-header'><a href='#intrinsics-20'>Intrinsics:</a></h1>
+<ul>
+<li>TBM: blcmsk.</li>
+</ul>
+
+<h1 id='examples-50' class='section-header'><a href='#examples-50'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101_1111u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0011_1111u8</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>mask_trailing_ones_and_least_significant_zero</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.first_bit_set' class='method stab '><code>fn <a href='#method.first_bit_set' class='fnname'>first_bit_set</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the position of the first bit that is set (starting from the
+low-order bits).</p>
+
+<p>Returns <code>bit_size()</code> if no bit is found.</p>
+
+<h1 id='keywords-8' class='section-header'><a href='#keywords-8'>Keywords:</a></h1>
+<p>Find first bit set, find first one, bit scan forward.</p>
+
+<h1 id='examples-51' class='section-header'><a href='#examples-51'>Examples:</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b0101_1111u8</span>.<span class='ident'>first_bit_set</span>(), <span class='number'>0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b0101_1100u8</span>.<span class='ident'>first_bit_set</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b1000_0000u8</span>.<span class='ident'>first_bit_set</span>(), <span class='number'>7</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b0000_0000u8</span>.<span class='ident'>first_bit_set</span>(), <span class='number'>8</span>);
+</pre>
+</div><h3 id='method.first_bit_clear' class='method stab '><code>fn <a href='#method.first_bit_clear' class='fnname'>first_bit_clear</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the position of the first bit that is set (starting from the
+low-order bits).</p>
+
+<p>Returns <code>bit_size()</code> if no bit is found.</p>
+
+<h1 id='keywords-9' class='section-header'><a href='#keywords-9'>Keywords:</a></h1>
+<p>Find first zero.</p>
+
+<h1 id='examples-52' class='section-header'><a href='#examples-52'>Examples:</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b1111_1111u8</span>.<span class='ident'>first_bit_clear</span>(), <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b0111_1111u8</span>.<span class='ident'>first_bit_clear</span>(), <span class='number'>7</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b1010_0011u8</span>.<span class='ident'>first_bit_clear</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>0b1000_1010u8</span>.<span class='ident'>first_bit_clear</span>(), <span class='number'>0</span>);
+</pre>
+</div><h3 id='method.reverse_bits' class='method stab '><code>fn <a href='#method.reverse_bits' class='fnname'>reverse_bits</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Reverses the bits of <code>self</code>.</p>
+
+<h1 id='intrinsics-21' class='section-header'><a href='#intrinsics-21'>Intrinsics:</a></h1>
+<ul>
+<li>ARM: rbit (u32 ARMv7, u64 ARMv8).</li>
+</ul>
+
+<h1 id='examples-53' class='section-header'><a href='#examples-53'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0100_1101u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bits</span>(), <span class='ident'>s</span>);
+
+<span class='kw'>let</span> <span class='ident'>n1</span> <span class='op'>=</span> <span class='number'>0b1011_0010_1010_1001u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1001_0101_0100_1101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>reverse_bits</span>(), <span class='ident'>s1</span>);</pre>
+</div><h3 id='method.reverse_bit_pairs' class='method stab '><code>fn <a href='#method.reverse_bit_pairs' class='fnname'>reverse_bit_pairs</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Reverses the pairs of bits of <code>self</code>.</p>
+
+<h1 id='examples-54' class='section-header'><a href='#examples-54'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1000_1110u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_pairs</span>(), <span class='ident'>s</span>);
+
+<span class='kw'>let</span> <span class='ident'>n1</span> <span class='op'>=</span> <span class='number'>0b1011_0010_1010_1001u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b0110_1010_1000_1110u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>reverse_bit_pairs</span>(), <span class='ident'>s1</span>);</pre>
+</div><h3 id='method.reverse_bit_nibbles' class='method stab '><code>fn <a href='#method.reverse_bit_nibbles' class='fnname'>reverse_bit_nibbles</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Reverses the nibbles of <code>self</code>.</p>
+
+<h1 id='examples-55' class='section-header'><a href='#examples-55'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0010_1011u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bit_nibbles</span>(), <span class='ident'>s</span>);
+
+<span class='kw'>let</span> <span class='ident'>n1</span> <span class='op'>=</span> <span class='number'>0b1011_0010_1010_1001u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1001_1010_0010_1011u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>reverse_bit_nibbles</span>(), <span class='ident'>s1</span>);</pre>
+</div><h3 id='method.reverse_byte_groups' class='method stab '><code>fn <a href='#method.reverse_byte_groups' class='fnname'>reverse_byte_groups</a>(self, bytes_per_block: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, blocks_per_group: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Reverses the bytes of <code>self</code>.</p>
+
+<ul>
+<li><code>bytes_per_block</code>: number of bytes per block to reverse.</li>
+<li><code>blocks_per_group</code>: number of blocks per group of blocks.</li>
+</ul>
+
+<h1 id='examples-56' class='section-header'><a href='#examples-56'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0101_1101_1010_0101_u16</span>;
+
+<span class='comment'>// Single bytes:</span>
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b1010_0101_0101_1101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_byte_groups</span>(<span class='number'>1</span>, <span class='number'>1</span>), <span class='ident'>s0</span>);
+
+<span class='comment'>// Single bytes: group_subwords = 2</span>
+<span class='kw'>let</span> <span class='ident'>s3</span> <span class='op'>=</span> <span class='number'>0b0101_1101_1010_0101u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_byte_groups</span>(<span class='number'>1</span>, <span class='number'>2</span>), <span class='ident'>s3</span>);</pre>
+</div><h3 id='method.reverse_bytes' class='method stab '><code>fn <a href='#method.reverse_bytes' class='fnname'>reverse_bytes</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Reverses the bytes of <code>self</code> (equivalent to swap bytes).</p>
+
+<h1 id='intrinsics-22' class='section-header'><a href='#intrinsics-22'>Intrinsics:</a></h1>
+<ul>
+<li>x86_64: bswap.</li>
+<li>ARM: rev (v5), revsh (v5), rev16 (v6,v8), rev32(v8).</li>
+<li>gcc/llvm: <code>__builtin_bswap16/32/64</code>.</li>
+</ul>
+
+<h1 id='examples-57' class='section-header'><a href='#examples-57'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>reverse_bytes</span>(), <span class='ident'>s</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>swap_bytes</span>(), <span class='ident'>s</span>);
+
+<span class='kw'>let</span> <span class='ident'>n1</span> <span class='op'>=</span> <span class='number'>0b1011_0010_1010_1001u16</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1010_1001_1011_0010u16</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>reverse_bytes</span>(), <span class='ident'>s1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n1</span>.<span class='ident'>swap_bytes</span>(), <span class='ident'>s1</span>);</pre>
+</div><h3 id='method.set_bit' class='method stab '><code>fn <a href='#method.set_bit' class='fnname'>set_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Sets the <code>bit</code> of <code>self</code>.</p>
+
+<h1 id='panics-20' class='section-header'><a href='#panics-20'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-58' class='section-header'><a href='#examples-58'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span>  <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b1111_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1011_0011u8</span>;
+<span class='kw'>let</span> <span class='ident'>s2</span> <span class='op'>=</span> <span class='number'>0b1011_1010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit</span>(<span class='number'>6</span>), <span class='ident'>s0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit</span>(<span class='number'>0</span>), <span class='ident'>s1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bit</span>(<span class='number'>3</span>), <span class='ident'>s2</span>);</pre>
+</div><h3 id='method.clear_bit' class='method stab '><code>fn <a href='#method.clear_bit' class='fnname'>clear_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Clears the <code>bit</code> of <code>self</code>.</p>
+
+<h1 id='panics-21' class='section-header'><a href='#panics-21'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-59' class='section-header'><a href='#examples-59'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b0011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1011_0000u8</span>;
+<span class='kw'>let</span> <span class='ident'>s2</span> <span class='op'>=</span> <span class='number'>0b1001_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_bit</span>(<span class='number'>7</span>), <span class='ident'>s0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_bit</span>(<span class='number'>1</span>), <span class='ident'>s1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_bit</span>(<span class='number'>5</span>), <span class='ident'>s2</span>);</pre>
+</div><h3 id='method.flip_bit' class='method stab '><code>fn <a href='#method.flip_bit' class='fnname'>flip_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Flip the <code>bit</code> of <code>self</code>.</p>
+
+<h1 id='panics-22' class='section-header'><a href='#panics-22'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-60' class='section-header'><a href='#examples-60'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s0</span> <span class='op'>=</span> <span class='number'>0b0011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s1</span> <span class='op'>=</span> <span class='number'>0b1111_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s2</span> <span class='op'>=</span> <span class='number'>0b1001_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>flip_bit</span>(<span class='number'>7</span>), <span class='ident'>s0</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>flip_bit</span>(<span class='number'>6</span>), <span class='ident'>s1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>flip_bit</span>(<span class='number'>5</span>), <span class='ident'>s2</span>);</pre>
+</div><h3 id='method.test_bit' class='method stab '><code>fn <a href='#method.test_bit' class='fnname'>test_bit</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h3><div class='docblock'><p>Test the <code>bit</code> of <code>self</code>.</p>
+
+<h1 id='panics-23' class='section-header'><a href='#panics-23'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-61' class='section-header'><a href='#examples-61'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>test_bit</span>(<span class='number'>7</span>), <span class='boolval'>true</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>test_bit</span>(<span class='number'>6</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>test_bit</span>(<span class='number'>5</span>), <span class='boolval'>true</span>);</pre>
+</div><h3 id='method.clear_bits_leq' class='method stab '><code>fn <a href='#method.clear_bits_leq' class='fnname'>clear_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Clears all bits of <code>self</code> at position &lt;= <code>bit</code>.</p>
+
+<h1 id='panics-24' class='section-header'><a href='#panics-24'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-62' class='section-header'><a href='#examples-62'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1111_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1100_0000u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>clear_bits_leq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.set_bits_geq' class='method stab '><code>fn <a href='#method.set_bits_geq' class='fnname'>set_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Sets all bits of <code>self</code> at position &gt;= <code>bit</code>.</p>
+
+<h1 id='panics-25' class='section-header'><a href='#panics-25'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-63' class='section-header'><a href='#examples-63'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1000_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1110_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bits_geq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.set_bits_leq' class='method stab '><code>fn <a href='#method.set_bits_leq' class='fnname'>set_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Sets all bits of <code>self</code> at position &lt;= <code>bit</code>.</p>
+
+<h1 id='panics-26' class='section-header'><a href='#panics-26'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-64' class='section-header'><a href='#examples-64'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1000_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1011_1111u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>set_bits_leq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.flip_bits_geq' class='method stab '><code>fn <a href='#method.flip_bits_geq' class='fnname'>flip_bits_geq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Flip all bits of <code>self</code> at position &gt;= <code>bit</code>.</p>
+
+<h1 id='panics-27' class='section-header'><a href='#panics-27'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-65' class='section-header'><a href='#examples-65'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1001_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0111_0010u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>flip_bits_geq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.flip_bits_leq' class='method stab '><code>fn <a href='#method.flip_bits_leq' class='fnname'>flip_bits_leq</a>(self, bit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; Self</code></h3><div class='docblock'><p>Flip all bits of <code>self</code> at position &lt;= <code>bit</code>.</p>
+
+<h1 id='panics-28' class='section-header'><a href='#panics-28'>Panics</a></h1>
+<p>If <code>bit &gt;= bit_size()</code>.</p>
+
+<h1 id='examples-66' class='section-header'><a href='#examples-66'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_0010u8</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1000_1101u8</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>flip_bits_leq</span>(<span class='number'>5</span>), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.is_pow2' class='method stab '><code>fn <a href='#method.is_pow2' class='fnname'>is_pow2</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h3><div class='docblock'><p>Is <code>self</code> a power of 2.</p>
+
+<h1 id='examples-67' class='section-header'><a href='#examples-67'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>3</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>5</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>6</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='number'>7</span>.<span class='ident'>is_pow2</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>8</span>.<span class='ident'>is_pow2</span>());</pre>
+</div><h3 id='method.ceil_pow2' class='method stab '><code>fn <a href='#method.ceil_pow2' class='fnname'>ceil_pow2</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Round <code>self</code> to the next power of 2.</p>
+
+<h1 id='panics-29' class='section-header'><a href='#panics-29'>Panics</a></h1>
+<p>If the next power of 2 cannot be represented by Self.</p>
+
+<h1 id='examples-68' class='section-header'><a href='#examples-68'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>7</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>8</span>.<span class='ident'>ceil_pow2</span>(), <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>30</span>).<span class='ident'>ceil_pow2</span>(), <span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>30</span>));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>30</span>) <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>ceil_pow2</span>(), <span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>31</span>));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>31</span>).<span class='ident'>ceil_pow2</span>(), <span class='number'>2u32</span>.<span class='ident'>pow</span>(<span class='number'>31</span>));
+<span class='comment'>// panics:</span>
+<span class='comment'>// assert_eq!((2u32.pow(31) + 1).ceil_pow2(), 2u32.pow(32));</span></pre>
+</div><h3 id='method.floor_pow2' class='method stab '><code>fn <a href='#method.floor_pow2' class='fnname'>floor_pow2</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Round <code>self</code> to the previous power of 2.</p>
+
+<h1 id='panics-30' class='section-header'><a href='#panics-30'>Panics</a></h1>
+<p>If <code>self &lt;= 0</code>.</p>
+
+<h1 id='examples-69' class='section-header'><a href='#examples-69'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>2</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>7</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>4</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>8</span>.<span class='ident'>floor_pow2</span>(), <span class='number'>8</span>);</pre>
+</div><h3 id='method.average_floor' class='method stab '><code>fn <a href='#method.average_floor' class='fnname'>average_floor</a>(x: Self, y: Self) -&gt; Self</code></h3><div class='docblock'><p>Average without overflow (rounds to the smallest value).</p>
+
+<h1 id='example-3' class='section-header'><a href='#example-3'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='comment'>// The following would overflow:</span>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>u64</span>::<span class='ident'>max_value</span>() <span class='op'>/</span> <span class='number'>2</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>1</span>;
+<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>u64</span>::<span class='ident'>max_value</span>() <span class='op'>/</span> <span class='number'>2</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>average_floor</span>(<span class='ident'>a</span>, <span class='ident'>b</span>), <span class='ident'>result</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>average_floor</span>(<span class='ident'>b</span>, <span class='ident'>a</span>), <span class='ident'>result</span>);
+</pre>
+</div><h3 id='method.average_ceil' class='method stab '><code>fn <a href='#method.average_ceil' class='fnname'>average_ceil</a>(x: Self, y: Self) -&gt; Self</code></h3><div class='docblock'><p>Average without overflow (rounds to the largest value).</p>
+
+<h1 id='example-4' class='section-header'><a href='#example-4'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='comment'>// The following would overflow:</span>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>u64</span>::<span class='ident'>max_value</span>() <span class='op'>/</span> <span class='number'>2</span> <span class='op'>+</span> <span class='number'>1</span>;
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>a</span> <span class='op'>-</span> <span class='number'>1</span>;
+<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>u64</span>::<span class='ident'>max_value</span>() <span class='op'>/</span> <span class='number'>2</span> <span class='op'>+</span> <span class='number'>1</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>average_ceil</span>(<span class='ident'>a</span>, <span class='ident'>b</span>), <span class='ident'>result</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>&lt;</span><span class='ident'>u64</span> <span class='kw'>as</span> <span class='ident'>Word</span><span class='op'>&gt;</span>::<span class='ident'>average_ceil</span>(<span class='ident'>b</span>, <span class='ident'>a</span>), <span class='ident'>result</span>);
+</pre>
+</div><h3 id='method.inner_perfect_shuffle' class='method stab '><code>fn <a href='#method.inner_perfect_shuffle' class='fnname'>inner_perfect_shuffle</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Inner Perfect Shuffle of <code>self</code>.</p>
+
+<p>See also:
+<a href="http://icodeguru.com/Embedded/Hacker&#x27;s-Delight/047.htm">Hacker&#39;s Delight: shuffling bits</a>.</p>
+
+<h1 id='examples-70' class='section-header'><a href='#examples-70'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b0110_0101_1101_1011_1111_1001_0110_0011u32</span>;
+<span class='comment'>//        abcd efgh ijkl mnop ABCD EFGH IJKL MNOP,</span>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b1011_1110_1001_0011_0111_1001_0100_1111u32</span>;
+<span class='comment'>//        AaBb CcDd EeFf GgHh IiJj KkLl MmNn OoPp</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>inner_perfect_shuffle</span>(), <span class='ident'>s</span>);</pre>
+</div><h3 id='method.inner_perfect_unshuffle' class='method stab '><code>fn <a href='#method.inner_perfect_unshuffle' class='fnname'>inner_perfect_unshuffle</a>(self) -&gt; Self</code></h3><div class='docblock'><p>Inner Perfect Unshuffle of <code>self</code>.</p>
+
+<p>See also:
+<a href="http://icodeguru.com/Embedded/Hacker&#x27;s-Delight/047.htm">Hacker&#39;s Delight: shuffling bits</a>.</p>
+
+<h1 id='examples-71' class='section-header'><a href='#examples-71'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>bitwise</span>::<span class='ident'>Word</span>;
+
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0b1011_1110_1001_0011_0111_1001_0100_1111u32</span>;
+<span class='comment'>//        AaBb CcDd EeFf GgHh IiJj KkLl MmNn OoPp</span>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='number'>0b0110_0101_1101_1011_1111_1001_0110_0011u32</span>;
+<span class='comment'>//        abcd efgh ijkl mnop ABCD EFGH IJKL MNOP,</span>
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>inner_perfect_unshuffle</span>(), <span class='ident'>s</span>);</pre>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a></code></li>
+<li><code>impl <a class='trait' href='../bitwise/trait.Word.html' title='bitwise::Word'>Word</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a></code></li>
+</ul><script type="text/javascript" async
+                         src="../implementors/bitwise/trait.Word.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "bitwise";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
