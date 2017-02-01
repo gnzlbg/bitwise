@@ -45,7 +45,7 @@ Licensed under the [MIT license][license].
 - Some of the algorithms are heavily inspired from Matthew Fioravante's 
   [N3864 A constexpr bitwise operations library for C++][n3864_link] proposal 
   and accompanying library: [stdcxx-bitops][stdcxx_bitops_link]. 
-- Others are inspired from those in [Hacker's Delight](hackers_delight_link).
+- Others are inspired from those in [Hacker's Delight][hackers_delight_link].
 - The Morton Z-Curve encoding / decoding algorithms are adapted/modified from
   [libmorton][libmorton_link] (which resulted in bugfixes to libmorton).
 - Some come from [Chess Programming Wiki][chess_programming_wiki_link].
@@ -75,3 +75,4 @@ any additional terms or conditions.
 [libmorton_link]: https://github.com/Forceflow/libmorton
 [chess_programming_wiki_link]: https://chessprogramming.wikispaces.com/
 [real_time_collision_detection_link]: http://realtimecollisiondetection.net/
+[hackers_delight_link]: http://hackersdelight.org/
