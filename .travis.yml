@@ -1,49 +1,40 @@
 sudo: false
 language: rust
-# necessary for `travis-cargo coveralls --no-sudo`
 addons:
   apt:
     packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - binutils-dev # optional: only required for the --verify flag of coveralls
-
-# run builds for all the trains (and more)
+    - libcurl4-openssl-dev
+    - libelf-dev
+    - libdw-dev
+    - binutils-dev
 rust:
-  - nightly
-  - beta
-  # check it compiles on the latest stable compiler
-  - stable
-  # and the first stable one (this should be bumped as the minimum
-  # Rust version required changes)
-  - 1.2.0
+- nightly
+#- stable
+#- 1.13.0
 
-# load travis-cargo
 before_script:
-  - |
-      pip install 'travis-cargo<0.2' --user &&
-      export PATH=$HOME/.local/bin:$PATH
+- ! 'pip install ''travis-cargo<0.2'' --user &&
 
-# the main build
+  export PATH=$HOME/.local/bin:$PATH
+
+'
 script:
-  - | 
-      travis-cargo build &&
-      travis-cargo test &&
-      travis-cargo bench &&
-      travis-cargo --only stable doc
-after_success:
-  # upload the documentation from the build with stable (automatically only actually
-  # runs on the master branch, not individual PRs)
-  - travis-cargo --only stable doc-upload
-  # measure code coverage and upload to coveralls.io (the verify
-  # argument mitigates kcov crashes due to malformed debuginfo, at the
-  # cost of some speed <https://github.com/huonw/travis-cargo/issues/12>)
-  - travis-cargo coveralls --no-sudo --verify
+- ! 'travis-cargo build &&
 
+  travis-cargo test &&
+
+  travis-cargo bench &&
+
+  travis-cargo --only nightly doc
+
+'
+after_success:
+- travis-cargo --only nightly doc-upload
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-cargo coveralls --no-sudo --verify;
+  fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./kcov/build/src/kcov --verify --coveralls-id=$TRAVIS_JOB_ID --exclude-pattern=/.cargo target/kcov target/debug/deps/bitwise-*; fi
 env:
   global:
-    # override the default `--features unstable` used for the nightly branch (optional)
-     - TRAVIS_CARGO_NIGHTLY_FEATURE=""
-    # encrypted github token for doc upload (see `GH_TOKEN` link above)
-     - secure: "JNWcsT/AyHX72KTqJgZpqwOAN2FI1bAiTLkvCC2j/9O50EhCz/q7M+YDKawYMbqJNccCGbS0y+V/YPXPeuMFlp0B/7+hSca3/skXZ75uIk/yWRmYYm6Dj7BvrUx1M0LrG+dTMYQn/jtFBdOxOEzOHznO16SZPO0cfS8k2NAqhfdsAvWtzYELJ25zwWGzrU/A7aq1WkC0M3QMBbUoxSRwjXihRqwfbXS2Z4gLnzWJAMxdI24gSqFrvY8dHb/PKx9PyHR1W2SskH5cPEfNDHLGZ7ZgwLfqTD2OuHbcPOfqZ5ImPT1oJHtor9KNqhwxkSMVoMZDTQu0974/5+48t3U7CYzRnjgrAesH4z9QS6MgnL1rTvAvu+lEspoJmN4MB5VCGcrsP+H576XLlB2i5BzWDC+zdUfi8fZdQBVEnr7N9h7xuh89z3/anUfuWrlKV4a15BI7qivKZlenvrIq4L/QZQlWGfWgWOdb3UP8HeocEZFFOBb7Z3NYGkSWzlu5FQjWjd5qtoyKK0l0aiAUp6nW1Vc8flJJc0XH0aRIDn2I9Nd/OaLkUSI/tmh75/CGl04ReWe3bRuzEsi3K2wPqsQ2OAB9liE9n190CVNb1ZGE3JGu/Smt/JlLnJ/lYNFdIvVBmfPGE9BTU2XdyQ6YO1Yhy8/ZxYlJJCvhTPWeyPpEU+Q="
+  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+  - secure: CBkbWUVQ1pvKRYqgbpqmNnvpOXgmlyNoeprMhIQjNIDfKh/CW0EPeso2IvbgfwJFGPWwcmmwdl1K8NXR0J9oIGY0VD449p4K4ZAHV9W0TMoTfth5LNrls7NNQxMEABl7U/3mAEFpK1SxwS/CWCtHhGrOnZlLsbabTERJkHYK+ui9RFb8NYhwxm5me3GSEdTc3JNQ/4DfNaBEIcus67xY3FQU0VphkTDxhDOHnGzgj4+fU9UWldvdkWru9in2D4mmT82FZSPOKBQpRTe5twaTxPDvAU4uFanIw3G1Hxl5/m9EYkMx1ppwOLswp4DZxzVdcJbk/k7ZKcz5FSZVckoRx3C6O8ItHe0prNRp2YUbVY2P+1TOyuKISq5P1cEtGQW+K4cNtBD/sg68HUzJpcemG/5CYJpsHK2yLPV0F/oJLpdP7kqlatYFCg/mpoO/sgjUD6ChhghMm/JR/Ifcfdfic8t8gLm9tRxL4axek2sNNXMi7GDlnM8rIfOCdr8SIFDu53hyovZb7MDzLleeV66CIKpMqluDFThkb4dvuzeGyIDXnJRd9bRaMCGSw2qPX+Iyhm4vnPhYfHmcV9/C0nlqrTJTuDnrNGvjv6umIHK92mTaasjwIpnCaJ6kGAZq/COgz/bHU8XB4/Z3DPe7pnq+9qR4GwdybgeCp2raKey/WZI=
+
