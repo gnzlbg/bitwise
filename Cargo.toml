@@ -12,6 +12,9 @@ license = "MIT"
 build = "build.rs"
 categories = ["algorithms", "hardware-support"]
 
+[badges]
+travis-ci = { repository = "https://github.com/gnzlbg/bitwise", branch = "master" }
+
 [build-dependencies]
 rustc_version = "0.1.*"
 
