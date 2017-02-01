@@ -2,32 +2,25 @@
 name = "bitwise"
 version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
-description = "Bitwise manipulation algorithms for Words and Word sequences."
+description = "Bitwise manipulation algorithms for words and sequences."
 documentation = "https://gnzlbg.github.io/bitwise"
 homepage = "https://gnzlbg.github.io/bitwise"
 repository = "https://github.com/gnzlbg/bitwise"
 readme = "readme.md"
-keywords = ["bit", "byte", "algorithm", "bitwise", "word"]
+keywords = ["bitwise", "algorithm", "bit", "byte"]
 license = "MIT"
+build = "build.rs"
 
 [dependencies]
-clippy = {version = "0.0.76", optional = true}
-llvmint = {version = "0.0.2", optional = true}
+bitintr = "0.1.*"
 
-[features]
-default = []
-dev = ["clippy"]
-sse42 = ["llvmint"]
-bmi1 = ["llvmint"]
-bmi2 = ["llvmint"]
-abm = ["llvmint"]
-tbm = ["llvmint"]
+[build-dependencies]
+rustc_version = "0.1.*"
 
-[profile.bench]
-opt-level = 3
-debug = false
-rpath = false
-lto = true
-debug-assertions = false
-codegen-units = 1
-panic = 'unwind'
+[dev-dependencies]
+bencher = "0.1.*"
+
+[[bench]]
+name = "morton"
+bench = true
+harness = false
