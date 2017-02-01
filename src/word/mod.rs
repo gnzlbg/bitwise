@@ -1,9 +1,8 @@
-pub mod word;
+pub mod to_word;
 
 pub use bitintr::Int as Word;
 
-//pub use self::to_word::*;
-pub use self::word::*;
+pub use self::to_word::*;
 
 pub mod count_zeros;
 pub use self::count_zeros::*;

@@ -2,20 +2,21 @@
 name = "bitwise"
 version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
-description = "Bitwise manipulation algorithms for words and sequences."
+description = "Portable high-level bitwise manipulation algorithms."
 documentation = "https://gnzlbg.github.io/bitwise"
 homepage = "https://gnzlbg.github.io/bitwise"
 repository = "https://github.com/gnzlbg/bitwise"
 readme = "readme.md"
-keywords = ["bitwise", "algorithm", "bit", "byte"]
+keywords = ["portable", "bit", "manipulation", "algorithms"]
 license = "MIT"
 build = "build.rs"
-
-[dependencies]
-bitintr = "0.1.*"
+categories = ["algorithms", "hardware-support"]
 
 [build-dependencies]
 rustc_version = "0.1.*"
+
+[dependencies]
+bitintr = "0.1.*"
 
 [dev-dependencies]
 bencher = "0.1.*"
@@ -24,3 +25,13 @@ bencher = "0.1.*"
 name = "morton"
 bench = true
 harness = false
+
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = 'abort'
+

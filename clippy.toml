@@ -1,0 +1,2 @@
+doc-valid-idents = ["ARMv5", "ARMv6", "ARMv7", "ARMv8", "x86_64", "PowerPC"]
+single-char-binding-names-threshold = 6

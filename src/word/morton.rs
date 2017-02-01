@@ -290,7 +290,7 @@ pub mod magic {
         match MortonIndex::bit_size().to_u8() {
             32 => {
                 let mut x = x.to_u32();
-                x = x & MASK_2D_U32[5];
+                x &= MASK_2D_U32[5];
                 x = (x ^ (x >> 1)) & MASK_2D_U32[4];
                 x = (x ^ (x >> 2)) & MASK_2D_U32[3];
                 x = (x ^ (x >> 4)) & MASK_2D_U32[2];
@@ -300,7 +300,7 @@ pub mod magic {
             }
             64 => {
                 let mut x = x.to_u64();
-                x = x & MASK_2D_U64[5];
+                x &= MASK_2D_U64[5];
                 x = (x ^ (x >> 1)) & MASK_2D_U64[4];
                 x = (x ^ (x >> 2)) & MASK_2D_U64[3];
                 x = (x ^ (x >> 4)) & MASK_2D_U64[2];
@@ -331,7 +331,7 @@ pub mod magic {
         match Coordinate::bit_size().to_u8() {
             32 => {
                 let mut x = x.to_u32();
-                x = x & MASK_3D_U32[0];
+                x &= MASK_3D_U32[0];
                 x = (x | x << 16) & MASK_3D_U32[1];
                 x = (x | x << 8) & MASK_3D_U32[2];
                 x = (x | x << 4) & MASK_3D_U32[3];
@@ -356,7 +356,7 @@ pub mod magic {
         match MortonIndex::bit_size().to_u8() {
             32 => {
                 let mut x = x.to_u32();
-                x = x & MASK_3D_U32[4];
+                x &= MASK_3D_U32[4];
                 x = (x ^ (x >> 2)) & MASK_3D_U32[3];
                 x = (x ^ (x >> 4)) & MASK_3D_U32[2];
                 x = (x ^ (x >> 8)) & MASK_3D_U32[1];
