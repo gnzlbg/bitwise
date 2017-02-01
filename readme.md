@@ -8,7 +8,7 @@ The algorithms:
 
 - have descriptive names to ease reading code that performs bit manipulations,
 - often optimize to perfect assembly code (and _always_ on nightly by using
-  the [`bitintr`][bitintr_crate] crate),
+  the [bitintr][bitintr_link] crate),
 - works on ~~stable~~ unstable only :( due to specialization for now.
 
 ## Example
@@ -42,11 +42,16 @@ Licensed under the [MIT license][license].
 
 ## Acknowledgments
 
-Some of the algorithms are heavily inspired and/or directly taken from Matthew
-Fioravante's [N3864 A constexpr bitwise operations library for C++][n3864_link]
-proposal and accompanying library: [stdcxx-bitops][stdcxx_bitops_link]. The
-Morton Z-Curve encoding / decoding algorithms using look-up table and magic bits
-are modified versions from [libmorton][libmorton_link].
+- Some of the algorithms are heavily inspired from Matthew Fioravante's 
+  [N3864 A constexpr bitwise operations library for C++][n3864_link] proposal 
+  and accompanying library: [stdcxx-bitops][stdcxx_bitops_link]. 
+- Others are inspired from those in [Hacker's Delight](hackers_delight_link).
+- The Morton Z-Curve encoding / decoding algorithms are adapted/modified from
+  [libmorton][libmorton_link] (which resulted in bugfixes to libmorton).
+- Some come from [Chess Programming Wiki][chess_programming_wiki_link].
+- Others from [Real-Time Collision Detection][real_time_collision_detection_link].
+- Many are adapted from the [bitintr][bitintr_link] protable bitwise
+  manipulation intrinsics library.
 
 ## Contribution
 
@@ -68,3 +73,5 @@ any additional terms or conditions.
 [n3864_link]: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3864.html
 [stdcxx_bitops_link]: https://github.com/fmatthew5876/stdcxx-bitops
 [libmorton_link]: https://github.com/Forceflow/libmorton
+[chess_programming_wiki_link]: https://chessprogramming.wikispaces.com/
+[real_time_collision_detection_link]: http://realtimecollisiondetection.net/

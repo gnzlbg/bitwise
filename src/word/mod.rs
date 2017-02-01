@@ -1,182 +1,183 @@
-pub mod to_word;
+//! Algorithms for single words (u8...u64).
+
+mod to_word;
 
 pub use bitintr::Int as Word;
 
 pub use self::to_word::*;
 
-pub mod count_zeros;
+mod count_zeros;
 pub use self::count_zeros::*;
 
-pub mod count_ones;
+mod count_ones;
 pub use self::count_ones::*;
 
-pub mod leading_zeros;
+mod leading_zeros;
 pub use self::leading_zeros::*;
 
-pub mod leading_ones;
+mod leading_ones;
 pub use self::leading_ones::*;
 
-pub mod trailing_zeros;
+mod trailing_zeros;
 pub use self::trailing_zeros::*;
 
-pub mod trailing_ones;
+mod trailing_ones;
 pub use self::trailing_ones::*;
 
-pub mod shift_logical_left;
+mod shift_logical_left;
 pub use self::shift_logical_left::*;
 
-pub mod shift_logical_right;
+mod shift_logical_right;
 pub use self::shift_logical_right::*;
 
-pub mod shift_arithmetic_left;
+mod shift_arithmetic_left;
 pub use self::shift_arithmetic_left::*;
 
-pub mod shift_arithmetic_right;
+mod shift_arithmetic_right;
 pub use self::shift_arithmetic_right::*;
 
-pub mod rotate_left;
+mod rotate_left;
 pub use self::rotate_left::*;
 
-pub mod rotate_right;
+mod rotate_right;
 pub use self::rotate_right::*;
 
-pub mod swap_bytes;
+mod swap_bytes;
 pub use self::swap_bytes::*;
 
-pub mod from_be;
+mod from_be;
 pub use self::from_be::*;
 
-pub mod from_le;
+mod from_le;
 pub use self::from_le::*;
 
-pub mod to_be;
+mod to_be;
 pub use self::to_be::*;
 
-pub mod to_le;
+mod to_le;
 pub use self::to_le::*;
 
-pub mod pow;
+mod pow;
 pub use self::pow::*;
 
-pub mod parity;
+mod parity;
 pub use self::parity::*;
 
-pub mod clear_least_significant_one;
+mod clear_least_significant_one;
 pub use self::clear_least_significant_one::*;
 
-pub mod set_least_significant_zero;
+mod set_least_significant_zero;
 pub use self::set_least_significant_zero::*;
 
-pub mod isolate_least_significant_one;
+mod isolate_least_significant_one;
 pub use self::isolate_least_significant_one::*;
 
-pub mod isolate_least_significant_zero;
+mod isolate_least_significant_zero;
 pub use self::isolate_least_significant_zero::*;
 
-pub mod clear_trailing_ones;
+mod clear_trailing_ones;
 pub use self::clear_trailing_ones::*;
 
-pub mod set_trailing_zeros;
+mod set_trailing_zeros;
 pub use self::set_trailing_zeros::*;
 
-pub mod mask_trailing_zeros;
+mod mask_trailing_zeros;
 pub use self::mask_trailing_zeros::*;
 
-pub mod mask_trailing_ones;
+mod mask_trailing_ones;
 pub use self::mask_trailing_ones::*;
 
-pub mod mask_trailing_zeros_and_least_significant_one;
+mod mask_trailing_zeros_and_least_significant_one;
 pub use self::mask_trailing_zeros_and_least_significant_one::*;
 
-pub mod mask_trailing_ones_and_least_significant_zero;
+mod mask_trailing_ones_and_least_significant_zero;
 pub use self::mask_trailing_ones_and_least_significant_zero::*;
 
-pub mod set_bit;
+mod set_bit;
 pub use self::set_bit::*;
 
-pub mod clear_bit;
+mod clear_bit;
 pub use self::clear_bit::*;
 
-pub mod flip_bit;
+mod flip_bit;
 pub use self::flip_bit::*;
 
-pub mod test_bit;
+mod test_bit;
 pub use self::test_bit::*;
 
-pub mod copy_bit;
+mod copy_bit;
 pub use self::copy_bit::*;
 
-pub mod reverse_bit_groups;
+mod reverse_bit_groups;
 pub use self::reverse_bit_groups::*;
 
-pub mod reverse_bits;
+mod reverse_bits;
 pub use self::reverse_bits::*;
 
-pub mod reverse_bit_pairs;
+mod reverse_bit_pairs;
 pub use self::reverse_bit_pairs::*;
 
-pub mod reverse_bit_nibbles;
+mod reverse_bit_nibbles;
 pub use self::reverse_bit_nibbles::*;
 
-pub mod reverse_byte_groups;
+mod reverse_byte_groups;
 pub use self::reverse_byte_groups::*;
 
-pub mod reverse_bytes;
+mod reverse_bytes;
 pub use self::reverse_bytes::*;
 
-pub mod clear_bits_geq;
+mod clear_bits_geq;
 pub use self::clear_bits_geq::*;
 
-pub mod clear_bits_leq;
+mod clear_bits_leq;
 pub use self::clear_bits_leq::*;
 
-pub mod set_bits_geq;
+mod set_bits_geq;
 pub use self::set_bits_geq::*;
 
-pub mod set_bits_leq;
+mod set_bits_leq;
 pub use self::set_bits_leq::*;
 
-pub mod flip_bits_geq;
+mod flip_bits_geq;
 pub use self::flip_bits_geq::*;
 
-pub mod flip_bits_leq;
+mod flip_bits_leq;
 pub use self::flip_bits_leq::*;
 
-pub mod is_pow2;
+mod is_pow2;
 pub use self::is_pow2::*;
 
-pub mod ceil_pow2;
+mod ceil_pow2;
 pub use self::ceil_pow2::*;
 
-pub mod floor_pow2;
+mod floor_pow2;
 pub use self::floor_pow2::*;
 
-pub mod is_aligned;
+mod is_aligned;
 pub use self::is_aligned::*;
 
-pub mod align_up;
+mod align_up;
 pub use self::align_up::*;
 
-pub mod align_down;
+mod align_down;
 pub use self::align_down::*;
 
-pub mod outer_perfect_shuffle;
+mod outer_perfect_shuffle;
 pub use self::outer_perfect_shuffle::*;
 
-pub mod outer_perfect_unshuffle;
+mod outer_perfect_unshuffle;
 pub use self::outer_perfect_unshuffle::*;
 
-pub mod inner_perfect_shuffle;
+mod inner_perfect_shuffle;
 pub use self::inner_perfect_shuffle::*;
 
-pub mod inner_perfect_unshuffle;
+mod inner_perfect_unshuffle;
 pub use self::inner_perfect_unshuffle::*;
 
-pub mod parallel_bits_deposit;
+mod parallel_bits_deposit;
 pub use self::parallel_bits_deposit::*;
 
-pub mod parallel_bits_extract;
+mod parallel_bits_extract;
 pub use self::parallel_bits_extract::*;
 
 pub mod morton;
-pub use self::morton::*;
