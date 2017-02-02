@@ -183,6 +183,9 @@ pub use self::parallel_bits_extract::*;
 mod extract_bits;
 pub use self::extract_bits::*;
 
+mod hamming_distance;
+pub use self::hamming_distance::*;
+
 pub mod morton;
 pub use morton::decode_2d as morton_decode_2d;
 pub use morton::decode_3d as morton_decode_3d;
