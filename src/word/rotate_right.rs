@@ -23,7 +23,6 @@ use word::{Word, ToWord, UnsignedWord};
 /// ```
 pub fn rotate_right<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
     debug_assert!(n <= T::bit_size().to());
-    // TODO: update to use x86::bmi2::rorx when bitintr implements it.
     T::rotate_right(x, n.to())
 }
 

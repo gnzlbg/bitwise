@@ -17,9 +17,6 @@ use bitintr;
 /// assert_eq!(mask_trailing_ones(0), 0);
 /// ```
 pub fn mask_trailing_ones<T: Word>(x: T) -> T {
-    // the software fallback of `t1mskc` should generate the right code when tbm
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     !bitintr::x86::tbm::t1mskc(x)
 }
 

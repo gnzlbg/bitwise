@@ -21,9 +21,6 @@ use bitintr;
 /// assert_eq!(isolate_least_significant_zero(0b1111_1111u8), 0u8);
 /// ```
 pub fn isolate_least_significant_zero<T: Word>(x: T) -> T {
-    // the software fallback of `blcic` should generate the right code when tbm
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::tbm::blcic(x)
 }
 

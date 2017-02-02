@@ -20,9 +20,6 @@ use bitintr;
 /// assert_eq!(set_trailing_zeros(0b1111_1111u8), 0b1111_1111u8);
 /// ```
 pub fn set_trailing_zeros<T: Word>(x: T) -> T {
-    // the software fallback of `blcfill` should generate the right code when tbm
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::tbm::blsfill(x)
 }
 

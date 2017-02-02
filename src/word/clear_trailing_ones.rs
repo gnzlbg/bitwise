@@ -20,9 +20,6 @@ use bitintr;
 /// assert_eq!(clear_trailing_ones(0), 0);
 /// ```
 pub fn clear_trailing_ones<T: Word>(x: T) -> T {
-    // the software fallback of `blcfill` should generate the right code when tbm
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::tbm::blcfill(x)
 }
 

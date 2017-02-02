@@ -1,4 +1,5 @@
 use word::Word;
+use bitintr;
 
 /// Clear least significant set bit of `x`.
 ///
@@ -19,7 +20,7 @@ use word::Word;
 /// assert_eq!(clear_least_significant_one(n), s);
 /// ```
 pub fn clear_least_significant_one<T: Word>(x: T) -> T {
-    x & (x - T::one())
+    bitintr::x86::bmi::blsr(x)//x & (x - T::one())
 }
 
 /// Method version of [`clear_least_significant_one`](fn.clear_least_significant_one.html).

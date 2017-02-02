@@ -12,17 +12,17 @@ pub use self::count_zeros::*;
 mod count_ones;
 pub use self::count_ones::*;
 
-mod leading_zeros;
-pub use self::leading_zeros::*;
+mod count_leading_zeros;
+pub use self::count_leading_zeros::*;
 
-mod leading_ones;
-pub use self::leading_ones::*;
+mod count_leading_ones;
+pub use self::count_leading_ones::*;
 
-mod trailing_zeros;
-pub use self::trailing_zeros::*;
+mod count_trailing_zeros;
+pub use self::count_trailing_zeros::*;
 
-mod trailing_ones;
-pub use self::trailing_ones::*;
+mod count_trailing_ones;
+pub use self::count_trailing_ones::*;
 
 mod shift_logical_left;
 pub use self::shift_logical_left::*;
@@ -180,4 +180,11 @@ pub use self::parallel_bits_deposit::*;
 mod parallel_bits_extract;
 pub use self::parallel_bits_extract::*;
 
+mod extract_bits;
+pub use self::extract_bits::*;
+
 pub mod morton;
+pub use morton::decode_2d as morton_decode_2d;
+pub use morton::decode_3d as morton_decode_3d;
+pub use morton::encode_2d as morton_encode_2d;
+pub use morton::encode_3d as morton_encode_3d;

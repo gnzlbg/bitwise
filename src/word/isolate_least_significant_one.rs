@@ -21,9 +21,6 @@ use bitintr;
 /// assert_eq!(isolate_least_significant_one(0), 0);
 /// ```
 pub fn isolate_least_significant_one<T: Word>(x: T) -> T {
-    // the software fallback of `blsi` should generate the right code when bmi
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::bmi::blsi(x)
 }
 

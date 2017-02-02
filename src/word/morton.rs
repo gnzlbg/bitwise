@@ -1,4 +1,59 @@
 //! Encoding/decoding of Morton Z-curve indices.
+//!
+//! The encode/decode 2d/3d functions in this module expose the fastest
+//! algorithm for the target and set of target features enabled when a nightly
+//! compiler is used.
+//!
+//! ## Correctness
+//!
+//! The default implementation is loss-less, that is, it preserve all
+//! information when encoding/decoding. This means that the encoding/decoding
+//! functions are invertible: `encode(decode(m)) == m`).
+//!
+//! The `bitmask` and `lut` implementations in the sub-modules are _lossy_ (not
+//! loss-less).
+//!
+//! The `decode/encode_3d_high_bits` functions can be used to wrap a lossy
+//! implementation into a loss-less one.
+//!
+//! ## Performance of the default algorithm
+//!
+//! The default implementation is loss-less. It uses the `bitmask`-based
+//! everywhere except on x86 targets that support the BMI 2.0 instruction set.
+//!
+//! ### Choice of default algorithms
+//!
+//! This decision was based on the following facts:
+//!
+//! - The `bmi2` algorithm is the fastest on machines with the BMI 2.0
+//! instruction set, but very slow otherwise.
+//! - The performance of the `bitmask` and the look-up table (`lut`) algorithms in
+//! the micro-benchmarks is comparable.
+//! - The `lut` version requires more memory than the `bitmask` version.
+//!
+//! and this hypothesis:
+//!
+//! The `bitmask` version might deliver better performance on real applications
+//! than the `lut` version because it uses less cache.
+//!
+//! Since every real application is different, all implementations are still
+//! provided in the sub-modules. So when in doubt, benchmark your application
+//! with the different implementations and make an informed choice.
+//!
+//! ### Choice of loss-less by default
+//!
+//! The cost of making a lossy algorithm `loss-less` is within the measurement
+//! error. The trend shows a positive cost, but this cost is negligible, and
+//! the correctness/reliability gains are worth it.
+//!
+//! Still, the higher bits that get lost by the lossy implementations are
+//! probably completely irrelevant in practice unless one is dealing with
+//! insanely large z-Curves.
+//!
+//! Negligibly faster lossy implementations are provided in the `bitmask` and
+//! `lut` sub-modules.
+//!
+//! The `bmi2` implementation is always loss-less.
 
 #![allow(dead_code)]
 
@@ -238,7 +293,8 @@ pub mod bmi2 {
 }
 
 
-pub mod magic {
+pub mod bitmask {
+    //! Encoding/decoding of Morton Z-curve indices using precomputed bitmasks.
     use word::Word;
 
     const MASK_2D_U32: [u32; 6] = [0xFFFFFFFF, 0x0000FFFF, 0x00FF00FF, 0x0F0F0F0F, 0x33333333,
@@ -433,19 +489,20 @@ pub fn encode_2d<T: Word>(x: T, y: T) -> T {
         if cfg!(target_feature = "bmi2") {
             bmi2::encode_2d(x, y)
         } else {
-            // magic::encode_2d(x, y)
+            // bitmask::encode_2d(x, y)
             lut::encode_2d(x, y)
         }
     }
     #[cfg(not(RUSTC_IS_NIGHTLY))]
     {
-        // magic::encode_2d(x, y)
+        // bitmask::encode_2d(x, y)
         lut::encode_2d(x, y)
     }
 }
 
+/// Encodes the high-bits of `x` and `y` into the Morton index `v`.
 #[inline]
-fn encode_hb_3d<T: Word>(v: T, x: T, y: T, _: T) -> T {
+pub fn encode_3d_high_bits<T: Word>(v: T, x: T, y: T, _: T) -> T {
     let mut v = v;
     match T::bit_size().to_u8() {
         32 => {
@@ -501,14 +558,14 @@ pub fn encode_3d<T: Word>(x: T, y: T, z: T) -> T {
         if cfg!(target_feature = "bmi2") {
             bmi2::encode_3d(x, y, z)
         } else {
-            let v = magic::encode_3d(x, y, z);
-            encode_hb_3d(v, x, y, z)
+            let v = bitmask::encode_3d(x, y, z);
+            encode_3d_high_bits(v, x, y, z)
         }
     }
     #[cfg(not(RUSTC_IS_NIGHTLY))]
     {
-        let v = magic::encode_3d(x, y, z);
-        encode_hb_3d(v, x, y, z)
+        let v = bitmask::encode_3d(x, y, z);
+        encode_3d_high_bits(v, x, y, z)
     }
 }
 
@@ -543,19 +600,20 @@ pub fn decode_2d<T: Word>(v: T) -> (T, T) {
         if cfg!(target_feature = "bmi2") {
             bmi2::decode_2d(v)
         } else {
-            magic::decode_2d(v)
+            bitmask::decode_2d(v)
             //lut::decode_2d(v)
         }
     }
     #[cfg(not(RUSTC_IS_NIGHTLY))]
     {
-        magic::decode_2d(v)
+        bitmask::decode_2d(v)
         //lut::decode_2d(v)
     }
 }
 
+/// Decodes the high-bits of `b` into the coordinates `x` and `y`.
 #[inline]
-fn decode_hb_3d<T: Word>(v: T, x: T, y: T, z: T) -> (T, T, T) {
+pub fn decode_3d_high_bits<T: Word>(v: T, x: T, y: T, z: T) -> (T, T, T) {
     let mut x = x;
     let mut y = y;
     match T::bit_size().to_u8() {
@@ -607,47 +665,21 @@ pub fn decode_3d<T: Word>(v: T) -> (T, T, T) {
         if cfg!(target_feature = "bmi2") {
             bmi2::decode_3d(v)
         } else {
-            let (x, y, z) = magic::decode_3d(v);
-            decode_hb_3d(v, x, y, z)
+            let (x, y, z) = bitmask::decode_3d(v);
+            decode_3d_high_bits(v, x, y, z)
         }
     }
     #[cfg(not(RUSTC_IS_NIGHTLY))]
     {
-        let (x, y, z) = magic::decode_3d(v);
-        decode_hb_3d(v, x, y, z)
+        let (x, y, z) = bitmask::decode_3d(v);
+        decode_3d_high_bits(v, x, y, z)
     }
 }
 
-#[inline]
-pub fn encode<T: Word>(v: &[T]) -> T {
-    match v.len() {
-        2 => encode_2d(v[0], v[1]),
-        3 => encode_3d(v[0], v[1], v[2]),
-        _ => unreachable!(),
-    }
-}
 
-#[inline]
-pub fn decode<T: Word>(v: T, r: &mut [T]) {
-    // TODO: use unsafe { get_unchecked }
-    match r.len() {
-        2 => {
-            let (x, y) = decode_2d(v);
-            r[0] = x;
-            r[1] = y;
-        }
-        3 => {
-            let (x, y, z) = decode_3d(v);
-            r[0] = x;
-            r[1] = y;
-            r[2] = z;
-        }
-        _ => unreachable!(),
-    }
-}
-
-// These are reused from the benches. TODO: make them optional.
+#[doc(hidden)]
 pub mod testing_utils {
+    //! Testing utilities, used in tests and benchmarks (TODO: make optional)
     use super::*;
     use std::fmt::Debug;
 
@@ -721,23 +753,23 @@ mod tests {
         Runner::run(BMI2Invariant {});
     }
 
-    struct MagicInvariant;
+    struct BitmaskInvariant;
 
-    impl RunnerFn for MagicInvariant {
+    impl RunnerFn for BitmaskInvariant {
         fn run<T: Word + Debug>(&self, v: T) {
             {
                 // 2D:
-                let (x, y) = magic::decode_2d::<T, _>(v);
-                let vs = magic::encode_2d::<T, _>(x, y);
-                let (x2, y2) = magic::decode_2d::<T, _>(vs);
-                let vs3 = magic::encode_2d::<T, _>(x2, y2);
+                let (x, y) = bitmask::decode_2d::<T, _>(v);
+                let vs = bitmask::encode_2d::<T, _>(x, y);
+                let (x2, y2) = bitmask::decode_2d::<T, _>(vs);
+                let vs3 = bitmask::encode_2d::<T, _>(x2, y2);
                 assert_eq!(vs3, vs);
             }
             {
-                let (x, y, z) = magic::decode_3d::<T, _>(v);
-                let vs = magic::encode_3d::<T, _>(x, y, z);
-                let (x2, y2, z2) = magic::decode_3d::<T, _>(vs);
-                let vs3 = magic::encode_3d::<T, _>(x2, y2, z2);
+                let (x, y, z) = bitmask::decode_3d::<T, _>(v);
+                let vs = bitmask::encode_3d::<T, _>(x, y, z);
+                let (x2, y2, z2) = bitmask::decode_3d::<T, _>(vs);
+                let vs3 = bitmask::encode_3d::<T, _>(x2, y2, z2);
                 assert_eq!(vs3, vs);
             }
 
@@ -746,8 +778,8 @@ mod tests {
 
 
     #[test]
-    fn magic_invariant() {
-        Runner::run(MagicInvariant {});
+    fn bitmask_invariant() {
+        Runner::run(BitmaskInvariant {});
     }
 
     struct LUTInvariant;
@@ -796,12 +828,12 @@ mod tests {
                 let v_m: T = encode_2d(x_bmi2, y_bmi2);
                 assert_eq!(v_m, v);
 
-                let (x_mb, y_mb) = magic::decode_2d::<T, _>(v);
+                let (x_mb, y_mb) = bitmask::decode_2d::<T, _>(v);
 
                 assert_eq!(x_bmi2, x_mb);
                 assert_eq!(y_bmi2, y_mb);
 
-                let v_mb = magic::encode_2d::<T, _>(x_bmi2, y_bmi2);
+                let v_mb = bitmask::encode_2d::<T, _>(x_bmi2, y_bmi2);
                 assert_eq!(v_mb, v);
 
                 let (x_lut, y_lut) = lut::decode_2d(v);
@@ -830,7 +862,7 @@ mod tests {
                     assert_eq!(v_m, v);
                 }
 
-                // note: BMI2 and LUT/MAGIC produce different results for 3D
+                // note: BMI2 and LUT/BITMASK produce different results for 3D
                 // because the last 2bits of a 32bit word and the last bit of a
                 // 64bit word are not preserved in the decoding (such that
                 // re-encoding produces a different key than the original value)
@@ -841,13 +873,13 @@ mod tests {
                 };
 
                 let (x_bmi2, y_bmi2, z_bmi2) = bmi2::decode_3d::<T, _>(v);
-                let (x_mb, y_mb, z_mb) = magic::decode_3d::<T, _>(v);
+                let (x_mb, y_mb, z_mb) = bitmask::decode_3d::<T, _>(v);
 
                 assert_eq!(x_bmi2, x_mb);
                 assert_eq!(y_bmi2, y_mb);
                 assert_eq!(z_bmi2, z_mb);
 
-                let v_mb = magic::encode_3d::<T, _>(x_bmi2, y_bmi2, z_bmi2);
+                let v_mb = bitmask::encode_3d::<T, _>(x_bmi2, y_bmi2, z_bmi2);
                 assert_eq!(v_mb, v);
 
 

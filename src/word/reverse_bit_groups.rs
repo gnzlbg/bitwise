@@ -58,7 +58,7 @@ pub fn reverse_bit_groups<T: Word, U: UnsignedWord>(x: T, group_bit_size: U, no_
     // is released under the MIT's License here:
     // https://github.com/fmatthew5876/stdcxx-bitops
 
-    type TU<U> where U: Word = U::Unsigned;
+    type TU<U> where U: Word = U::Unsigned; // TODO: fix warning ?
 
     debug_assert!(group_bit_size.is_pow2());
     debug_assert!(no_subwords.is_pow2());

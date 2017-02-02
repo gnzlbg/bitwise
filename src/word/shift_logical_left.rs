@@ -33,5 +33,3 @@ impl<T: Word> SLL for T {
         shift_logical_left(self, n)
     }
 }
-
-// TODO: test debug_assert

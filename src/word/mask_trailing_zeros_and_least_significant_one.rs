@@ -19,9 +19,6 @@ use bitintr;
 /// assert_eq!(mask_trailing_zeros_and_least_significant_one(n), s);
 /// ```
 pub fn mask_trailing_zeros_and_least_significant_one<T: Word>(x: T) -> T {
-    // the software fallback of `blsmsk` should generate the right code when bmi
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::bmi::blsmsk(x)
 }
 

@@ -19,9 +19,6 @@ use bitintr;
 /// assert_eq!(mask_trailing_ones_and_least_significant_zero(n), s);
 /// ```
 pub fn mask_trailing_ones_and_least_significant_zero<T: Word>(x: T) -> T {
-    // the software fallback of `blcmsk` should generate the right code when tbm
-    // is not available (TODO: check this, otherwise switch depending on target
-    // features):
     bitintr::x86::tbm::blcmsk(x)
 }
 

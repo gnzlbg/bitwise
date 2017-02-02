@@ -1,12 +1,16 @@
 use word::Word;
 
+/// Unsigned word.
 pub trait UnsignedWord: Word {}
 impl UnsignedWord for u8 {}
 impl UnsignedWord for u16 {}
 impl UnsignedWord for u32 {}
 impl UnsignedWord for u64 {}
+impl UnsignedWord for usize {}
 
+/// From-like trait for words.
 pub trait FromWord<T> {
+    /// Converts a `T` to `Self`.
     fn from(T) -> Self;
 }
 
@@ -54,7 +58,9 @@ impl<T: Word, U: Word> FromWord<T> for U {
     }
 }
 
+/// Into-like trait for words.
 pub trait ToWord<T> {
+    /// Converts self to `T`.
     fn to(self) -> T;
 }
 
