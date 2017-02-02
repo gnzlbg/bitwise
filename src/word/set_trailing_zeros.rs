@@ -19,16 +19,19 @@ use bitintr;
 /// assert_eq!(n.set_trailing_zeros(), s);
 /// assert_eq!(set_trailing_zeros(0b1111_1111u8), 0b1111_1111u8);
 /// ```
+#[inline]
 pub fn set_trailing_zeros<T: Word>(x: T) -> T {
     bitintr::x86::tbm::blsfill(x)
 }
 
 /// Method version of [`set_trailing_zeros`](fn.set_trailing_zeros.html).
 pub trait SetTrailingZeros {
+    #[inline]
     fn set_trailing_zeros(self) -> Self;
 }
 
 impl<T: Word> SetTrailingZeros for T {
+    #[inline]
     fn set_trailing_zeros(self) -> Self {
         set_trailing_zeros(self)
     }

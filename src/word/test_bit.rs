@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.test_bit(6u8), false);
 /// assert_eq!(n.test_bit(5u8), true);
 /// ```
+#[inline]
 pub fn test_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> bool {
     debug_assert!(T::bit_size() > bit.to());
     x & (T::one() << bit.to()) != T::zero()
@@ -23,10 +24,12 @@ pub fn test_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> bool {
 
 /// Method version of [`test_bit`](fn.test_bit.html).
 pub trait TestBit {
+    #[inline]
     fn test_bit<U: UnsignedWord>(self, n: U) -> bool;
 }
 
 impl<T: Word> TestBit for T {
+    #[inline]
     fn test_bit<U: UnsignedWord>(self, n: U) -> bool {
         test_bit(self, n)
     }

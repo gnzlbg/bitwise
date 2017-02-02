@@ -18,6 +18,7 @@ use word::{Word, ToWord};
 /// assert_eq!(b.shift_logical_left(4), 0b1001_0000u8);
 ///
 /// ```
+#[inline]
 pub fn shift_logical_left<T: Word, U: Word>(x: T, n: U) -> T {
     debug_assert!(n <= T::bit_size().to());
     (x.to_unsigned() << n.to_unsigned().to()).to()
@@ -25,10 +26,12 @@ pub fn shift_logical_left<T: Word, U: Word>(x: T, n: U) -> T {
 
 /// Method version of [`shift_logical_left`](fn.shift_logical_left.html).
 pub trait SLL {
+    #[inline]
     fn shift_logical_left<U: Word>(self, n: U) -> Self;
 }
 
 impl<T: Word> SLL for T {
+    #[inline]
     fn shift_logical_left<U: Word>(self, n: U) -> Self {
         shift_logical_left(self, n)
     }

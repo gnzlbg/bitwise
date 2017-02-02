@@ -24,16 +24,19 @@ use bitintr;
 /// assert_eq!(n.count_leading_zeros(), 10);
 /// assert_eq!(count_leading_zeros(n), 10);
 /// ```
+#[inline]
 pub fn count_leading_zeros<T: Word>(x: T) -> T {
     bitintr::x86::abm::lzcnt(x)
 }
 
 /// Method version of [`count_leading_zeros`](fn.count_leading_zeros.html).
 pub trait CountLeadingZeros {
+    #[inline]
     fn count_leading_zeros(self) -> Self;
 }
 
 impl<T: Word> CountLeadingZeros for T {
+    #[inline]
     fn count_leading_zeros(self) -> Self {
         count_leading_zeros(self)
     }

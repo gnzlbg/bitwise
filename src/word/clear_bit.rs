@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.clear_bit(1u8), 0b1011_0000u8);
 /// assert_eq!(n.clear_bit(5u8), 0b1001_0010u8);
 /// ```
+#[inline]
 pub fn clear_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
     x & !(T::one() << bit.to())
@@ -23,10 +24,12 @@ pub fn clear_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
 
 /// Method version of [`clear_bit`](fn.clear_bit.html).
 pub trait ClearBit {
+    #[inline]
     fn clear_bit<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> ClearBit for T {
+    #[inline]
     fn clear_bit<U: UnsignedWord>(self, n: U) -> Self {
         clear_bit(self, n)
     }

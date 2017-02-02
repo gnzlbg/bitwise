@@ -19,6 +19,7 @@ use word::Word;
 ///     assert_eq!(to_le(n), n.swap_bytes());
 /// }
 /// ```
+#[inline]
 pub fn to_le<T: Word>(x: T) -> T {
     T::to_le(x)
 }

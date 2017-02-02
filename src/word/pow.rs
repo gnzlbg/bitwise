@@ -11,6 +11,7 @@ use word::{Word, ToWord, UnsignedWord};
 ///
 /// assert_eq!(pow(2i8, 6u8), 64i8);
 /// ```
+#[inline]
 pub fn pow<T: Word, U: UnsignedWord>(x: T, exp: U) -> T {
     T::pow(x, exp.to())
 }
@@ -19,11 +20,11 @@ pub fn pow<T: Word, U: UnsignedWord>(x: T, exp: U) -> T {
 // one in std:
 /*
 pub trait Pow {
-    fn pow<U: UnsignedWord>(self, n: U) -> Self;
+  #[inline] fn pow<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> Pow for T {
-    fn pow<U: UnsignedWord>(self, n: U) -> Self {
+  #[inline] fn pow<U: UnsignedWord>(self, n: U) -> Self {
         pow(self, n)
     }
 }

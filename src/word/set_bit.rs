@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(set_bit(n, 0u8), 0b1011_0011u8);
 /// assert_eq!(n.set_bit(3u8), 0b1011_1010u8);
 /// ```
+#[inline]
 pub fn set_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
     x | (T::one() << bit.to())
@@ -23,10 +24,12 @@ pub fn set_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
 
 /// Method version of [`set_bit`](fn.set_bit.html).
 pub trait SetBit {
+    #[inline]
     fn set_bit<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> SetBit for T {
+    #[inline]
     fn set_bit<U: UnsignedWord>(self, n: U) -> Self {
         set_bit(self, n)
     }

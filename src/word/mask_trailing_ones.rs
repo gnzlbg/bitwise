@@ -16,16 +16,19 @@ use bitintr;
 /// assert_eq!(0b0101_1111u8.mask_trailing_ones(), 0b0001_1111u8);
 /// assert_eq!(mask_trailing_ones(0), 0);
 /// ```
+#[inline]
 pub fn mask_trailing_ones<T: Word>(x: T) -> T {
     !bitintr::x86::tbm::t1mskc(x)
 }
 
 /// Method version of [`mask_trailing_ones`](fn.mask_trailing_ones.html).
 pub trait MaskTrailingOnes {
+    #[inline]
     fn mask_trailing_ones(self) -> Self;
 }
 
 impl<T: Word> MaskTrailingOnes for T {
+    #[inline]
     fn mask_trailing_ones(self) -> Self {
         mask_trailing_ones(self)
     }

@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.flip_bits_geq(5u8), s);
 /// assert_eq!(flip_bits_geq(n, 5u8), s);
 /// ```
+#[inline]
 pub fn flip_bits_geq<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
     x ^ !((T::one() << bit.to()) - T::one())
@@ -24,10 +25,12 @@ pub fn flip_bits_geq<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
 
 /// Method version of [`flip_bits_geq`](fn.flip_bits_geq.html).
 pub trait FlipBitsGeq {
+    #[inline]
     fn flip_bits_geq<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> FlipBitsGeq for T {
+    #[inline]
     fn flip_bits_geq<U: UnsignedWord>(self, n: U) -> Self {
         flip_bits_geq(self, n)
     }

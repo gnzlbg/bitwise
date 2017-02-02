@@ -59,7 +59,7 @@ struct BITMASKEncode2D;
 impl RunnerFn for BITMASKEncode2D {
     fn run<T: Word + Debug>(&self, v: T) {
         bencher::black_box(morton::bitmask::encode_2d::<T, T>(bencher::black_box(v),
-                                                            bencher::black_box(v)));
+                                                              bencher::black_box(v)));
     }
 }
 
@@ -231,8 +231,8 @@ struct BITMASKEncode3D;
 impl RunnerFn for BITMASKEncode3D {
     fn run<T: Word + Debug>(&self, v: T) {
         bencher::black_box(morton::bitmask::encode_3d::<T, T>(bencher::black_box(v),
-                                                            bencher::black_box(v),
-                                                            bencher::black_box(v)));
+                                                              bencher::black_box(v),
+                                                              bencher::black_box(v)));
     }
 }
 

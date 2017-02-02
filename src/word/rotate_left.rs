@@ -18,6 +18,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.rotate_left(12), m);
 /// rotate_left(n, u64::bit_size());
 /// ```
+#[inline]
 pub fn rotate_left<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
     debug_assert!(n <= T::bit_size().to());
     T::rotate_left(x, n.to())
@@ -25,10 +26,12 @@ pub fn rotate_left<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
 
 /// Method version of [`rotate_left`](fn.rotate_left.html).
 pub trait RotateLeft {
+    #[inline]
     fn rotate_left<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> RotateLeft for T {
+    #[inline]
     fn rotate_left<U: UnsignedWord>(self, n: U) -> Self {
         rotate_left(self, n)
     }

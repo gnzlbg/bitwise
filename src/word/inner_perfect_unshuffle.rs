@@ -18,6 +18,7 @@ use word::{Word, ReverseBitGroups, OuterPerfectUnshuffle};
 /// assert_eq!(n.inner_perfect_unshuffle(), s);
 /// assert_eq!(inner_perfect_unshuffle(n), s);
 /// ```
+#[inline]
 pub fn inner_perfect_unshuffle<T: Word>(x: T) -> T {
     let hwb = T::bit_size().to_u8() / 2u8;
     x.outer_perfect_unshuffle().reverse_bit_groups(hwb, 1u8)
@@ -25,10 +26,12 @@ pub fn inner_perfect_unshuffle<T: Word>(x: T) -> T {
 
 /// Method version of [`inner_perfect_unshuffle`](fn.inner_perfect_unshuffle.html).
 pub trait InnerPerfectUnshuffle {
+    #[inline]
     fn inner_perfect_unshuffle(self) -> Self;
 }
 
 impl<T: Word> InnerPerfectUnshuffle for T {
+    #[inline]
     fn inner_perfect_unshuffle(self) -> Self {
         inner_perfect_unshuffle(self)
     }

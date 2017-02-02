@@ -18,6 +18,7 @@ use word::Word;
 /// assert_eq!(n.outer_perfect_unshuffle(), s);
 /// assert_eq!(outer_perfect_unshuffle(n), s);
 /// ```
+#[inline]
 pub fn outer_perfect_unshuffle<T: Word>(x: T) -> T {
     let mut x = x;
     let s = T::byte_size();
@@ -42,10 +43,12 @@ pub fn outer_perfect_unshuffle<T: Word>(x: T) -> T {
 
 /// Method version of [`outer_perfect_unshuffle`](fn.outer_perfect_unshuffle.html).
 pub trait OuterPerfectUnshuffle {
+    #[inline]
     fn outer_perfect_unshuffle(self) -> Self;
 }
 
 impl<T: Word> OuterPerfectUnshuffle for T {
+    #[inline]
     fn outer_perfect_unshuffle(self) -> Self {
         outer_perfect_unshuffle(self)
     }

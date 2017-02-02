@@ -21,6 +21,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(shift_arithmetic_left(b, 4u8), 0b1001_0000u8);
 /// b.shift_arithmetic_left(u8::bit_size() - 1);
 /// ```
+#[inline]
 pub fn shift_arithmetic_left<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
     debug_assert!(n <= T::bit_size().to());
     (x.to_unsigned() << n.to()).to()
@@ -28,10 +29,12 @@ pub fn shift_arithmetic_left<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
 
 /// Method version of [`shift_arithmetic_left`](fn.shift_arithmetic_left.html).
 pub trait SAL {
+    #[inline]
     fn shift_arithmetic_left<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> SAL for T {
+    #[inline]
     fn shift_arithmetic_left<U: UnsignedWord>(self, n: U) -> Self {
         shift_arithmetic_left(self, n)
     }

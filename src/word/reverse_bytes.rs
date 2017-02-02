@@ -17,16 +17,19 @@ use word::Word;
 /// assert_eq!(0b1011_0010u8.reverse_bytes(), 0b1011_0010u8);
 /// assert_eq!(0b1011_0010_1010_1001u16.reverse_bytes(), 0b1010_1001_1011_0010u16);
 /// ```
+#[inline]
 pub fn reverse_bytes<T: Word>(x: T) -> T {
     x.swap_bytes()
 }
 
 /// Method version of [`reverse_bytes`](fn.reverse_bytes.html).
 pub trait ReverseBytes: Word {
+    #[inline]
     fn reverse_bytes(self) -> Self;
 }
 
 impl<T: Word> ReverseBytes for T {
+    #[inline]
     fn reverse_bytes(self) -> T {
         reverse_bytes(self)
     }

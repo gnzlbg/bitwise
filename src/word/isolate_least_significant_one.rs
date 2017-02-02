@@ -20,16 +20,19 @@ use bitintr;
 /// assert_eq!(n.isolate_least_significant_one(), s);
 /// assert_eq!(isolate_least_significant_one(0), 0);
 /// ```
+#[inline]
 pub fn isolate_least_significant_one<T: Word>(x: T) -> T {
     bitintr::x86::bmi::blsi(x)
 }
 
 /// Method version of [`isolate_least_significant_one`](fn.isolate_least_significant_one.html).
 pub trait IsolateLeastSignificantOne {
+    #[inline]
     fn isolate_least_significant_one(self) -> Self;
 }
 
 impl<T: Word> IsolateLeastSignificantOne for T {
+    #[inline]
     fn isolate_least_significant_one(self) -> Self {
         isolate_least_significant_one(self)
     }

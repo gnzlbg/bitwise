@@ -11,13 +11,14 @@ impl UnsignedWord for usize {}
 /// From-like trait for words.
 pub trait FromWord<T> {
     /// Converts a `T` to `Self`.
+    #[inline]
     fn from(T) -> Self;
 }
 
 macro_rules! impl_from_word_from_to {
     ($From:ty, $To:ty) => (
         impl FromWord<$From> for $To {
-            fn from(x: $From) -> Self {
+            #[inline] fn from(x: $From) -> Self {
                 x as Self
             }
         }
@@ -53,6 +54,7 @@ impl_from_word!(u64);
 impl_from_word!(usize);
 
 impl<T: Word, U: Word> FromWord<T> for U {
+    #[inline]
     default fn from(x: T) -> Self {
         ToWord::to(x)
     }
@@ -61,6 +63,7 @@ impl<T: Word, U: Word> FromWord<T> for U {
 /// Into-like trait for words.
 pub trait ToWord<T> {
     /// Converts self to `T`.
+    #[inline]
     fn to(self) -> T;
 }
 
@@ -68,6 +71,7 @@ pub trait ToWord<T> {
 impl<T, U> ToWord<U> for T
     where U: FromWord<T>
 {
+    #[inline]
     fn to(self) -> U {
         U::from(self)
     }

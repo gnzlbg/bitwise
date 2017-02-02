@@ -22,16 +22,19 @@ use word::Word;
 /// assert_eq!(n3.parity(), 0);
 /// assert_eq!(parity(n2), 1);
 /// ```
+#[inline]
 pub fn parity<T: Word>(x: T) -> T {
     x.count_ones() & T::one()
 }
 
 /// Method version of [`parity`](fn.parity.html).
 pub trait Parity {
+    #[inline]
     fn parity(self) -> Self;
 }
 
 impl<T: Word> Parity for T {
+    #[inline]
     fn parity(self) -> Self {
         parity(self)
     }

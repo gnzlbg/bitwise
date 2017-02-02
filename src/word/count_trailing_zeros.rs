@@ -21,6 +21,7 @@ use bitintr;
 /// assert_eq!(n.count_trailing_zeros(), 3);
 /// assert_eq!(count_trailing_zeros(n), 3);
 /// ```
+#[inline]
 pub fn count_trailing_zeros<T: Word>(x: T) -> T {
     bitintr::x86::bmi::tzcnt(x)
 }
@@ -28,10 +29,12 @@ pub fn count_trailing_zeros<T: Word>(x: T) -> T {
 /// Method version of [`count_trailing_zeros`](fn.count_trailing_zeros.html).
 
 pub trait CountTrailingZeros {
+    #[inline]
     fn count_trailing_zeros(self) -> Self;
 }
 
 impl<T: Word> CountTrailingZeros for T {
+    #[inline]
     fn count_trailing_zeros(self) -> Self {
         count_trailing_zeros(self)
     }

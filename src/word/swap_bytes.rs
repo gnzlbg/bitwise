@@ -13,16 +13,19 @@ use word::Word;
 /// assert_eq!(n.swap_bytes(), m);
 /// assert_eq!(swap_bytes(n), m);
 /// ```
+#[inline]
 pub fn swap_bytes<T: Word>(x: T) -> T {
     T::swap_bytes(x)
 }
 
 /// Method version of [`swap_bytes`](fn.swap_bytes.html).
 pub trait SwapBytes {
+    #[inline]
     fn swap_bytes(self) -> Self;
 }
 
 impl<T: Word> SwapBytes for T {
+    #[inline]
     fn swap_bytes(self) -> Self {
         swap_bytes(self)
     }

@@ -53,6 +53,7 @@ use word::is_pow2::*;
 /// // Reverse bits within each 8 2-bit subwords of `n`:
 /// assert_eq!(n.reverse_bit_groups(1u32, 8u32), 0b1010_1110_0101_1010u16);
 /// ```
+#[inline]
 pub fn reverse_bit_groups<T: Word, U: UnsignedWord>(x: T, group_bit_size: U, no_subwords: U) -> T {
     // Adapted from Matthew Fioravante's stdcxx-bitops, which
     // is released under the MIT's License here:
@@ -107,10 +108,12 @@ pub fn reverse_bit_groups<T: Word, U: UnsignedWord>(x: T, group_bit_size: U, no_
 
 /// Method version of [`reverse_bit_groups`](fn.reverse_bit_groups.html).
 pub trait ReverseBitGroups: Word {
+    #[inline]
     fn reverse_bit_groups<T: UnsignedWord>(self, x: T, y: T) -> Self;
 }
 
 impl<T: Word> ReverseBitGroups for T {
+    #[inline]
     fn reverse_bit_groups<U: UnsignedWord>(self, x: U, y: U) -> T {
         reverse_bit_groups(self, x, y)
     }

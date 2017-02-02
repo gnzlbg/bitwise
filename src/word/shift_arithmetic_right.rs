@@ -20,6 +20,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// b.shift_arithmetic_right(u8::bit_size() - 1);
 ///
 /// ```
+#[inline]
 pub fn shift_arithmetic_right<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
     debug_assert!(n <= T::bit_size().to());
     (x.to_signed() >> n.to()).to()
@@ -28,10 +29,12 @@ pub fn shift_arithmetic_right<T: Word, U: UnsignedWord>(x: T, n: U) -> T {
 
 /// Method version of [`shift_arithmetic_right`](fn.shift_arithmetic_right.html).
 pub trait SAR {
+    #[inline]
     fn shift_arithmetic_right<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> SAR for T {
+    #[inline]
     fn shift_arithmetic_right<U: UnsignedWord>(self, n: U) -> Self {
         shift_arithmetic_right(self, n)
     }

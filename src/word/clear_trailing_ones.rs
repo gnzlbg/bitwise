@@ -19,16 +19,19 @@ use bitintr;
 /// assert_eq!(n.clear_trailing_ones(), s);
 /// assert_eq!(clear_trailing_ones(0), 0);
 /// ```
+#[inline]
 pub fn clear_trailing_ones<T: Word>(x: T) -> T {
     bitintr::x86::tbm::blcfill(x)
 }
 
 /// Method version of [`clear_trailing_ones`](fn.clear_trailing_ones.html).
 pub trait ClearTrailingOnes {
+    #[inline]
     fn clear_trailing_ones(self) -> Self;
 }
 
 impl<T: Word> ClearTrailingOnes for T {
+    #[inline]
     fn clear_trailing_ones(self) -> Self {
         clear_trailing_ones(self)
     }

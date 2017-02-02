@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.clear_bits_leq(5u8), s);
 /// assert_eq!(clear_bits_leq(n, 5u8), s);
 /// ```
+#[inline]
 pub fn clear_bits_leq<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
     x & !((T::one() << (T::one() + bit.to())) - T::one())
@@ -23,10 +24,12 @@ pub fn clear_bits_leq<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
 
 /// Method version of [`clear_bits_leq`](fn.clear_bits_leq.html).
 pub trait ClearBitsLeq {
+    #[inline]
     fn clear_bits_leq<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> ClearBitsLeq for T {
+    #[inline]
     fn clear_bits_leq<U: UnsignedWord>(self, n: U) -> Self {
         clear_bits_leq(self, n)
     }

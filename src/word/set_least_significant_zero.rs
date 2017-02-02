@@ -17,16 +17,19 @@ use bitintr::x86::tbm;
 /// assert_eq!(n.set_least_significant_zero(), s);
 /// assert_eq!(set_least_significant_zero(n), s);
 /// ```
+#[inline]
 pub fn set_least_significant_zero<T: Word>(x: T) -> T {
     tbm::blcs(x)
 }
 
 /// Method version of [`set_least_significant_zero`](fn.set_least_significant_zero.html).
 pub trait SetLeastSignificantZero {
+    #[inline]
     fn set_least_significant_zero(self) -> Self;
 }
 
 impl<T: Word> SetLeastSignificantZero for T {
+    #[inline]
     fn set_least_significant_zero(self) -> Self {
         set_least_significant_zero(self)
     }

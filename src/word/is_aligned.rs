@@ -29,6 +29,7 @@ use word::{Word, UnsignedWord, ToWord};
 /// assert!(4.is_aligned(4u8));
 /// assert!(!4.is_aligned(8u8));
 /// ```
+#[inline]
 pub fn is_aligned<T: Word, U: UnsignedWord>(x: T, alignment: U) -> bool {
     debug_assert!(U::one() <= alignment);
     (x & (alignment - U::one()).to()) == T::zero()
@@ -36,10 +37,12 @@ pub fn is_aligned<T: Word, U: UnsignedWord>(x: T, alignment: U) -> bool {
 
 /// Method version of [`is_aligned`](fn.is_aligned.html).
 pub trait IsAligned {
+    #[inline]
     fn is_aligned<U: UnsignedWord>(self, U) -> bool;
 }
 
 impl<T: Word> IsAligned for T {
+    #[inline]
     fn is_aligned<U: UnsignedWord>(self, u: U) -> bool {
         is_aligned(self, u)
     }

@@ -26,6 +26,7 @@ use word::reverse_bit_groups::*;
 /// // Single bytes within two half-words:
 /// assert_eq!(reverse_byte_groups(0b0101_1101_1010_0101_0101_1101_1010_0101u32, 1u32, 2u32), 0b1010_0101_0101_1101_1010_0101_0101_1101u32);
 /// ```
+#[inline]
 pub fn reverse_byte_groups<T: Word, U: UnsignedWord>(x: T,
                                                      group_byte_size: U,
                                                      no_subwords: U)
@@ -35,10 +36,12 @@ pub fn reverse_byte_groups<T: Word, U: UnsignedWord>(x: T,
 
 /// Method version of [`reverse_byte_groups`](fn.reverse_byte_groups.html).
 pub trait ReverseByteGroups: Word {
+    #[inline]
     fn reverse_byte_groups<U: UnsignedWord>(self, group_byte_size: U, no_subwords: U) -> Self;
 }
 
 impl<T: Word> ReverseByteGroups for T {
+    #[inline]
     fn reverse_byte_groups<U: UnsignedWord>(self, group_byte_size: U, no_subwords: U) -> T {
         reverse_byte_groups(self, group_byte_size, no_subwords)
     }

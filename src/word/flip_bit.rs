@@ -16,6 +16,7 @@ use word::{Word, ToWord, UnsignedWord};
 /// assert_eq!(n.flip_bit(6u8), 0b1111_0010u8);
 /// assert_eq!(n.flip_bit(5u8), 0b1001_0010u8);
 /// ```
+#[inline]
 pub fn flip_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
     x ^ (T::one() << bit.to())
@@ -23,10 +24,12 @@ pub fn flip_bit<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
 
 /// Method version of [`flip_bit`](fn.flip_bit.html).
 pub trait FlipBit {
+    #[inline]
     fn flip_bit<U: UnsignedWord>(self, n: U) -> Self;
 }
 
 impl<T: Word> FlipBit for T {
+    #[inline]
     fn flip_bit<U: UnsignedWord>(self, n: U) -> Self {
         flip_bit(self, n)
     }

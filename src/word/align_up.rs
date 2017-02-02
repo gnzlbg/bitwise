@@ -29,6 +29,7 @@ use word::{Word, UnsignedWord, ToWord, IsPow2};
 /// assert_eq!(4.align_up(4u8), 4);
 /// assert_eq!(4.align_up(8u8), 8);
 /// ```
+#[inline]
 pub fn align_up<T: Word, U: UnsignedWord>(x: T, alignment: U) -> T {
     debug_assert!(alignment.is_pow2());
     let x = x.to_unsigned();
@@ -38,10 +39,12 @@ pub fn align_up<T: Word, U: UnsignedWord>(x: T, alignment: U) -> T {
 
 /// Method version of [`align_up`](fn.align_up.html).
 pub trait AlignUp {
+    #[inline]
     fn align_up<U: UnsignedWord>(self, U) -> Self;
 }
 
 impl<T: Word> AlignUp for T {
+    #[inline]
     fn align_up<U: UnsignedWord>(self, u: U) -> Self {
         align_up(self, u)
     }

@@ -19,6 +19,7 @@ use word::Word;
 /// assert_eq!(7.floor_pow2(), 4);
 /// assert_eq!(8.floor_pow2(), 8);
 /// ```
+#[inline]
 pub fn floor_pow2<T: Word>(x: T) -> T {
     debug_assert!(x > T::zero());
     let mut x = x;
@@ -40,10 +41,12 @@ pub fn floor_pow2<T: Word>(x: T) -> T {
 
 /// Method version of [`floor_pow2`](fn.floor_pow2.html).
 pub trait FloorPow2 {
+    #[inline]
     fn floor_pow2(self) -> Self;
 }
 
 impl<T: Word> FloorPow2 for T {
+    #[inline]
     fn floor_pow2(self) -> Self {
         floor_pow2(self)
     }

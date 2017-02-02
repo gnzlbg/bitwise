@@ -18,6 +18,7 @@ use word::Word;
 /// assert_eq!(n.outer_perfect_shuffle(), s);
 /// assert_eq!(outer_perfect_shuffle(n), s);
 /// ```
+#[inline]
 pub fn outer_perfect_shuffle<T: Word>(x: T) -> T {
     let mut x = x;
     let s = T::byte_size();
@@ -42,10 +43,12 @@ pub fn outer_perfect_shuffle<T: Word>(x: T) -> T {
 
 /// Method version of [`outer_perfect_shuffle`](fn.outer_perfect_shuffle.html).
 pub trait OuterPerfectShuffle {
+    #[inline]
     fn outer_perfect_shuffle(self) -> Self;
 }
 
 impl<T: Word> OuterPerfectShuffle for T {
+    #[inline]
     fn outer_perfect_shuffle(self) -> Self {
         outer_perfect_shuffle(self)
     }

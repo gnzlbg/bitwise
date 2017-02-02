@@ -24,6 +24,7 @@ use word::Word;
 /// // panics:
 /// // assert_eq!((2u32.pow(31) + 1).ceil_pow2(), 2u32.pow(32));
 /// ```
+#[inline]
 pub fn ceil_pow2<T: Word>(x: T) -> T {
     let mut x = x - T::one();
     let s = T::byte_size();
@@ -44,10 +45,12 @@ pub fn ceil_pow2<T: Word>(x: T) -> T {
 
 /// Method version of [`ceil_pow2`](fn.ceil_pow2.html).
 pub trait CeilPow2 {
+    #[inline]
     fn ceil_pow2(self) -> Self;
 }
 
 impl<T: Word> CeilPow2 for T {
+    #[inline]
     fn ceil_pow2(self) -> Self {
         ceil_pow2(self)
     }

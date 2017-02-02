@@ -19,6 +19,7 @@ use word::Word;
 ///     assert_eq!(to_be(n), n.swap_bytes());
 /// }
 /// ```
+#[inline]
 pub fn to_be<T: Word>(x: T) -> T {
     T::to_be(x)
 }
