@@ -186,6 +186,14 @@ pub use self::extract_bits::*;
 mod hamming_distance;
 pub use self::hamming_distance::*;
 
+mod is_even;
+pub use self::is_even::*;
+
+mod is_odd;
+pub use self::is_odd::*;
+
+pub mod gcd;
+
 pub mod morton;
 pub use morton::decode_2d as morton_decode_2d;
 pub use morton::decode_3d as morton_decode_3d;

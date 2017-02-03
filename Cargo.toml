@@ -29,6 +29,12 @@ name = "morton"
 bench = true
 harness = false
 
+[[bench]]
+name = "gcd"
+bench = true
+harness = false
+
+
 [profile.bench]
 opt-level = 3
 debug = false

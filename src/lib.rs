@@ -27,9 +27,8 @@
 #![cfg_attr(RUSTC_IS_NIGHTLY, feature(cfg_target_feature))]
 #![cfg_attr(RUSTC_IS_NIGHTLY, feature(test))]
 
-#![no_std]
-
-extern crate core as std;
+//#![no_std]
+//extern crate core as std;
 
 #[cfg(RUSTC_IS_NIGHTLY)]
 extern crate test;
