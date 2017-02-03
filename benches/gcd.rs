@@ -155,7 +155,7 @@ fn u16_small_steins_iterative(b: &mut Bencher) {
 fn u16_small_steins_iterative_xor(b: &mut Bencher) {
     run_u16_small(b, gcd::steins::iterative_xor)    
 }
-
+/*
 
 benchmark_group!(u16_small_g,
                  u16_small_euclid_recursive,
@@ -215,8 +215,6 @@ fn u16_large_steins_iterative_xor(b: &mut Bencher) {
     run_u16_large(b, gcd::steins::iterative_xor)    
 }
 
-
-/*
 benchmark_group!(u16_large_g,
                  //u16_large_euclid_recursive,
                  //u16_large_euclid_iterative,
