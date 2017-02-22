@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 #[macro_use]
 extern crate bencher;
 
@@ -225,5 +227,4 @@ benchmark_group!(u16_large_g,
 */
 
 
-benchmark_main!(u08_small_g, u08_mid_g, u08_large_g,
-                u16_small_g, u16_mid_g);
+benchmark_main!(u08_small_g, u08_mid_g, u08_large_g);
