@@ -2,7 +2,7 @@
 
 [![crates.io version][crate-shield]][crate] [![Travis build status][travis-shield]][travis] [![Coveralls.io code coverage][coveralls-shield]][coveralls] [![Docs][docs-shield]][docs] [![License][license-shield]][license]
 
-> Work in progress.
+> We do what we must because we can.
 
 The algorithms:
 
