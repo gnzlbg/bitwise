@@ -1,6 +1,6 @@
 [package]
 name = "bitwise"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 description = "Portable high-level bitwise manipulation algorithms."
 documentation = "https://gnzlbg.github.io/bitwise"
@@ -10,7 +10,7 @@ readme = "readme.md"
 keywords = ["portable", "bit", "manipulation", "algorithms"]
 license = "MIT"
 build = "build.rs"
-categories = ["algorithms", "hardware-support"]
+categories = ["algorithms", "hardware-support", "no-std"]
 
 [badges]
 travis-ci = { repository = "gnzlbg/bitwise", branch = "master" }
