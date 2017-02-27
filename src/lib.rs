@@ -33,6 +33,9 @@ extern crate core as std;
 #[cfg(RUSTC_IS_NIGHTLY)]
 extern crate test;
 
+#[cfg(test)]
+extern crate quickcheck;
+
 /// Low-level bitwise manipulation intrinsics.
 pub extern crate bitintr;
 

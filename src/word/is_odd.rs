@@ -30,3 +30,38 @@ impl<T: Word> IsOdd for T {
         is_odd(self)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use word::*;
+    use quickcheck::{TestResult, QuickCheck};
+
+    macro_rules! prop_is_odd_tests {
+        ($($name:ident: $WordType:ty,)*) => {
+            $(
+                #[test]
+                fn $name() {
+                    fn inner(x: $WordType) -> TestResult {
+                        let rem = (x % 2) != 0;
+                        let res = x.is_odd();
+                        TestResult::from_bool(rem == res)
+                    }
+                    QuickCheck::new().quickcheck(inner as fn($WordType) -> TestResult);
+                }
+            )*
+        }
+    }
+
+    prop_is_odd_tests! {
+        prop_is_odd_u8: u8,
+        prop_is_odd_i8: i8,
+        prop_is_odd_u16: u16,
+        prop_is_odd_i16: i16,
+        prop_is_odd_u32: u32,
+        prop_is_odd_i32: i32,
+        prop_is_odd_u64: u64,
+        prop_is_odd_i64: i64,
+        prop_is_odd_usize: usize,
+        prop_is_odd_isize: isize,
+    }
+}
