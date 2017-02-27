@@ -47,3 +47,44 @@ impl<T: Word> IsAligned for T {
         is_aligned(self, u)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use word::*;
+    use quickcheck::{TestResult, QuickCheck};
+
+    macro_rules! prop_is_aligned_tests {
+        ($($name:ident: ($WordType:ty, $UnsignedType:ty),)*) => {
+            $(
+                #[test]
+                fn $name() {
+                    fn inner(x: $WordType, alignment: $UnsignedType) -> TestResult {
+                        if alignment < 1 {
+                            return TestResult::discard();
+                        }
+                        if !alignment.is_pow2() {
+                            return TestResult::discard();
+                        }
+
+                        let res = x.is_aligned(alignment);
+
+                        if x == 0 || (x % alignment) == 0 { // zero or multiple
+                            TestResult::from_bool(res)
+                        } else {
+                            TestResult::from_bool(!res)
+                        }
+                    }
+                    QuickCheck::new().quickcheck(inner as fn($WordType, $UnsignedType) -> TestResult);
+                }
+            )*
+        }
+    }
+
+    prop_is_aligned_tests! {
+        prop_is_aligned_u8_u8: (u8, u8),
+        prop_is_aligned_u16_u16: (u16, u16),
+        prop_is_aligned_u32_u32: (u32, u32),
+        prop_is_aligned_u64_u64: (u64, u64),
+        prop_is_aligned_usize_usize: (usize, usize),
+    }
+}
