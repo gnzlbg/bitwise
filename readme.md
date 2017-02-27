@@ -59,7 +59,10 @@ The giants that came before us:
 ## Contribution
 
 Yes please! Just note that all contributions shall be licensed as above without
-any additional terms or conditions.
+any additional terms or conditions. The following people have contributed code to this library:
+
+- [Gonzalo Brito Gadeschi](https://github.com/gnzlbg) (main author).
+- [Brian L. Troutwine](https://github.com/blt).
 
 <!-- Links -->
 [travis-shield]: https://img.shields.io/travis/gnzlbg/bitwise.svg?style=flat-square
