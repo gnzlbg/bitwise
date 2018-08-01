@@ -75,7 +75,5 @@ mod tests {
         prop_is_pow2_i32: i32,
         prop_is_pow2_u64: u64,
         prop_is_pow2_i64: i64,
-        prop_is_pow2_usize: usize,
-        prop_is_pow2_isize: isize,
     }
 }

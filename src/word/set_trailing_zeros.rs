@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Set the trailing 0's of `x`.
 ///
@@ -21,7 +20,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn set_trailing_zeros<T: Word>(x: T) -> T {
-    bitintr::x86::tbm::blsfill(x)
+    x.blsfill()
 }
 
 /// Method version of [`set_trailing_zeros`](fn.set_trailing_zeros.html).

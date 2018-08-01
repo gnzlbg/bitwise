@@ -85,6 +85,5 @@ mod tests {
         prop_is_aligned_u16_u16: (u16, u16),
         prop_is_aligned_u32_u32: (u32, u32),
         prop_is_aligned_u64_u64: (u64, u64),
-        prop_is_aligned_usize_usize: (usize, usize),
     }
 }

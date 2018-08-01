@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr::x86::tbm;
 
 /// Set least significant 0 bit of `x`.
 ///
@@ -19,7 +18,7 @@ use bitintr::x86::tbm;
 /// ```
 #[inline]
 pub fn set_least_significant_zero<T: Word>(x: T) -> T {
-    tbm::blcs(x)
+    x.blcs()
 }
 
 /// Method version of [`set_least_significant_zero`](fn.set_least_significant_zero.html).

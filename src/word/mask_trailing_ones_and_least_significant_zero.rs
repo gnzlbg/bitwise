@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Returns mask with all trailing 1's of `x` and the least
 /// significant 0 bit set.
@@ -20,7 +19,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn mask_trailing_ones_and_least_significant_zero<T: Word>(x: T) -> T {
-    bitintr::x86::tbm::blcmsk(x)
+    x.blcmsk()
 }
 
 /// Method version of [`mask_trailing_zeros_and_least_significant_zero`](fn.mask_trailing_zeros_and_least_significant_zero.html).

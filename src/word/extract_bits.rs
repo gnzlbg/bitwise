@@ -1,5 +1,4 @@
 use word::{Word, ToWord};
-use bitintr;
 
 /// Extract bits [`start`, `start + length`) from `x` into the lower bits
 /// of the result.
@@ -22,7 +21,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn extract_bits<T: Word, U: Word>(x: T, start: U, length: U) -> T {
-    bitintr::x86::bmi::bextr(x, start.to(), length.to())
+    x.bextr(start.to(), length.to())
 }
 
 /// Method version of [`extract_bits`](fn.extract_bits.html).

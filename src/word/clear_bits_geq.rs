@@ -1,5 +1,4 @@
 use word::{Word, ToWord, UnsignedWord};
-use bitintr;
 
 /// Clears all bits of `x` at position >= `bit`.
 ///
@@ -21,7 +20,7 @@ use bitintr;
 #[inline]
 pub fn clear_bits_geq<T: Word, U: UnsignedWord>(x: T, bit: U) -> T {
     debug_assert!(T::bit_size() > bit.to());
-    bitintr::x86::bmi2::bzhi(x, bit.to())
+    x.bzhi(bit.to())
 }
 
 /// Method version of [`clear_bits_geq`](fn.clear_bits_geq.html).

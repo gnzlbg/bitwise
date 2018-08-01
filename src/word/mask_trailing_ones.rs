@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Returns mask with the trailing 1's of `self` set.
 ///
@@ -18,7 +17,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn mask_trailing_ones<T: Word>(x: T) -> T {
-    !bitintr::x86::tbm::t1mskc(x)
+    !x.t1mskc()
 }
 
 /// Method version of [`mask_trailing_ones`](fn.mask_trailing_ones.html).

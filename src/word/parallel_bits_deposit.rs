@@ -1,5 +1,4 @@
 use word::{Word, ToWord};
-use bitintr;
 
 /// Parallel bits deposit of `mask` into `x`.
 ///
@@ -28,7 +27,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn parallel_bits_deposit<T: Word, U: Word>(x: T, mask: U) -> T {
-    bitintr::x86::bmi2::pdep(x, mask.to())
+    x.pdep(mask.to())
 }
 
 /// Method version of [`parallel_bits_deposit`](fn.parallel_bits_deposit.html).

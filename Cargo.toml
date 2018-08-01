@@ -1,6 +1,6 @@
 [package]
 name = "bitwise"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 description = "Portable high-level bitwise manipulation algorithms."
 documentation = "https://gnzlbg.github.io/bitwise"
@@ -16,14 +16,14 @@ categories = ["algorithms", "hardware-support", "no-std"]
 travis-ci = { repository = "gnzlbg/bitwise", branch = "master" }
 
 [build-dependencies]
-rustc_version = "0.1.*"
+rustc_version = "0.2"
 
 [dependencies]
-bitintr = "0.1.*"
+bitintr = "0.2"
 
 [dev-dependencies]
-bencher = "0.1.*"
-quickcheck = "0.4.1"
+bencher = "0.1"
+quickcheck = "0.6"
 
 [[bench]]
 name = "morton"

@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Returns mask with the least significant zero bit of `x` set to 1.
 ///
@@ -22,7 +21,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn isolate_least_significant_zero<T: Word>(x: T) -> T {
-    bitintr::x86::tbm::blcic(x)
+    x.blcic()
 }
 
 /// Method version of [`isolate_least_significant_zero`](fn.isolate_least_significant_zero.html).

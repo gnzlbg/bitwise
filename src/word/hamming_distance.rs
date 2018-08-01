@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr::x86::abm;
 
 /// Hamming distance between the binary representation of `x` and `y`.
 ///
@@ -38,7 +37,7 @@ use bitintr::x86::abm;
 /// ```
 #[inline]
 pub fn hamming_distance<T: Word>(x: T, y: T) -> T {
-    abm::popcnt(x ^ y)
+    (x ^ y).popcnt()
 }
 
 /// Method version of [`hamming_distance`](fn.hamming_distance.html).

@@ -61,7 +61,5 @@ mod tests {
         prop_is_even_i32: i32,
         prop_is_even_u64: u64,
         prop_is_even_i64: i64,
-        prop_is_even_usize: usize,
-        prop_is_even_isize: isize,
     }
 }

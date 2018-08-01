@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Reverses the bits of `x`.
 ///
@@ -16,7 +15,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn reverse_bits<T: Word>(x: T) -> T {
-    bitintr::arm::v7::rbit(x)
+    x.rbit()
 }
 
 /// Method version of [`reverse_bits`](fn.reverse_bits.html).

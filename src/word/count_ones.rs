@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr::x86::abm;
 
 /// Number of ones in the binary representation of `x`.
 ///
@@ -26,7 +25,7 @@ use bitintr::x86::abm;
 /// ```
 #[inline]
 pub fn count_ones<T: Word>(x: T) -> T {
-    abm::popcnt(x)
+    x.popcnt()
 }
 
 /// Method version of [`count_ones`](fn.count_ones.html).
