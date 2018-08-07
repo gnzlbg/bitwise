@@ -186,7 +186,7 @@ pub mod lut {
         let loops = MortonIndex::byte_size().to_u8();
         for i in 0..loops {
             let shift = (i * 8) + startshift;
-            let index: usize = ((v >> shift.to()) & mask.to()).to();
+            let index: usize = ((v >> shift.to()) & mask.to()).to_usize();
             let val = MortonIndex::from_u8(lut[index]);
             result = result | (val << (4 * i as u32).to()).to();
         }
@@ -232,7 +232,7 @@ pub mod lut {
         let loops = if loops >= 8 { 7 } else { loops };
         for i in 0..loops {
             let shift = (i * 9) + startshift;
-            let index: usize = ((v >> shift.to()) & mask).to();
+            let index: usize = ((v >> shift.to()) & mask).to_usize();
             let val = MortonIndex::from_u8(lut[index]);
             result = result | (val << (3 * i as u32).to()).to();
         }

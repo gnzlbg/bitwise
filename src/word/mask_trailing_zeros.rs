@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Returns mask with the trailing 0's of `x` set.
 ///
@@ -18,7 +17,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn mask_trailing_zeros<T: Word>(x: T) -> T {
-    bitintr::x86::tbm::tzmsk(x)
+    x.tzmsk()
 }
 
 /// Method version of [`mask_trailing_zeros`](fn.mask_trailing_zeros.html).

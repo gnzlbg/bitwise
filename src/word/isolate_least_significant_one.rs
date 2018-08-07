@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Returns mask with the least significant set bit of `x` set to 1.
 ///
@@ -22,7 +21,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn isolate_least_significant_one<T: Word>(x: T) -> T {
-    bitintr::x86::bmi::blsi(x)
+    x.blsi()
 }
 
 /// Method version of [`isolate_least_significant_one`](fn.isolate_least_significant_one.html).

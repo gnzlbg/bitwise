@@ -1,9 +1,9 @@
 //! Algorithms for single words (u8...u64).
 
+mod word;
+pub use self::word::*;
+
 mod to_word;
-
-pub use bitintr::Int as Word;
-
 pub use self::to_word::*;
 
 mod count_zeros;

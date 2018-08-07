@@ -61,7 +61,5 @@ mod tests {
         prop_is_odd_i32: i32,
         prop_is_odd_u64: u64,
         prop_is_odd_i64: i64,
-        prop_is_odd_usize: usize,
-        prop_is_odd_isize: isize,
     }
 }

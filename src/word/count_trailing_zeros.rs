@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Count the number of trailing zeros in the binary representation of `x`.
 ///
@@ -23,7 +22,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn count_trailing_zeros<T: Word>(x: T) -> T {
-    bitintr::x86::bmi::tzcnt(x)
+    x.tzcnt()
 }
 
 /// Method version of [`count_trailing_zeros`](fn.count_trailing_zeros.html).

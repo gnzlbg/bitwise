@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Clear the trailing bits set of `x`.
 ///
@@ -21,7 +20,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn clear_trailing_ones<T: Word>(x: T) -> T {
-    bitintr::x86::tbm::blcfill(x)
+    x.blcfill()
 }
 
 /// Method version of [`clear_trailing_ones`](fn.clear_trailing_ones.html).

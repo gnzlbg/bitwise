@@ -6,7 +6,6 @@ impl UnsignedWord for u8 {}
 impl UnsignedWord for u16 {}
 impl UnsignedWord for u32 {}
 impl UnsignedWord for u64 {}
-impl UnsignedWord for usize {}
 
 /// From-like trait for words.
 pub trait FromWord<T> {
@@ -37,8 +36,8 @@ macro_rules! impl_from_word_multiple {
 
 macro_rules! impl_from_word {
     ($From:ty) => (
-        impl_from_word_multiple!($From, i8, i16, i32, i64, isize,
-                                 u8, u16, u32, u64, usize);
+        impl_from_word_multiple!($From, i8, i16, i32, i64,
+                                 u8, u16, u32, u64);
     )
 }
 
@@ -46,12 +45,10 @@ impl_from_word!(i8);
 impl_from_word!(i16);
 impl_from_word!(i32);
 impl_from_word!(i64);
-impl_from_word!(isize);
 impl_from_word!(u8);
 impl_from_word!(u16);
 impl_from_word!(u32);
 impl_from_word!(u64);
-impl_from_word!(usize);
 
 impl<T: Word, U: Word> FromWord<T> for U {
     #[inline]

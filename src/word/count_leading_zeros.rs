@@ -1,5 +1,4 @@
 use word::Word;
-use bitintr;
 
 /// Counts the number of leading zeros in the binary representation of `x`.
 ///
@@ -26,7 +25,7 @@ use bitintr;
 /// ```
 #[inline]
 pub fn count_leading_zeros<T: Word>(x: T) -> T {
-    bitintr::x86::abm::lzcnt(x)
+    x.lzcnt()
 }
 
 /// Method version of [`count_leading_zeros`](fn.count_leading_zeros.html).
