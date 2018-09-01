@@ -79,8 +79,8 @@ any additional terms or conditions. The following people have contributed code t
 [n3864_link]: https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3864.html
 [stdcxx_bitops_link]: https://github.com/fmatthew5876/stdcxx-bitops
 [libmorton_link]: https://github.com/Forceflow/libmorton
-[chess_programming_wiki_link]: https://chessprogramming.wikispaces.com/
-[chess_programming_bit_twiddling_link]: https://chessprogramming.wikispaces.com/Bit-Twiddling
+[chess_programming_wiki_link]: https://www.chessprogramming.org
+[chess_programming_bit_twiddling_link]: https://www.chessprogramming.org/Bit-Twiddling
 [real_time_collision_detection_link]: https://realtimecollisiondetection.net/
 [hackers_delight_link]: https://hackersdelight.org/
 [jasper_neumann_site_link]: https://programming.sirrida.de/index.php
