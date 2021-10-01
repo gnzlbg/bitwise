@@ -19,7 +19,7 @@ travis-ci = { repository = "gnzlbg/bitwise", branch = "master" }
 rustc_version = "0.2"
 
 [dependencies]
-bitintr = "0.2"
+bitintr = "0.3"
 
 [dev-dependencies]
 bencher = "0.1"
